@@ -1,0 +1,38 @@
+<div class="page-header">
+  <%= link_to works_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_work_path(@work), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing works</h1>
+</div>
+
+<dl>
+  <dt>Project:</dt>
+  <dd><%= @work.project_id %></dd>
+
+  <dt>Task:</dt>
+  <dd><%= @work.task_id %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @work.user_id %></dd>
+
+  <dt>Start:</dt>
+  <dd><%= @work.start %></dd>
+
+  <dt>Finish:</dt>
+  <dd><%= @work.finish %></dd>
+
+  <dt>Duration:</dt>
+  <dd><%= @work.duration %></dd>
+
+  <dt>Additional cost:</dt>
+  <dd><%= @work.additional_cost %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @work.description %></dd>
+
+</dl>

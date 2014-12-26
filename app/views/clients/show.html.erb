@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to clients_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_client_path(@client), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing clients</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @client.name %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @client.status %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @client.description %></dd>
+
+  <dt>Url:</dt>
+  <dd><%= @client.url %></dd>
+
+  <dt>Address:</dt>
+  <dd><%= @client.address_id %></dd>
+
+</dl>

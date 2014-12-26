@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  status: MyString
+  rate: 1
+  description: MyText
+  area: MyString
+  start_date: 2014-12-23 16:11:51
+  end_date: 2014-12-23 16:11:51
+  client_id: 1
+  whiteboard: MyText
+  url: MyString
+
+two:
+  name: MyString
+  status: MyString
+  rate: 1
+  description: MyText
+  area: MyString
+  start_date: 2014-12-23 16:11:51
+  end_date: 2014-12-23 16:11:51
+  client_id: 1
+  whiteboard: MyText
+  url: MyString

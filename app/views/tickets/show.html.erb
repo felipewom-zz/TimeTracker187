@@ -1,0 +1,53 @@
+<div class="page-header">
+  <%= link_to tickets_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_ticket_path(@ticket), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing tickets</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @ticket.name %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @ticket.description %></dd>
+
+  <dt>Start date:</dt>
+  <dd><%= @ticket.start_date %></dd>
+
+  <dt>End date:</dt>
+  <dd><%= @ticket.end_date %></dd>
+
+  <dt>Ticket category:</dt>
+  <dd><%= @ticket.ticket_category_id %></dd>
+
+  <dt>Assignee:</dt>
+  <dd><%= @ticket.assignee_id %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @ticket.status_id %></dd>
+
+  <dt>Estimated time:</dt>
+  <dd><%= @ticket.estimated_time %></dd>
+
+  <dt>Actual time:</dt>
+  <dd><%= @ticket.actual_time %></dd>
+
+  <dt>Billable:</dt>
+  <dd><%= @ticket.billable %></dd>
+
+  <dt>Ticket priority:</dt>
+  <dd><%= @ticket.ticket_priority_id %></dd>
+
+  <dt>Project:</dt>
+  <dd><%= @ticket.project_id %></dd>
+
+  <dt>Budget progress:</dt>
+  <dd><%= @ticket.budget_progress %></dd>
+
+</dl>

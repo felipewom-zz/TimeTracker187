@@ -1,0 +1,38 @@
+<div class="page-header">
+  <%= link_to new_user_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New User
+  <% end %>
+  <h1>Listing users</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Último Acesso</th>
+      <th><span class="icon-pencil"></span></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @users.each do |user| %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.to_s %></td>
+      <td><%= user.email %></td>
+      <td onload='mask(this, mphone);'><%= user.phone %></td>
+      <td><%= user.last_sign_in_at.strftime('%H:%M:%S  %d/%m/%Y') %></td>
+      <td>
+        <%= link_to '<span class="icon-eye-open"></span>'.html_safe, user, :title => 'Visualizar', :class => 'btn' %>
+        <%= link_to '<span class="icon-pencil"></span>'.html_safe, edit_user_path(user), :title => 'Editar', :class => 'btn' %>
+        <%= link_to '<span class=" icon-trash"></span>'.html_safe, user, :confirm => 'Are you sure?', :title => 'Deletar', :method => :delete,  :class => 'btn'%></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= render 'utils/phone_number' %>

@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to ticket_priorities_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_ticket_priority_path(@ticket_priority), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing ticket_priorities</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @ticket_priority.name %></dd>
+
+  <dt>Weight:</dt>
+  <dd><%= @ticket_priority.weight %></dd>
+
+</dl>

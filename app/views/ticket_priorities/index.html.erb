@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_ticket_priority_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Ticket priority
+  <% end %>
+  <h1>Listing ticket_priorities</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Weight</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @ticket_priorities.each do |ticket_priority| %>
+    <tr>
+      <td><%= ticket_priority.name %></td>
+      <td><%= ticket_priority.weight %></td>
+      <td><%= link_to 'Show', ticket_priority %></td>
+      <td><%= link_to 'Edit', edit_ticket_priority_path(ticket_priority) %></td>
+      <td><%= link_to 'Destroy', ticket_priority, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

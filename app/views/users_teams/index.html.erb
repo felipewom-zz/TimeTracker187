@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_users_team_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Users team
+  <% end %>
+  <h1>Listing users_teams</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Team</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @users_teams.each do |users_team| %>
+    <tr>
+      <td><%= users_team.user_id %></td>
+      <td><%= users_team.team_id %></td>
+      <td><%= link_to 'Show', users_team %></td>
+      <td><%= link_to 'Edit', edit_users_team_path(users_team) %></td>
+      <td><%= link_to 'Destroy', users_team, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to ticket_statuses_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_ticket_status_path(@ticket_status), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing ticket_statuses</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @ticket_status.name %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @ticket_status.active %></dd>
+
+</dl>

@@ -1,0 +1,44 @@
+<div class="page-header">
+  <%= link_to projects_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_project_path(@project), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing projects</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @project.name %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @project.status %></dd>
+
+  <dt>Rate:</dt>
+  <dd><%= @project.rate %></dd>
+
+  <dt>Description:</dt>
+  <dd><%= @project.description %></dd>
+
+  <dt>Area:</dt>
+  <dd><%= @project.area %></dd>
+
+  <dt>Start date:</dt>
+  <dd><%= @project.start_date %></dd>
+
+  <dt>End date:</dt>
+  <dd><%= @project.end_date %></dd>
+
+  <dt>Client:</dt>
+  <dd><%= @project.client_id %></dd>
+
+  <dt>Whiteboard:</dt>
+  <dd><%= @project.whiteboard %></dd>
+
+  <dt>Url:</dt>
+  <dd><%= @project.url %></dd>
+
+</dl>

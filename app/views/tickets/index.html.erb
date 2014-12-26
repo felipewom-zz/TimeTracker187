@@ -1,0 +1,53 @@
+<div class="page-header">
+  <%= link_to new_ticket_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Ticket
+  <% end %>
+  <h1>Listing tickets</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Ticket category</th>
+      <th>Assignee</th>
+      <th>Status</th>
+      <th>Estimated time</th>
+      <th>Actual time</th>
+      <th>Billable</th>
+      <th>Ticket priority</th>
+      <th>Project</th>
+      <th>Budget progress</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @tickets.each do |ticket| %>
+    <tr>
+      <td><%= ticket.name %></td>
+      <td><%= ticket.description %></td>
+      <td><%= ticket.start_date %></td>
+      <td><%= ticket.end_date %></td>
+      <td><%= ticket.ticket_category_id %></td>
+      <td><%= ticket.assignee_id %></td>
+      <td><%= ticket.status_id %></td>
+      <td><%= ticket.estimated_time %></td>
+      <td><%= ticket.actual_time %></td>
+      <td><%= ticket.billable %></td>
+      <td><%= ticket.ticket_priority_id %></td>
+      <td><%= ticket.project_id %></td>
+      <td><%= ticket.budget_progress %></td>
+      <td><%= link_to 'Show', ticket %></td>
+      <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+      <td><%= link_to 'Destroy', ticket, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

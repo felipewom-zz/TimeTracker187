@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to new_ticket_comment_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Ticket comment
+  <% end %>
+  <h1>Listing ticket_comments</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Version</th>
+      <th>Ticket</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @ticket_comments.each do |ticket_comment| %>
+    <tr>
+      <td><%= ticket_comment.body %></td>
+      <td><%= ticket_comment.version_id %></td>
+      <td><%= ticket_comment.ticket_id %></td>
+      <td><%= link_to 'Show', ticket_comment %></td>
+      <td><%= link_to 'Edit', edit_ticket_comment_path(ticket_comment) %></td>
+      <td><%= link_to 'Destroy', ticket_comment, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

@@ -1,0 +1,43 @@
+<div class="page-header">
+  <%= link_to new_work_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Work
+  <% end %>
+  <h1>Listing works</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Task</th>
+      <th>User</th>
+      <th>Start</th>
+      <th>Finish</th>
+      <th>Duration</th>
+      <th>Additional cost</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @works.each do |work| %>
+    <tr>
+      <td><%= work.project_id %></td>
+      <td><%= work.task_id %></td>
+      <td><%= work.user_id %></td>
+      <td><%= work.start %></td>
+      <td><%= work.finish %></td>
+      <td><%= work.duration %></td>
+      <td><%= work.additional_cost %></td>
+      <td><%= work.description %></td>
+      <td><%= link_to 'Show', work %></td>
+      <td><%= link_to 'Edit', edit_work_path(work) %></td>
+      <td><%= link_to 'Destroy', work, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

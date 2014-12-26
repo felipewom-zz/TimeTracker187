@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<%= render 'layouts/head' %>
+<body>
+<section>
+  <%= render 'layouts/navbar' %>
+</section>
+<div class="container">
+  <header>
+    <%= render 'layouts/header' %>
+  </header>
+  <section>
+    <%= render 'layouts/alert' %>
+  </section>
+  <div class="row-fluid">
+  <% if user_signed_in? %>
+    <div class="span10 offset1">
+  <% else %>
+    <div class="row"></div>
+    <div class="span3 offset4" style="padding-top: 4%">
+  <% end %>
+      <div class="hero-unit">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+</body>
+</html>

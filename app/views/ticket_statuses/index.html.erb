@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_ticket_status_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Ticket status
+  <% end %>
+  <h1>Listing ticket_statuses</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Active</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @ticket_statuses.each do |ticket_status| %>
+    <tr>
+      <td><%= ticket_status.name %></td>
+      <td><%= ticket_status.active %></td>
+      <td><%= link_to 'Show', ticket_status %></td>
+      <td><%= link_to 'Edit', edit_ticket_status_path(ticket_status) %></td>
+      <td><%= link_to 'Destroy', ticket_status, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

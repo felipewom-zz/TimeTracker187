@@ -1,0 +1,23 @@
+<%= simple_form_for(@ticket, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
+    <%= f.input :ticket_category_id %>
+    <%= f.input :assignee_id %>
+    <%= f.input :status_id %>
+    <%= f.input :estimated_time %>
+    <%= f.input :actual_time %>
+    <%= f.input :billable %>
+    <%= f.input :ticket_priority_id %>
+    <%= f.input :project_id %>
+    <%= f.input :budget_progress %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary" %>
+  </div>
+<% end %>

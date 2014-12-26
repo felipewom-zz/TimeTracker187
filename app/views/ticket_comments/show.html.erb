@@ -1,0 +1,23 @@
+<div class="page-header">
+  <%= link_to ticket_comments_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_ticket_comment_path(@ticket_comment), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing ticket_comments</h1>
+</div>
+
+<dl>
+  <dt>Body:</dt>
+  <dd><%= @ticket_comment.body %></dd>
+
+  <dt>Version:</dt>
+  <dd><%= @ticket_comment.version_id %></dd>
+
+  <dt>Ticket:</dt>
+  <dd><%= @ticket_comment.ticket_id %></dd>
+
+</dl>

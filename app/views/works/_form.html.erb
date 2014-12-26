@@ -1,0 +1,18 @@
+<%= simple_form_for(@work, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :project_id %>
+    <%= f.input :task_id %>
+    <%= f.input :user_id %>
+    <%= f.input :start %>
+    <%= f.input :finish %>
+    <%= f.input :duration %>
+    <%= f.input :additional_cost %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary" %>
+  </div>
+<% end %>

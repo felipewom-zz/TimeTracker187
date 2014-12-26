@@ -1,0 +1,48 @@
+<div class="page-header">
+  <%= link_to users_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_user_path(@user), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1><%= @user.to_s %></h1>
+</div>
+
+<div class="row-fluid">
+  <div class="span4">
+    <dl>
+      <dt>Username:</dt>
+      <dd><%= @user.username %></dd>
+
+    </dl>
+    <dl>
+      <dt>Email:</dt>
+      <dd><%= @user.email %></dd>
+
+    </dl>
+    <dl>
+      <dt>Telefone:</dt>
+      <dd onload='mask(this, mphone);'><%= @user.phone %></dd>
+
+    </dl>
+    <dl>
+      <dt>Logado por último:</dt>
+      <dd><%= @user.last_sign_in_at.strftime('%H:%M:%S  %d/%m/%Y') %></dd>
+    </dl>
+  </div>
+  <div class="span3">
+    <dl>
+      <dt>Permissão:</dt>
+      <dd>
+        <% @user.roles.each do |role| %>
+          Nome: <%= role.name.to_s.upcase! %>
+          <br>
+          Descrição: <%= role.description %>
+        <% end %>
+      </dd>
+    </dl>
+  </div>
+</div>
+

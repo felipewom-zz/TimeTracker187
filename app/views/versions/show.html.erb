@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to versions_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_version_path(@version), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing versions</h1>
+</div>
+
+<dl>
+  <dt>Item type:</dt>
+  <dd><%= @version.item_type %></dd>
+
+  <dt>Item:</dt>
+  <dd><%= @version.item_id %></dd>
+
+  <dt>Event:</dt>
+  <dd><%= @version.event %></dd>
+
+  <dt>Object:</dt>
+  <dd><%= @version.object %></dd>
+
+  <dt>Object changes:</dt>
+  <dd><%= @version.object_changes %></dd>
+
+</dl>

@@ -1,0 +1,37 @@
+<div class="page-header">
+  <%= link_to new_version_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Version
+  <% end %>
+  <h1>Listing versions</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Item type</th>
+      <th>Item</th>
+      <th>Event</th>
+      <th>Object</th>
+      <th>Object changes</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @versions.each do |version| %>
+    <tr>
+      <td><%= version.item_type %></td>
+      <td><%= version.item_id %></td>
+      <td><%= version.event %></td>
+      <td><%= version.object %></td>
+      <td><%= version.object_changes %></td>
+      <td><%= link_to 'Show', version %></td>
+      <td><%= link_to 'Edit', edit_version_path(version) %></td>
+      <td><%= link_to 'Destroy', version, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

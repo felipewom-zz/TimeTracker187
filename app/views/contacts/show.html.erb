@@ -1,0 +1,32 @@
+<div class="page-header">
+  <%= link_to contacts_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_contact_path(@contact), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing contacts</h1>
+</div>
+
+<dl>
+  <dt>Name:</dt>
+  <dd><%= @contact.name %></dd>
+
+  <dt>Email:</dt>
+  <dd><%= @contact.email %></dd>
+
+  <dt>Address:</dt>
+  <dd><%= @contact.address_id %></dd>
+
+  <dt>Client:</dt>
+  <dd><%= @contact.client_id %></dd>
+
+  <dt>Cellphone:</dt>
+  <dd><%= @contact.cellphone %></dd>
+
+  <dt>Phone number:</dt>
+  <dd><%= @contact.phone_number %></dd>
+
+</dl>

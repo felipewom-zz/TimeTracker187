@@ -16,12 +16,7 @@ class CreateProjects < ActiveRecord::Migration
 
       t.timestamps
 
-      add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
-      add_index "projects", ["completed"], :name => "index_projects_on_completed"
-      add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
-      add_index "projects", ["owner_id"], :name => "index_projects_on_owner_id"
-      add_index "projects", ["start_date"], :name => "index_projects_on_start_date"
-      add_index "projects", ["url"], :name => "index_projects_on_url"
+
     end
   end
 end

@@ -10,8 +10,7 @@ class CreateClients < ActiveRecord::Migration
 
       t.timestamps
 
-      add_index "clients", ["addressable_id"], :name => "index_clients_on_addressable_id"
-      add_index "clients", ["url"], :name => "index_clients_on_url"
+
     end
   end
 end

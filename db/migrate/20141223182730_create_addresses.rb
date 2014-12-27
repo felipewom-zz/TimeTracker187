@@ -12,7 +12,7 @@ class CreateAddresses < ActiveRecord::Migration
 
       t.timestamps
 
-      add_index "addresses", ["type", "addressable_id"], :name => "index_addresses_on_addressable_type_and_addressable_id"
+
     end
   end
 end

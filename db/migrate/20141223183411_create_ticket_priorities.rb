@@ -5,6 +5,8 @@ class CreateTicketPriorities < ActiveRecord::Migration
       t.string :weight
 
       t.timestamps
+
+
     end
   end
 end

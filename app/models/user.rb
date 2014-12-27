@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_and_belongs_to_many :roles
+  has_many :works
+  has_many :projects, :through => :works
   after_create :default_role
 
   # Setup accessible (or protected) attributes for your model
@@ -20,6 +22,14 @@ class User < ActiveRecord::Base
     self.roles.any? do |r|
       r[:name] == role.to_s
     end
+  end
+
+  def self.current
+    Thread.current[:user]
+  end
+
+  def self.current=(user)
+    Thread.current[:user] = user
   end
 
   private

@@ -28,10 +28,13 @@ class Ability
   # https://github.com/ryanb/cancan/wiki/Defining-Abilities
   def initialize(user)
     user ||= User.new # guest user
-    if user.is? :admin
-      can :manage, :all
-    elsif user.is? :user
-      can :manage, [Task]
+    user.roles.each do |role|
+      if role.name == 'admin'
+        can :manage, :all
+      end
+      if role.name == 'user'
+        can :read, :all
+      end
     end
   end
 end

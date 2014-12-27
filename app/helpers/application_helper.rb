@@ -12,36 +12,27 @@ module ApplicationHelper
     'Time Tracker Copyright'
   end
 
-  def nav_items
-    [
-        {
-          :displaytext    => 'Tasks',
-          :controllername => 'tasks',
-          :linkurl        => tasks_path,
-          :permission     => 'user'
-        },
-        {
-            :displaytext    => 'Users',
-            :controllername => 'users',
-            :linkurl        => users_path,
-            :permission     => 'admin'
-        },
-        {
-            :displaytext    => 'Roles',
-            :controllername => 'roles',
-            :linkurl        => roles_path,
-            :permission     => 'admin'
-        }
-    ]
+
+  def items
+    link_items = []
+    Rails.application.routes.routes.map do |route|
+      if route.defaults[:action].to_s.eql?('index')
+        link_items.push({ :displaytext    => route.defaults[:controller].to_s.capitalize,
+                          :controllername => route.defaults[:controller].to_s,
+                          :linkurl        => route.name,
+                          :permission     => 'admin' })
+      end
+    end
+    return link_items
   end
 
   def display_nav_item(displaytext, controllername, linkurl)
-    raw("<li#{controller_name == controllername ? ' class="active"' : ''}>#{link_to displaytext, linkurl}</li>")
+    raw("<li#{controller_name == controllername ? ' class="active"' : ''}>#{link_to displaytext, '/'+linkurl}</li>")
   end
   
   def navbar_items
     navbar = ' '
-    nav_items.each do |nav_item|
+    items.each do |nav_item|
       if current_user.is? :admin
         navbar += display_nav_item(nav_item[:displaytext], nav_item[:controllername], nav_item[:linkurl])
       else

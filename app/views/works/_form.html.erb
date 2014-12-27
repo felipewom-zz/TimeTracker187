@@ -2,9 +2,15 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :project_id %>
-    <%= f.input :task_id %>
-    <%= f.input :user_id %>
+    <%=f.input :project_id,
+                     :collection => Project.all %>
+    <%=f.input :task_id,
+               :collection => Task.all %>
+    <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
+    <%= f.input :start, :as => :string,
+                :input_html => {:class => 'datepicker',
+                                :value => @work.start.present? ? localize(@work.start,
+                                                                              :format => '%d/%m/%Y') : nil} %>
     <%= f.input :start %>
     <%= f.input :finish %>
     <%= f.input :duration %>
@@ -12,7 +18,9 @@
     <%= f.input :description %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary" %>
+  <div class='form-actions'>
+    <%= f.button :submit, :class => 'btn-primary' %>
   </div>
 <% end %>
+
+<%= render 'utils/datepicker' %>

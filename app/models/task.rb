@@ -1,3 +1,4 @@
 class Task < ActiveRecord::Base
-  attr_accessible :completed, :note, :title
+  belongs_to :user
+  attr_accessible :note, :title, :user_id
 end

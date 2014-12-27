@@ -11,20 +11,14 @@
     <tr>
       <th>User</th>
       <th>Team</th>
-      <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
 <% @users_teams.each do |users_team| %>
     <tr>
-      <td><%= users_team.user_id %></td>
-      <td><%= users_team.team_id %></td>
-      <td><%= link_to 'Show', users_team %></td>
-      <td><%= link_to 'Edit', edit_users_team_path(users_team) %></td>
-      <td><%= link_to 'Destroy', users_team, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= User.find(users_team.user_id).to_s %></td>
+      <td><%= Team.find(users_team.team_id).name %></td>
     </tr>
 <% end %>
   </tbody>

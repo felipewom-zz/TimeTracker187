@@ -78,4 +78,10 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def is?(role)
+    current_user.roles.any? do |r|
+      r[:name] == role.to_s
+    end
+  end
 end

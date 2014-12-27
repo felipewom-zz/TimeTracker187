@@ -25,7 +25,6 @@ class WorksController < ApplicationController
   # GET /works/new.json
   def new
     @work = Work.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @work }

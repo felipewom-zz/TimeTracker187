@@ -1,53 +1,22 @@
 TimeTracker::Application.routes.draw do
 
-
-  resources :works
-
-
-  resources :versions
-
-
-  resources :tickets
-
-
-  resources :ticket_statuses
-
-
-  resources :ticket_priorities
-
-
-  resources :ticket_comments
-
-
-  resources :ticket_categories
-
-
-  resources :members_projects
-
-
-  resources :contacts
-
-
-  resources :addresses
-
-
-  resources :clients
-
-
-  resources :users_teams
-
-
-  resources :teams
-
-
-  resources :projects
-
-
-  resources :roles
-
-
   devise_for :users
 
+  resources :works
+  resources :versions
+  resources :tickets
+  resources :ticket_statuses
+  resources :ticket_priorities
+  resources :ticket_comments
+  resources :ticket_categories
+  resources :members_projects
+  resources :contacts
+  resources :addresses
+  resources :clients
+  resources :users_teams
+  resources :teams
+  resources :projects
+  resources :roles
   resources :users
   resources :tasks
 

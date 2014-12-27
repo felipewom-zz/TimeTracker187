@@ -11,10 +11,8 @@
 </div>
 
 <dl>
-  <dt>User:</dt>
-  <dd><%= @users_team.user_id %></dd>
-
-  <dt>Team:</dt>
-  <dd><%= @users_team.team_id %></dd>
-
+  <dt>Membros</dt>
+  <dd><%= @users_team.user.to_s %>
+    <i class="icon-arrow-right"></i>
+  <%= @users_team.team.to_s %></dd>
 </dl>

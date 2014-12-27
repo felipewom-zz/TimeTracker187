@@ -1,0 +1,14 @@
+<script type="text/javascript">
+    var nowTemp = new Date();
+    var now = nowTemp.getDate() + "/" + (1+nowTemp.getMonth()) + "/" + nowTemp.getFullYear();
+    $('.datepicker').val(now);
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        startDate: '-0d',
+        todayBtn: true,
+        language: "pt-BR",
+        setDate: new Date(),
+        autoclose: true,
+        update: new Date()
+    });
+</script>

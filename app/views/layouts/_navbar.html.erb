@@ -10,12 +10,18 @@
       <div class="nav-collapse">
         <% if user_signed_in? %>
           <ul class="nav pull-right">
-            <%= navbar_items %>
-            <li title="<%= current_user.inspect %>">
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
-            </li>
-            <li>
-              <%= link_to "Logout", destroy_user_session_path, :method => :delete, :class => 'navbar-link' %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-expanded="false">Config
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li title="<%= current_user.inspect %>">
+                  <%= link_to "<i class='icon-user'></i>&nbsp;Profile".html_safe, edit_user_registration_path, :class => 'navbar-link' %>
+                </li>
+                <li>
+                  <%= link_to "<i class='icon-off'></i>&nbsp;Logout".html_safe, destroy_user_session_path, :method => :delete, :class => 'navbar-link' %>
+                </li>
+              </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
@@ -28,6 +34,14 @@
                 <li class="dropdown-header">&nbsp;Nav header</li>
                 <li><a href="#">Separated link</a></li>
                 <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-expanded="false">Models
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <%= navbar_items %>
               </ul>
             </li>
           </ul>

@@ -1,12 +1,28 @@
-<%= simple_form_for(@users_team, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
-  <%= f.error_notification %>
+<%= form_for(@users_team,
+                    :defaults => {
+                            :input_html => {
+                                    :class => 'form-inline' } }) do |f| %>
+    <% if @users_team.errors.any? %>
+        <ul>
+          <% @users_team.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :team_id %>
-  </div>
+    <div class="control-group">
+      <div class="control-label">Usuário<i class="icon-arrow-right"></i>Time</div>
+      <div class="controls">
+        <%= f.collection_select :user_id,
+                    User.all, :id, :to_s,
+                    :selected => @users_team.user%>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary" %>
-  </div>
+        <%= f.collection_select :team_id,
+                    Team.all, :id, :name,
+                    :selected => @users_team.team  %>
+      </div>
+    </div>
+    <div class="form-inputs">
+    <%= f.submit 'Salvar', :class => "btn btn-primary" %>
+    </div>
 <% end %>

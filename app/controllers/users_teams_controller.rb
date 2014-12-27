@@ -2,8 +2,7 @@ class UsersTeamsController < ApplicationController
   # GET /users_teams
   # GET /users_teams.json
   def index
-    @users_teams = UsersTeam.all
-
+    @users_teams = UsersTeam.all(:order => :team_id)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @users_teams }

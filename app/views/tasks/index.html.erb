@@ -11,7 +11,7 @@
     <tr>
       <th>Title</th>
       <th>Note</th>
-      <th>Completed</th>
+      <th>Created By</th>
       <th></th>
       <th></th>
       <th></th>
@@ -23,7 +23,7 @@
     <tr>
       <td><%= task.title %></td>
       <td><%= task.note %></td>
-      <td><%= task.completed %></td>
+      <td><%= task.user.to_s %></td>
       <td><%= link_to 'Show', task %></td>
       <td><%= link_to 'Edit', edit_task_path(task) %></td>
       <td><%= link_to 'Destroy', task, :confirm => 'Are you sure?', :method => :delete %></td>

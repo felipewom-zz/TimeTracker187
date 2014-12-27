@@ -1,4 +1,4 @@
-o: ActiveSupport::Cache::Entry	:@value"i{"source"∂g/*!
+o: ActiveSupport::Cache::Entry	:@compressedF:@value""i{"source"¬g/*!
  * jQuery JavaScript Library v1.11.1
  * http://jquery.com/
  *
@@ -14644,6 +14644,6 @@ return jQuery;
 
 
 ;
-"lengthi∂g"logical_path"application.js"_version"%29ed33acb378e0c0b27fe5f96549550a"digest"%2fc946cf2d69a6d7fdd2e431c4ab866e"
-class"BundledAsset"
-mtime"2014-12-26T14:50:36-02:00"content_type"application/javascript"required_assets_digest"%4625b132b46efc859acbcd84f1ad0e59"pathname"0$root/app/assets/javascripts/application.js:@created_atf1419617243.4158859 ù‡:@expires_in0:@compressedF
+"digest"%a5950b00f3e7e8a530cc2e16f74c413b"content_type"application/javascript"pathname"0$root/app/assets/javascripts/application.js"
+class"BundledAsset"lengthi¬g"
+mtime"2014-12-27T13:59:10-02:00"logical_path"application.js"required_assets_digest"%5121605a6e13b42b100c9219f1c44908"_version"%29ed33acb378e0c0b27fe5f96549550a:@created_atf1419696589.475364 l]:@expires_in0

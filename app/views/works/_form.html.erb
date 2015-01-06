@@ -5,7 +5,7 @@
     <%=f.input :project_id,
                      :collection => Project.all %>
     <%=f.input :task_id,
-               :collection => Task.all %>
+               :collection => Task.find_by_project_id(:project_id) %>
     <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
     <%= f.input :start, :as => :string,
                 :input_html => {:class => 'datepicker',

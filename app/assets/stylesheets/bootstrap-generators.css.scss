@@ -167,8 +167,90 @@ html {
       margin-left: 5px;
     }
   }
+  #session_user_email {
+    width: 94%;
+  }
+  #session_user_password{
+    width: 94%;
+  }
+  #btn_login{
+    width: 100%;
+  }
 }
 
+/* Landscape phone to portrait tablet */
+@media (min-width: 481px) and (max-width:960px) {
+  html body {
+    padding-top: 0 !important;
+    bottom: 121px;
+    .footer {
+      position: relative;
+      bottom: 0;
+      left: -20px;
+      width: 108%;
+      height: 40px;
+      background-color: #F9F9F9;
+      background-image: linear-gradient(to top, white, #f2f2f2);
+      background-repeat: repeat-x;
+      border: 1px solid #d4d4d4;
+      border-width: 1px 0 0 0;
+    }
+    .footer .container nobr {
+      text-align: center;
+      vertical-align: middle;
+      margin-top: 0px;
+      margin-right: auto;
+      margin-left: 25%;
+      margin-bottom: 0px;
+    }
+  }
+  #session_user_email{
+    width: 96%;
+  }
+  #session_user_password{
+    width: 96%;
+  }
+  #btn_login{
+    width: 99%;
+  }
+}
 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  html body {
+    padding-top: 0 !important;
+    bottom: 121px;
+    .footer {
+      position: relative;
+      bottom: 0;
+      left: -20px;
+      width: 112%;
+      height: 40px;
+      background-color: #F9F9F9;
+      background-image: linear-gradient(to top, white, #f2f2f2);
+      background-repeat: repeat-x;
+      border: 1px solid #d4d4d4;
+      border-width: 1px 0 0 0;
+    }
+    .footer .container nobr {
+      text-align: center;
+      vertical-align: middle;
+      margin-top: 0px;
+      margin-right: auto;
+      margin-left: 20%;
+      margin-bottom: 0px;
+    }
+    #session_user_email{
+      width: 95%;
+    }
 
+    #session_user_password{
+      width: 95%;
+    }
+
+    #btn_login{
+      width: 100%;
+    }
+  }
+}
 

@@ -1,3 +1,6 @@
 class Client < ActiveRecord::Base
-  attr_accessible :address_id, :description, :name, :status, :url
+  belongs_to :contact
+  belongs_to :status
+  attr_accessible :contact_id, :description, :name, :status_id, :url, :hourly_rate
+
 end

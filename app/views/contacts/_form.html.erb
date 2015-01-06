@@ -11,8 +11,8 @@
       </div>
       <div class="controls">
         <%= f.text_field :city,:class => 'input-xlarge', :required => true, :placeholder => 'Cidade', :autofocus => true %>
-        <%= f.text_field :state,:class => 'input-mini', :required => true, :placeholder => 'UF', :autofocus => true %>
-        <%= f.text_field :postal_code,:class => 'input-small', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
+        <%= f.text_field :state,:class => 'input-mini state', :required => true, :placeholder => 'UF', :autofocus => true %>
+        <%= f.text_field :postal_code,:class => 'input-small postal_code', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
       </div>
     </div>
     <div class="control-group">

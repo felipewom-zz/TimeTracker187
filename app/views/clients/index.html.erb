@@ -13,7 +13,7 @@
       <th>Status</th>
       <th>Description</th>
       <th>Url</th>
-      <th>Address</th>
+      <th>Contato</th>
       <th></th>
       <th></th>
       <th></th>
@@ -24,10 +24,10 @@
 <% @clients.each do |client| %>
     <tr>
       <td><%= client.name %></td>
-      <td><%= client.status %></td>
+      <td><%= client.status.name %></td>
       <td><%= client.description %></td>
       <td><%= client.url %></td>
-      <td><%= client.address_id %></td>
+      <td><%= client.contact.to_s %></td>
       <td><%= link_to 'Show', client %></td>
       <td><%= link_to 'Edit', edit_client_path(client) %></td>
       <td><%= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete %></td>

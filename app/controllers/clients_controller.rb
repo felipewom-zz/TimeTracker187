@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  @@lock = Mutex.new
   # GET /clients
   # GET /clients.json
   def index
@@ -25,7 +26,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.json
   def new
     @client = Client.new
-
+    @contact = Contact.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @client }
@@ -40,15 +41,20 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
-    @client = Client.new(params[:client])
-
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to @client, :notice => 'Client was successfully created.' }
-        format.json { render :json => @client, :status => :created, :location => @client }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @client.errors, :status => :unprocessable_entity }
+    @@lock.synchronize do
+      contact = ContactsController.new
+      contact_saved = contact.save_or_update_parameters(params[:client][:contact], params[:client][:contact_id].presence || nil)
+      params[:client].delete(:contact)
+      params[:client][:contact_id] = contact_saved.id
+      @client = Client.new(params[:client])
+      respond_to do |format|
+        if @client.save
+          format.html { redirect_to client_path(@client), :notice => 'Client was successfully created.' }
+          format.json { render :json => @client, :status => :created, :location => @client }
+        else
+          format.html { render :action => "new" }
+          format.json { render :json => @client.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -79,5 +85,23 @@ class ClientsController < ApplicationController
       format.html { redirect_to clients_url }
       format.json { head :no_content }
     end
+  end
+
+  def save_or_update_parameters(parameters = nil, client_id = nil)
+    unless parameters.nil?
+      if client_id.nil?
+        @client = Client.new
+      else
+        @client = Client.find(client_id)
+      end
+      @client.name = parameters[:name]
+      @client.status_id = parameters[:status_id]
+      @client.description = parameters[:description]
+      @client.hourly_rate = parameters[:hourly_rate]
+      @client.url = parameters[:url]
+      @client.contact_id = parameters[:contact_id]
+      @client.save!
+    end
+    return @contact
   end
 end

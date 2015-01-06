@@ -15,7 +15,7 @@
   <dd><%= @client.name %></dd>
 
   <dt>Status:</dt>
-  <dd><%= @client.status %></dd>
+  <dd><%= @client.status.name %></dd>
 
   <dt>Description:</dt>
   <dd><%= @client.description %></dd>
@@ -23,7 +23,9 @@
   <dt>Url:</dt>
   <dd><%= @client.url %></dd>
 
-  <dt>Address:</dt>
-  <dd><%= @client.address_id %></dd>
+  <dt>Endereço:</dt>
+  <dd><%= @client.contact.to_s or nil %></dd>
+  <dt>Contato:</dt>
+  <dd><%= @client.contact.numbers %> / </dd>
 
 </dl>

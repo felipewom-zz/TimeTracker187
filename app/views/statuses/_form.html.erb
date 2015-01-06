@@ -1,0 +1,13 @@
+<%= simple_form_for(@status, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :model, :collection => ActiveRecord::Base.connection.tables.map{|model| [model.capitalize.singularize.camelize]}.sort, :include_blank => false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Salvar Status', :class => "btn btn-primary" %>
+  </div>
+<% end %>

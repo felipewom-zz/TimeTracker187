@@ -29,8 +29,8 @@
 <% @projects.each do |project| %>
     <tr>
       <td><%= project.name %></td>
-      <td><%= project.status %></td>
-      <td><%= project.hourly_rate %></td>
+      <td><%= project.status.name or nil %></td>
+      <td>R$ <%= project.hourly_rate %></td>
       <td><%= project.description %></td>
       <td><%= project.area %></td>
       <td><%= project.start_date %></td>

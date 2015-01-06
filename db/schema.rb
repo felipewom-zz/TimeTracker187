@@ -10,14 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141223185819) do
+ActiveRecord::Schema.define(:version => 20150106142939) do
 
   create_table "clients", :force => true do |t|
     t.string   "name"
-    t.string   "status"
+    t.string   "status_id"
     t.text     "description"
     t.string   "url"
-    t.integer  "address_id"
+    t.integer  "contact_id"
     t.decimal  "hourly_rate", :precision => 10, :scale => 2, :default => 0.0
     t.datetime "created_at",                                                  :null => false
     t.datetime "updated_at",                                                  :null => false
@@ -26,17 +26,20 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
   create_table "contacts", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "address_id"
-    t.string   "client_id"
     t.string   "cellphone"
     t.string   "phone_number"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "address"
+    t.string   "city"
+    t.string   "neighbourhood"
+    t.string   "state",         :limit => 2
+    t.string   "postal_code",   :limit => 10
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
-    t.string   "status"
+    t.string   "status_id"
     t.string   "area"
     t.string   "url"
     t.boolean  "completed",                                  :default => false
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.datetime "updated_at",                                                    :null => false
   end
 
-  create_table "projects_users", :force => true do |t|
+  create_table "projects_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "project_id"
   end
@@ -66,6 +69,14 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
   create_table "roles_users", :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "statuses", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "model"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "tasks", :force => true do |t|
@@ -164,7 +175,8 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.string   "unconfirmed_email"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "contact_id"
+    t.integer  "address_id"
+    t.integer  "contact_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

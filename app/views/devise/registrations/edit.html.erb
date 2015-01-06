@@ -62,11 +62,11 @@
                 </div>
                 <%= c.label 'Estado', :class => 'control-label' %>
                 <div class="controls">
-                  <%= c.text_field :state,:class => 'input-mini', :required => true, :placeholder => 'UF', :autofocus => true %>
+                  <%= c.text_field :state,:class => 'input-mini state', :required => true, :placeholder => 'UF', :autofocus => true %>
                 </div>
                 <%= c.label 'CEP', :class => 'control-label' %>
                 <div class="controls">
-                  <%= c.text_field :postal_code,:class => 'input-small', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
+                  <%= c.text_field :postal_code,:class => 'input-small postal_code', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
                 </div>
                 <%= c.label 'Contato telefônico', :class => 'control-label' %>
                 <div class="controls">

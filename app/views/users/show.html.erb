@@ -24,7 +24,7 @@
     </dl>
     <dl>
       <dt>Telefone:</dt>
-      <dd onload='mask(this, mphone);'><%= @user.phone %></dd>
+      <dd><%= @user.contact.numbers or nil %></dd>
 
     </dl>
     <dl>

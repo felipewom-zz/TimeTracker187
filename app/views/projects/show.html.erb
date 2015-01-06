@@ -15,10 +15,10 @@
   <dd><%= @project.name %></dd>
 
   <dt>Status:</dt>
-  <dd><%= @project.status %></dd>
+  <dd><%= @project.status.name %></dd>
 
   <dt>Rate:</dt>
-  <dd><%= @project.hourly_rate %></dd>
+  <dd>R$ <%= @project.hourly_rate %></dd>
 
   <dt>Description:</dt>
   <dd><%= @project.description %></dd>
@@ -27,16 +27,16 @@
   <dd><%= @project.area %></dd>
 
   <dt>Start date:</dt>
-  <dd><%= @project.start_date %></dd>
+  <dd><%= @project.start_date.strftime("%B %d, %Y") or nil %></dd>
 
   <dt>End date:</dt>
-  <dd><%= @project.end_date %></dd>
+  <dd><%= @project.end_date.strftime("%B %d, %Y") or nil %></dd>
 
   <dt>Client:</dt>
-  <dd><%= @project.client_id %></dd>
+  <dd><%= @project.client.name %></dd>
 
   <dt>Whiteboard:</dt>
-  <dd><%= @project.whiteboard %></dd>
+  <dd style="background-color: #ffffff; min-height: 100px;"><%= @project.whiteboard %></dd>
 
   <dt>Url:</dt>
   <dd><%= @project.url %></dd>

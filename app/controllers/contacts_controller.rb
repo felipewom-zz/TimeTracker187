@@ -39,11 +39,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    contact_id = params[:contact_id] unless params[:contact_id].nil?
-    @contact = save_or_update_parameters(params[:contact], contact_id)
-    contact_user = User.find(current_user.id)
-    contact_user.contact_id = @contact.id
-    contact_user.save!
+    @contact = Contact.new(params[:contact])
     respond_to do |format|
       if @contact.save
         format.html { redirect_to contacts_path, :notice => 'Contato criado com sucesso.' }
@@ -83,20 +79,22 @@ class ContactsController < ApplicationController
     end
   end
 
-  def save_or_update_parameters(parameters, contact_id = nil)
-    if user.nil?
-      @contact = Contact.new
-    else
-      @contact = Contact.find(contact_id)
+  def save_or_update_parameters(parameters = nil, contact_id = nil)
+    unless parameters.nil?
+      if contact_id.nil?
+        @contact = Contact.new
+      else
+        @contact = Contact.find(contact_id)
+      end
+      @contact.address = parameters[:address]
+      @contact.neighbourhood = parameters[:neighbourhood]
+      @contact.city = parameters[:city]
+      @contact.state = parameters[:state]
+      @contact.postal_code = parameters[:postal_code]
+      @contact.phone_number = parameters[:phone_number]
+      @contact.cellphone = parameters[:cellphone]
+      @contact.save!
     end
-    @contact.address = parameters[:address]
-    @contact.neighbourhood = parameters[:neighbourhood]
-    @contact.city = parameters[:city]
-    @contact.state = parameters[:state]
-    @contact.postal_code = parameters[:postal_code]
-    @contact.phone_number = parameters[:phone_number]
-    @contact.cellphone = parameters[:cellphone]
-    @contact.save!
     return @contact
   end
 end

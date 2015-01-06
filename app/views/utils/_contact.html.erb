@@ -1,0 +1,38 @@
+<script type="text/javascript">
+  function formatar(mascara, documento){
+    var i = documento.value.length;
+    var saida = mascara.substring(0,1);
+    var texto = mascara.substring(i);
+    if (texto.substring(0,1) != saida){
+      documento.value += texto.substring(0,1);
+    }
+  }
+  $("#contact_postal_code").on('keydown keyup',function(){
+    var $that = $(this),
+            maxlength = 9
+    if($.isNumeric(maxlength)){
+      $that.val($that.val().substr(0, maxlength));
+    };
+  });
+  $("#contact_state").on('keydown keyup change',function(){
+    var $that = $(this),
+            maxlength = 2
+    if($.isNumeric(maxlength)){
+      $that.val($that.val().substr(0, maxlength).toUpperCase());
+    };
+  });
+  $("#user_contact_state").on('keydown keyup change',function(){
+    var $that = $(this),
+            maxlength = 2
+    if($.isNumeric(maxlength)){
+      $that.val($that.val().substr(0, maxlength).toUpperCase());
+    };
+  });
+  $("#user_contact_postal_code").on('keydown keyup',function(){
+    var $that = $(this),
+            maxlength = 9
+    if($.isNumeric(maxlength)){
+      $that.val($that.val().substr(0, maxlength));
+    };
+  });
+</script>

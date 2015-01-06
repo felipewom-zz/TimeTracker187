@@ -10,7 +10,6 @@
     <%= f.text_field :first_name, :required => true, :placeholder => 'Nome', :autofocus => true %>
     <%= f.text_field :last_name, :required => true, :placeholder => 'Sobrenome', :autofocus => true %>
     <%= f.text_field :email, :required => true, :placeholder => 'Email', :autofocus => true %>
-    <%= f.text_field :phone, :required => true, :placeholder => 'Telefone', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
     <%= f.text_field :password, :type => :password, :required => true, :placeholder => 'Senha' %>
     <%= f.text_field :password_confirmation, :type => :password, :required => true, :placeholder => 'Confirmação de Senha' %>
   </div>

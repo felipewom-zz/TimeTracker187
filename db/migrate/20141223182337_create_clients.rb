@@ -5,7 +5,7 @@ class CreateClients < ActiveRecord::Migration
       t.string :status
       t.text :description
       t.string :url
-      t.integer :addressable_id
+      t.integer :address_id
       t.decimal  "hourly_rate",    :precision => 10, :scale => 2, :default => 0.0
 
       t.timestamps

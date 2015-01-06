@@ -4,6 +4,7 @@ gem 'rails', '3.2.17'
 
 # Bundle install necessary gems
 gem 'sqlite3'
+gem 'mysql2', '0.3.11'
 gem 'devise', '~> 2.1.0'
 gem 'cancan', '~> 1.6.10'
 gem 'will_paginate'

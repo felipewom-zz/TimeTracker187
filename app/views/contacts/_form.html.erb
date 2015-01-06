@@ -1,16 +1,32 @@
-<%= simple_form_for(@contact, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
+<%= simple_form_for(@contact, :defaults => { :input_html => { :class => 'form-horizontal' } }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :address_id %>
-    <%= f.input :client_id %>
-    <%= f.input :cellphone %>
-    <%= f.input :phone_number %>
+    <%= f.input :contact_id, :as => :hidden, :input_html => {:value => current_user.contact_id}, :disabled => true %>
+    <div class="control-group">
+      <%= f.label 'Endereço', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :address, :class => 'input-xlarge', :required => true, :placeholder => 'Rua/Avenida...', :autofocus => true %>
+        <%= f.text_field :neighbourhood, :class => 'input-large', :required => true, :placeholder => 'Bairro', :autofocus => true %>
+      </div>
+      <div class="controls">
+        <%= f.text_field :city,:class => 'input-xlarge', :required => true, :placeholder => 'Cidade', :autofocus => true %>
+        <%= f.text_field :state,:class => 'input-mini', :required => true, :placeholder => 'UF', :autofocus => true %>
+        <%= f.text_field :postal_code,:class => 'input-small', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label 'Contato telefônico', :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :cellphone, :required => true, :placeholder => 'Celular (DDD) 99999-9999', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
+        <%= f.text_field :phone_number, :required => true, :placeholder => 'Telefone (DDD) 2222-2222', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
+      </div>
+    </div>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary" %>
+    <%= f.submit 'Criar Contato', :class => "btn btn-primary" %>
   </div>
 <% end %>
+<%= render 'utils/phone_number' %>
+<%= render 'utils/contact' %>

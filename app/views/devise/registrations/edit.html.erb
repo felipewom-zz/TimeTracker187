@@ -1,67 +1,90 @@
-<h2>Editar  <%= current_user.to_s.humanize %></h2>
-
 <%= form_for(resource,
              :as => resource_name,
              :url => registration_path(resource_name),
              :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
   <%= devise_error_messages! %>
-  <div class="control-group">
-    <%= f.label 'Nome do usuário', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :username, :required => true, :placeholder => 'Nome do usuário' , :class => 'uneditable-input', :disabled => true,  :autofocus => true %>
-    </div>
+  <div class="row-fluid">
+    <div class="span6">
+        <div class="control-group">
+          <%= f.label 'Nome do usuário', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :username, :required => true, :placeholder => 'Nome do usuário' , :class => 'uneditable-input', :disabled => true,  :autofocus => true %>
+          </div>
+          <%= f.label 'Nome', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :first_name, :required => true, :placeholder => 'Nome', :autofocus => true %>
+          </div>
+            <%= f.label 'Sobrenome', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :last_name, :required => true, :placeholder => 'Sobrenome', :autofocus => true %>
+          </div>
+          <%= f.label 'Email', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :email, :required => true, :type => :email, :placeholder => 'Email', :autofocus => true %>
+          </div>
+          <%= f.label 'Senha atual', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :current_password, :autocomplete => "off", :type => :password, :placeholder => 'Confirme sua senha atual', :required => true %>
+          </div>
+          <%= link_to 'Trocar a senha', '#' , :id => 'change_button' %>
+          <div id="change_password" class="control-group" >
+            <%= f.label 'Nova Senha', :class => "col-sm-1 control-label" %>
+            <div class="controls">
+              <%= f.text_field :password, :type => :password, :required => false, :placeholder => 'Nova Senha' %>
+            </div>
+            <%= f.label 'Confirmação', :class => "col-sm-1 control-label" %>
+            <div class="controls">
+              <%= f.text_field :password_confirmation, :type => :password, :required => false, :placeholder => 'Confirmação de Senha' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span2">
+        <% if current_user.contact.nil? %>
+          <div class="form-actions">
+            <%= link_to 'Adicionar Contato', '/contacts/new', :class => 'btn btn-primary' %>
+          </div>
+        <% else %>
+          <%= f.fields_for @contact do |c| %>
+            <div class="form-inputs">
+              <div class="control-group">
+                <%= c.label 'Endereço', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :address, :class => 'input-large', :required => true, :placeholder => 'Rua/Avenida...', :autofocus => true %>
+                </div>
+                <%= c.label 'Bairro', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :neighbourhood, :class => 'input-large', :required => true, :placeholder => 'Bairro', :autofocus => true %>
+                </div>
+                <%= c.label 'Cidade', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :city,:class => 'input-large', :required => true, :placeholder => 'Cidade', :autofocus => true %>
+                </div>
+                <%= c.label 'Estado', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :state,:class => 'input-mini', :required => true, :placeholder => 'UF', :autofocus => true %>
+                </div>
+                <%= c.label 'CEP', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :postal_code,:class => 'input-small', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
+                </div>
+                <%= c.label 'Contato telefônico', :class => 'control-label' %>
+                <div class="controls">
+                  <%= c.text_field :cellphone, :required => true, :placeholder => 'Celular (DDD) 99999-9999', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
+                  <%= c.text_field :phone_number, :required => true, :placeholder => 'Telefone (DDD) 2222-2222', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <%= render 'utils/contact' %>
+        <% end %>
+      </div>
   </div>
-  <div class="control-group">
-    <%= f.label 'Nome', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :first_name, :required => true, :placeholder => 'Nome', :autofocus => true %>
-      <%= f.text_field :last_name, :required => true, :placeholder => 'Sobrenome', :autofocus => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label 'Email', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :required => true, :type => :email, :placeholder => 'Email', :autofocus => true %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label 'Telefone', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :phone, :required => true, :placeholder => 'Telefone', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label 'Senha atual', :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :current_password, :autocomplete => "off", :type => :password, :placeholder => 'Confirme sua senha atual', :required => true %>
-      <%= link_to 'Change Password', '#' , :id => 'change_button' , :class => "btn btn-primary"%>
-    </div>
-  </div>
-  <div id="change_password" class="control-group" >
-    <%= f.label :password, :class => "col-sm-1 control-label" %>
-    <div class="controls">
-      <%= f.text_field :password, :type => :password, :required => false, :placeholder => 'Nova Senha' %>
-    </div>
-    <%= f.label 'Confirmation', :class => "col-sm-1 control-label" %>
-    <div class="controls">
-      <%= f.text_field :password_confirmation, :type => :password, :required => false, :placeholder => 'Confirmação de Senha' %>
-    </div>
-  </div>
-
   <div class="form-inputs">
     <%= f.submit 'Atualizar', :class => 'btn btn-primary' %>
   </div>
 <% end %>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+<p><%= link_to "Cancelar minha conta?", registration_path(resource_name), :data => { :confirm => "Tem certeza disso?" }, :method => :delete %></p>
 
 <%= render 'utils/phone_number' %>
-<script type="text/javascript">
-  $('#change_password').hide();
-  $('#change_button').click(function(){
-    $('#change_password').toggle();
-  });
-</script>
+<%= render 'utils/change_password' %>

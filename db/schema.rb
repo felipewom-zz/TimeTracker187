@@ -12,58 +12,27 @@
 
 ActiveRecord::Schema.define(:version => 20141223185819) do
 
-  create_table "addresses", :force => true do |t|
-    t.integer  "addressable_id"
-    t.string   "type"
-    t.string   "street"
-    t.string   "complement"
-    t.string   "city"
-    t.string   "state",          :limit => 2
-    t.string   "postal_code"
-    t.string   "neighbourhood"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
-  end
-
-  add_index "addresses", ["type", "addressable_id"], :name => "index_addresses_on_addressable_type_and_addressable_id"
-
   create_table "clients", :force => true do |t|
     t.string   "name"
     t.string   "status"
     t.text     "description"
     t.string   "url"
-    t.integer  "addressable_id"
-    t.decimal  "hourly_rate",    :precision => 10, :scale => 2, :default => 0.0
-    t.datetime "created_at",                                                     :null => false
-    t.datetime "updated_at",                                                     :null => false
+    t.integer  "address_id"
+    t.decimal  "hourly_rate", :precision => 10, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                  :null => false
+    t.datetime "updated_at",                                                  :null => false
   end
-
-  add_index "clients", ["addressable_id"], :name => "index_clients_on_addressable_id"
-  add_index "clients", ["url"], :name => "index_clients_on_url"
 
   create_table "contacts", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "addressable_id"
+    t.integer  "address_id"
     t.string   "client_id"
     t.string   "cellphone"
     t.string   "phone_number"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
-
-  add_index "contacts", ["addressable_id"], :name => "index_contacts_on_addressable_id"
-  add_index "contacts", ["client_id"], :name => "index_contacts_on_client_id"
-
-  create_table "members_projects", :id => false, :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "members_projects", ["project_id"], :name => "index_members_projects_on_project_id"
-  add_index "members_projects", ["user_id"], :name => "index_members_projects_on_user_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -73,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.boolean  "completed",                                  :default => false
     t.decimal  "hourly_rate", :precision => 10, :scale => 2, :default => 0.0
     t.integer  "client_id"
-    t.integer  "owner_id"
+    t.integer  "user_id"
     t.text     "description"
     t.text     "whiteboard"
     t.datetime "start_date"
@@ -82,18 +51,9 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.datetime "updated_at",                                                    :null => false
   end
 
-  add_index "projects", ["client_id"], :name => "index_projects_on_client_id"
-  add_index "projects", ["completed"], :name => "index_projects_on_completed"
-  add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
-  add_index "projects", ["owner_id"], :name => "index_projects_on_owner_id"
-  add_index "projects", ["start_date"], :name => "index_projects_on_start_date"
-  add_index "projects", ["url"], :name => "index_projects_on_url"
-
-  create_table "role", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+  create_table "projects_users", :force => true do |t|
+    t.integer "user_id"
+    t.integer "project_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -103,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "roles_users", :id => false, :force => true do |t|
+  create_table "roles_users", :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
   end
@@ -111,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
   create_table "tasks", :force => true do |t|
     t.string   "title"
     t.text     "note"
-    t.integer     "user_id"
+    t.integer  "project_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -186,14 +146,14 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
 
   create_table "users", :force => true do |t|
     t.string   "username"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",                    :default => "", :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
+    t.integer  "sign_in_count",          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -201,25 +161,22 @@ ActiveRecord::Schema.define(:version => 20141223185819) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      :limit => nil
+    t.string   "unconfirmed_email"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "phone"
+    t.string   "contact_id"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "users_teams", :id => false, :force => true do |t|
+  create_table "users_teams", :force => true do |t|
     t.integer  "user_id"
     t.integer  "team_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
-
-  add_index "users_teams", ["team_id"], :name => "index_users_teams_on_team_id"
-  add_index "users_teams", ["user_id"], :name => "index_users_teams_on_user_id"
 
   create_table "versions", :force => true do |t|
     t.string   "item_type",      :null => false

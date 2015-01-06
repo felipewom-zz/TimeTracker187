@@ -4,7 +4,9 @@
     <data-source source="LOCAL" name="Rails TimeTracker: development" uuid="19fdef34-6e62-4e5f-a609-7126af1ffd56">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db/development.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:mysql://127.0.0.1:3306/timetracker</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
       <libraries />
     </data-source>
   </component>

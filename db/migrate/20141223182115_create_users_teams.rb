@@ -4,9 +4,6 @@ class CreateUsersTeams < ActiveRecord::Migration
       t.integer :user_id
       t.integer :team_id
 
-      t.timestamps
-
-
     end
   end
 end

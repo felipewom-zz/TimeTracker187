@@ -1,6 +1,6 @@
 TimeTracker::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :path => :account, :controllers => {:registrations => 'registrations'}
 
   resources :works
   resources :versions
@@ -9,9 +9,8 @@ TimeTracker::Application.routes.draw do
   resources :ticket_priorities
   resources :ticket_comments
   resources :ticket_categories
-  resources :members_projects
+  resources :projects_users
   resources :contacts
-  resources :addresses
   resources :clients
   resources :users_teams
   resources :teams

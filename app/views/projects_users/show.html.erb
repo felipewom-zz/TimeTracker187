@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to members_projects_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_members_project_path(@projects_user), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing members_projects</h1>
+</div>
+
+<dl>
+  <dt>User:</dt>
+  <dd><%= @projects_user.user_id %></dd>
+
+  <dt>Project:</dt>
+  <dd><%= @projects_user.project_id %></dd>
+
+</dl>

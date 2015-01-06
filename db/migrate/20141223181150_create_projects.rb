@@ -8,7 +8,7 @@ class CreateProjects < ActiveRecord::Migration
       t.boolean   :completed,        :default => false
       t.decimal   :hourly_rate,      :precision => 10, :scale => 2, :default => 0.0
       t.integer   :client_id
-      t.integer   :owner_id
+      t.integer   :user_id
       t.text :description
       t.text :whiteboard
       t.datetime :start_date

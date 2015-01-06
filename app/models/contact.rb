@@ -1,3 +1,8 @@
 class Contact < ActiveRecord::Base
-  attr_accessible :address_id, :cellphone, :client_id, :email, :name, :phone_number
+  has_many :users
+  attr_accessible :address, :cellphone, :email, :name, :phone_number, :city, :state, :postal_code, :neighbourhood
+
+  def to_s
+    "#{address}, #{neighbourhood.capitalize}, #{city}/#{state}"
+  end
 end

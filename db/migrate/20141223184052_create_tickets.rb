@@ -6,7 +6,7 @@ class CreateTickets < ActiveRecord::Migration
       t.datetime :start_date
       t.datetime :end_date
       t.integer :ticket_category_id
-      t.integer :assignee_id
+      t.integer :user_id
       t.integer :status_id
       t.decimal :estimated_time, :precision => 19, :scale => 4, :default => 0.0
       t.decimal :actual_time, :precision => 19, :scale => 4, :default => 0.0

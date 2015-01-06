@@ -9,10 +9,8 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
       <th>Address</th>
-      <th>Client</th>
+      <th>CEP</th>
       <th>Cellphone</th>
       <th>Phone number</th>
       <th></th>
@@ -24,10 +22,8 @@
   <tbody>
 <% @contacts.each do |contact| %>
     <tr>
-      <td><%= contact.name %></td>
-      <td><%= contact.email %></td>
-      <td><%= contact.address_id %></td>
-      <td><%= contact.client_id %></td>
+      <td><%= contact.to_s %></td>
+      <td><%= contact.postal_code %></td>
       <td><%= contact.cellphone %></td>
       <td><%= contact.phone_number %></td>
       <td><%= link_to 'Show', contact %></td>

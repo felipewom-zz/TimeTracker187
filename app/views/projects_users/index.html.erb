@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_members_project_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Members project
+  <% end %>
+  <h1>Listing members_projects</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Project</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @projects_users.each do |members_project| %>
+    <tr>
+      <td><%= members_project.user_id %></td>
+      <td><%= members_project.project_id %></td>
+      <td><%= link_to 'Show', members_project %></td>
+      <td><%= link_to 'Edit', edit_members_project_path(members_project) %></td>
+      <td><%= link_to 'Destroy', members_project, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

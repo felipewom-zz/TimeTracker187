@@ -250,6 +250,3 @@ pt-BR:
       long: ! '%d de %B de %Y, %H:%M'
       short: ! '%d de %B, %H:%M'
     pm: ''
-  simple_form:
-    error_notification:
-      default_message: 'Alguns erros foram encontrados, poderia verificar?'

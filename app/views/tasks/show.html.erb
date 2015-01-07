@@ -1,18 +1,23 @@
 <div class="page-header">
+  <%= link_to tasks_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
   <%= link_to edit_task_path(@task), :class => 'btn btn-primary' do %>
     <i class="icon-pencil icon-white"></i>
-    Editar
+    Edit
   <% end %>
+  <h1>Listing tasks</h1>
 </div>
 
 <dl>
-  <dt>Título:</dt>
+  <dt>Title:</dt>
   <dd><%= @task.title %></dd>
 
-  <dt>Notas:</dt>
+  <dt>Note:</dt>
   <dd><%= @task.note %></dd>
 
-  <dt>Associado ao Projeto:</dt>
-  <dd><%= @task.project.name %></dd>
+  <dt>Created by:</dt>
+  <dd><%= @task.user.to_s %></dd>
 
 </dl>

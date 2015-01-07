@@ -1,4 +1,4 @@
 class Task < ActiveRecord::Base
-  belongs_to :project
-  attr_accessible :note, :title, :project_id
+  belongs_to :user
+  attr_accessible :note, :title, :user_id
 end

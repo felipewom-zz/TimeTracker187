@@ -3,6 +3,3 @@
 
 en:
   hello: "Hello world"
-  simple_form:
-    error_notification:
-      default_message: 'Alguns erros foram encontrados, poderia verificar?'

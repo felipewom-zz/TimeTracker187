@@ -1,0 +1,107 @@
+<script type="text/javascript">
+  $('.clockpicker').clockpicker();
+  $('#startClock').click(function (e) {
+    // Have to stop propagation here
+    e.stopPropagation();
+    $('#start').clockpicker('show');
+  });
+  $('#finishClock').click(function (e) {
+    // Have to stop propagation here
+    e.stopPropagation();
+    $('#finish').clockpicker('show');
+  });
+  $('#start').change(function () {
+    var start = this.value.toString();
+    var end = document.getElementById('finish').value.toString();
+    var duration = calculate(start, end);
+    if (duration < 1) {
+      duration = '00:00';
+    }
+    document.getElementById('duration').value = duration;
+  });
+  $('#finish').change(function () {
+    var end = this.value.toString();
+    var start = document.getElementById('start').value.toString();
+    var duration = calculate(start, end);
+    if (duration < 1) {
+      duration = '00:00';
+    }
+    document.getElementById('duration').value = duration;
+  });
+
+  function calculate(time_start, time_end) {
+    if (toSeconds(time_end) < toSeconds(time_start)) {
+      alert('Hora final menor que início, hora máx. permitida é 23:59!');
+      return 0;
+    } else {
+      var difference = Math.abs(toSeconds(time_start) - toSeconds(time_end));
+      // compute hours, minutes and seconds
+      var result = [
+        // an hour has 3600 seconds so we have to compute how often 3600 fits
+        // into the total number of seconds
+        Math.floor(difference / 3600), // HOURS
+        // similar for minutes, but we have to "remove" the hours first;
+        // this is easy with the modulus operator
+        Math.floor((difference % 3600) / 60), // MINUTES
+        // the remainder is the number of seconds
+      ];
+      // formatting (0 padding and concatenation)
+      result = result.map(function (v) {
+        return v < 10 ? '0' + v : v;
+      }).join(':');
+      return result;
+    }
+  }
+
+  function toSeconds(time_str) {
+    // Extract hours, minutes and seconds
+    var parts = time_str.split(':');
+    // compute  and return total seconds
+    return parts[0] * 3600 + // an hour has 3600 seconds
+            parts[1] * 60;   // a minute has 60 seconds
+  }
+
+  function mask(o, f) {
+    setTimeout(function () {
+      var v = formatar(o.value);
+      if (v != o.value) {
+        o.value = v;
+      }
+    }, 1);
+  }
+
+  function formatar(v) {
+    var r = v.replace(/\D/g, "");
+    r = r.replace(/^0/, "");
+    if (r.length > 5) {
+      r = r.replace(/^(\d{2})(\d{2}).*/, "$1:$2");
+    }
+    else if (r.length > 2) {
+      r = r.replace(/^(\d\d)(\d{2,5})/, "$1:$2");
+    }
+    else {
+      r = r.replace(/^(\d*)/, "$1:00");
+    }
+
+    var splitted = r.split(':');
+    var h = splitted[0];
+    var m = splitted[1];
+    if (parseInt(h) < 9) {
+      h = '0' + h;
+    } else if (parseInt(h) > 23) {
+      h = '23';
+    }
+    if(parseInt(m) < 9){
+      m = '0'+m;
+    }else if ( parseInt(m) > 59){
+      m = '59';
+    }
+    r = h.toString() + ":"+ m.toString();
+    if (r.length > 5) {
+      r = r.substr(0, 5);
+    }
+    return r;
+  }
+
+
+</script>

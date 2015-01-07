@@ -14,6 +14,7 @@
         <%= f.label 'Status do Projeto', :class => 'control-label' %>
         <div class="controls">
           <%= f.select :status_id, Status.find_all_by_model('project').map {|status| [status.name, status.id]}.sort, :selected => 1  %>
+          <%= link_to '<i class="icon-plus"></i>'.html_safe, new_status_path, :title => 'Novo Status', :style => 'position: relative; top: -4px; height: 100%;' %>
         </div>
         <%= f.label 'Descrição', :class => 'control-label' %>
         <div class="controls">
@@ -51,7 +52,8 @@
             <div class="span8">
               <%= f.label 'Cliente', :class => 'control-label' %>
               <div class="controls">
-                <%= f.select :client_id, Client.all.map.map {|client| [client.name, client.id]}.sort, :selected => 1 , :class => 'pull-right'%>
+                <%= f.select :client_id, Client.all.map.map {|client| [client.name, client.id]}.sort, :selected => 1 %>
+                <%= link_to '<i class="icon-plus"></i>'.html_safe, new_client_path, :title => 'Novo Cliente', :style => 'position: relative; top: -4px; height: 100%;' %>
               </div>
               <%= f.label 'URL', :class => 'control-label' %>
               <div class="controls">
@@ -66,9 +68,8 @@
         </div>
       </div>
     </div>
+      <%= f.submit 'Salvar Projeto', :class => "btn btn-primary" %>
   </div>
-  <div class="form-actions">
-    <%= f.submit 'Salvar Projeto', :class => "btn btn-primary" %>
-  </div>
+
 <% end %>
 <%= render 'utils/datepicker' %>

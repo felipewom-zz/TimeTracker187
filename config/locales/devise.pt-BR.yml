@@ -9,10 +9,10 @@ pt-BR:
     failure:
       already_authenticated: 'Você já está logado.'
       inactive: 'Sua conta ainda não foi ativada.'
-      invalid: 'E-mail ou senha inválidos.'
+      invalid: 'Login ou senha inválidos.'
       invalid_token: 'O token de autenticação não é válido.'
       locked: 'Sua conta está bloqueada.'
-      not_found_in_database: 'E-mail ou senha inválidos.'
+      not_found_in_database: 'Login ou senha inválidos.'
       timeout: 'Sua sessão expirou, por favor, efetue login novamente para continuar.'
       unauthenticated: 'Para continuar, efetue login ou registre-se.'
       unconfirmed: 'Antes de continuar, confirme a sua conta.'
@@ -53,7 +53,7 @@ pt-BR:
       already_confirmed: "já foi confirmado"
       confirmation_period_expired: "precisa ser confirmada em até %{period}, por favor, solicite uma nova"
       expired: "expirou, por favor, solicite uma nova"
-      not_found: "não encontrado"
+      not_found: "Email não encontrado"
       not_locked: "não foi bloqueado"
       not_saved:
         one: "Não foi possível salvar %{resource}: 1 erro"

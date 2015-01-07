@@ -3,12 +3,12 @@ TimeTracker::Application.configure do
   require 'smtp_tls'
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-      :address              => 'xxxxxxxxxxx',
+      :address              => 'smtp.gmail.com',
       :port                 => 587,
       :authentication       => :plain,
       :domain               => 'gmail.com',
-      :user_name            => 'xxxxxx@xxxxxxxxx',
-      :password             => 'xxxxxxxxxx',
+      :user_name            => 'felipewom@gmail.com',
+      :password             => 'felipewom782041',
   }
 
   # In the development environment your application's code is reloaded on

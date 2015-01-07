@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20150106142939) do
   add_index "tickets", ["ticket_priority_id"], :name => "index_tickets_on_ticket_priority_id"
 
   create_table "users", :force => true do |t|
-    t.string   "username"
+    t.string   "username",                               :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "email",                  :default => "", :null => false

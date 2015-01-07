@@ -2,8 +2,8 @@
              :url => session_path(resource_name),
              :html => { :class => 'form-horizontal' }) do |f| %>
   <%= devise_error_messages! %>
-  <%= f.email_field :email, :id => :session_user_email, :required => true, :autofocus => true, :placeholder => 'Email' %>
-  <%= f.password_field :password, :id => :session_user_password, :required => true, :placeholder => 'Senha' %>
+  <%= f.text_field :login, :required => true, :autofocus => true, :placeholder => 'Email ou Nome do Usuário', :class => 'devise' %>
+  <%= f.password_field :password, :required => true, :placeholder => 'Senha', :class => 'devise' %>
   <%= f.submit 'Logar', :class => 'btn btn-large btn-block btn-default' , :id => :btn_login %>
 <% end %>
 <%= render "devise/shared/links" %>

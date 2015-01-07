@@ -7,8 +7,8 @@ TimeTracker::Application.configure do
       :port                 => 587,
       :authentication       => :plain,
       :domain               => 'gmail.com',
-      :user_name            => 'felipewom@gmail.com',
-      :password             => 'felipewom782041',
+      :user_name            => 'xxxxxxx@gmail.com',
+      :password             => 'xxxxxxxxxxx',
   }
 
   # In the development environment your application's code is reloaded on

@@ -13,7 +13,6 @@
     <div class="span4">
       <div class="control-group">
         <%= f.hidden_field :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
-        <%= f.hidden_field :historic_date, :as => :hidden, :input_html => { :value => Time.now.strftime('%d/%m/%Y') }%>
         <%= f.label 'Projeto', :class => 'control-label' %>
         <div class="controls">
           <%= f.select :project_id, Project.all.map {|project| [project.name, project.id]}.sort, :selected => 1  %>
@@ -34,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="span8">
+    <div class="span2">
       <div class="control-group">
         <%= f.label 'Início', :class => 'control-label' %>
         <div class="input-append controls">
@@ -60,7 +59,26 @@
         </div>
       </div>
     </div>
+    <div class="span4">
+      <div id="historic" class="controls" style="background-color: #ffffff;width: 220px; border: 2px solid; border-radius: 5px;">
+      </div>
+      <%= f.hidden_field :historic_date, :id => :historic_date %>
+    </div>
   </div>
+  <br>
   <%= f.submit 'Salvar Histórico', :class => "btn btn-primary" %>
 <% end %>
+<script type="text/javascript">
+  $('#historic_date').val(new Date());
+  $('#historic').datepicker({
+    format: 'dd/mm/yyyy',
+    language: "pt-BR",
+    setDate: new Date(),
+    autoclose: true,
+    update: new Date()
+  }).on('changeDate', function(ev) {
+      var newDate = new Date(ev.date);
+      $('#historic_date').val(newDate);  //Updates value of of your input
+  });
+</script>
 <%= render 'utils/work' %>

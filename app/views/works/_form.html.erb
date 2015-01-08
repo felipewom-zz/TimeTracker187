@@ -1,4 +1,4 @@
-<%= form_for(@work, :defaults => { :input_html => { :class => 'form-horizontal' } }) do |f| %>
+<%= form_for(@work, :defaults => {:input_html => {:class => 'form-horizontal'}}) do |f| %>
   <% if @work.errors.any? %>
     <% @work.errors.full_messages.each do |alert| %>
       <% alert.each do |msg| %>
@@ -10,26 +10,22 @@
     <% end %>
   <% end %>
   <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
       <div class="control-group">
-        <%= f.hidden_field :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
+        <%= f.hidden_field :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
         <%= f.label 'Projeto', :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :project_id, Project.all.map {|project| [project.name, project.id]}.sort, :selected => 1  %>
+          <%= f.select :project_id, Project.all.map { |project| [project.name, project.id] }.sort, :selected => 1 %>
           <%= link_to '<i class="icon-plus"></i>'.html_safe, new_project_path, :title => 'Novo Projeto', :style => 'position: relative; top: -4px; height: 100%;' %>
-  </div>
+        </div>
         <%= f.label 'Tarefa', :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :task_id, Task.all.map {|task| [task.title, task.id]}.sort, :selected => 1  %>
+          <%= f.select :task_id, Task.all.map { |task| [task.title, task.id] }.sort, :selected => 1 %>
           <%= link_to '<i class="icon-plus"></i>'.html_safe, new_task_path, :title => 'Novo Tarefa', :style => 'position: relative; top: -4px; height: 100%;' %>
-  </div>
+        </div>
         <%= f.label 'Descrição', :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_area :description, :rows => 3 %>
-        </div>
-        <%= f.label 'Custo Adicional', :class => 'control-label' %>
-        <div class="controls">
-          <%= f.number_field :additional_cost %>
+          <%= f.text_area :description, :rows => 4 %>
         </div>
       </div>
     </div>
@@ -38,8 +34,8 @@
         <%= f.label 'Início', :class => 'control-label' %>
         <div class="input-append controls">
           <%= f.text_field :start, :class => 'input-mini clockpicker start',
-                           :style => 'text-align: center;' , :id => :start, :value => Time.now.strftime('%H:%M'),
-                           :onkeypress => "mask(this, formatar);",  :onblur => "mask(this, formatar)", :required => true %>
+                           :style => 'text-align: center;', :id => :start, :value => Time.now.strftime('%H:%M'),
+                           :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar)", :required => true %>
           <span id="startClock" class="add-on btn">
             <span class="icon-time"></span>
           </span>
@@ -48,7 +44,7 @@
         <div class="input-append controls">
           <%= f.text_field :finish, :class => 'input-mini clockpicker',
                            :style => 'text-align: center;', :id => :finish, :value => (Time.now+(4*60*60)).strftime('%H:%M'),
-                           :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar);", :required => true%>
+                           :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar);", :required => true %>
           <span id="finishClock" class="add-on btn">
             <span class="icon-time"></span>
           </span>
@@ -56,6 +52,10 @@
         <%= f.label 'Duração', :class => 'control-label' %>
         <div class="controls">
           <%= f.text_field :duration, :class => 'input-small', :style => 'text-align: center;', :id => :duration, :disabled => true, :value => '4:00' %>
+        </div>
+        <%= f.label 'Custo Adicional', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.number_field :additional_cost, :class => 'input-small' %>
         </div>
       </div>
     </div>
@@ -76,9 +76,9 @@
     setDate: new Date(),
     autoclose: true,
     update: new Date()
-  }).on('changeDate', function(ev) {
-      var newDate = new Date(ev.date);
-      $('#historic_date').val(newDate);  //Updates value of of your input
+  }).on('changeDate', function (ev) {
+    var newDate = new Date(ev.date);
+    $('#historic_date').val(newDate);  //Updates value of of your input
   });
 </script>
 <%= render 'utils/work' %>

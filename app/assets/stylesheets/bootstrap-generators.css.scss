@@ -9,18 +9,16 @@ html {
     padding-top: $navbarHeight + 10px;
     position: absolute;
     top: 0;
-    bottom: 50px;
+    bottom: 40px;
     right: 0;
     left: 0;
-    .hero-unit {
-      padding-top: 0px;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 0px;
-      margin-bottom: 20px;
-      font-size: 14px !important;
-      width: 100% !important;
-      height: 100% !important;
+    height: auto;
+    .row-fluid{
+      height: 91%;
+      overflow: auto;
+      .span12{
+        height: 97%;
+      }
     }
     .navbar-inner {
       .top {
@@ -32,7 +30,7 @@ html {
       margin-top: 0px;
       margin-right: 0;
       margin-left: 0;
-      margin-bottom: 20px;
+      margin-bottom: 0px !important;
       padding-left: 20px!important;
       padding-right: 20px!important;
       border-bottom: 1px solid #eeeeee;
@@ -132,8 +130,6 @@ html {
       padding-right: 20px;
       padding-left: 20px;
       padding-bottom: 20px;
-      margin-bottom: 20px;
-      font-size: 18px;
       font-weight: 200;
       line-height: 20px;
       color: inherit;
@@ -141,6 +137,8 @@ html {
       -webkit-border-radius: 6px;
       -moz-border-radius: 6px;
       border-radius: 6px;
+      margin-bottom: 0px;
+      font-size: 14px !important;
     }
     .container {
       position: relative;
@@ -153,7 +151,7 @@ html {
       left: 0;
       width: 100%;
       /* Set the fixed height of the footer here */
-      height: 40px;
+      height: 22px;
       .container {
         width: 100%;
         margin-top: 15px;
@@ -183,6 +181,9 @@ html {
 }
 /* Landscape phone to portrait tablet */
 @media (min-width: 961px){
+  .hero-unit{
+    height: 95% !important;
+  }
   .devise {
     width: 94%;
   }
@@ -192,7 +193,17 @@ html {
 @media (min-width: 481px) and (max-width:960px) {
   html body {
     padding-top: 0 !important;
-    bottom: 121px;
+    bottom: 0px;
+    position: inherit;
+    height: 100%;
+    overflow: hidden;
+    .row-fluid{
+      height: 91%;
+      overflow: hidden;
+      .span12{
+        height: 92%;
+      }
+    }
     .footer {
       position: relative;
       bottom: 0;
@@ -226,7 +237,19 @@ html {
 @media (max-width: 480px) {
   html body {
     padding-top: 0 !important;
-    bottom: 121px;
+    bottom: 0px;
+    position: inherit;
+    height: 100%;
+    overflow: auto;
+    .hero-unit {
+      padding-top: 0px;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 0px;
+      margin-bottom: 20px;
+      font-size: 14px !important;
+      overflow: hidden;
+    }
     .footer {
       position: relative;
       bottom: 0;

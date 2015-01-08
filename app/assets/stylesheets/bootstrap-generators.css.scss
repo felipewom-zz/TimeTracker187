@@ -167,14 +167,14 @@ html {
       margin-left: 5px;
     }
   }
-  #session_user_email {
-    width: 94%;
-  }
-  #session_user_password{
-    width: 94%;
-  }
   #btn_login{
     width: 100%;
+  }
+}
+/* Landscape phone to portrait tablet */
+@media (min-width: 961px){
+  .devise {
+    width: 94%;
   }
 }
 
@@ -204,11 +204,8 @@ html {
       margin-bottom: 0px;
     }
   }
-  #session_user_email{
-    width: 96%;
-  }
-  #session_user_password{
-    width: 96%;
+  .devise {
+    width: 96.5%;
   }
   #btn_login{
     width: 99%;
@@ -240,12 +237,9 @@ html {
       margin-left: 20%;
       margin-bottom: 0px;
     }
-    #session_user_email{
-      width: 95%;
-    }
 
-    #session_user_password{
-      width: 95%;
+    .devise{
+      width: 96%;
     }
 
     #btn_login{

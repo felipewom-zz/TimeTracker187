@@ -1,26 +1,66 @@
-<%= simple_form_for(@work, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%=f.input :project_id,
-                     :collection => Project.all %>
-    <%=f.input :task_id,
-               :collection => Task.find_by_project_id(:project_id) %>
-    <%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
-    <%= f.input :start, :as => :string,
-                :input_html => {:class => 'datepicker',
-                                :value => @work.start.present? ? localize(@work.start,
-                                                                              :format => '%d/%m/%Y') : nil} %>
-    <%= f.input :start %>
-    <%= f.input :finish %>
-    <%= f.input :duration %>
-    <%= f.input :additional_cost %>
-    <%= f.input :description %>
+<%= form_for(@work, :defaults => { :input_html => { :class => 'form-horizontal' } }) do |f| %>
+  <% if @work.errors.any? %>
+    <% @work.errors.full_messages.each do |alert| %>
+      <% alert.each do |msg| %>
+        <%= content_tag :div, :class => "alert alert-error" do %>
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <%= msg %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <div class="row-fluid">
+    <div class="span4">
+      <div class="control-group">
+        <%= f.hidden_field :user_id, :as => :hidden, :input_html => { :value => current_user.id }%>
+        <%= f.hidden_field :historic_date, :as => :hidden, :input_html => { :value => Time.now.strftime('%d/%m/%Y') }%>
+        <%= f.label 'Projeto', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :project_id, Project.all.map {|project| [project.name, project.id]}.sort, :selected => 1  %>
+          <%= link_to '<i class="icon-plus"></i>'.html_safe, new_project_path, :title => 'Novo Projeto', :style => 'position: relative; top: -4px; height: 100%;' %>
   </div>
-
-  <div class='form-actions'>
-    <%= f.button :submit, :class => 'btn-primary' %>
+        <%= f.label 'Tarefa', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :task_id, Task.all.map {|task| [task.title, task.id]}.sort, :selected => 1  %>
+          <%= link_to '<i class="icon-plus"></i>'.html_safe, new_task_path, :title => 'Novo Tarefa', :style => 'position: relative; top: -4px; height: 100%;' %>
   </div>
+        <%= f.label 'Descrição', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :description, :rows => 3 %>
+        </div>
+        <%= f.label 'Custo Adicional', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.number_field :additional_cost %>
+        </div>
+      </div>
+    </div>
+    <div class="span8">
+      <div class="control-group">
+        <%= f.label 'Início', :class => 'control-label' %>
+        <div class="input-append controls">
+          <%= f.text_field :start, :class => 'input-mini clockpicker start',
+                           :style => 'text-align: center;' , :id => :start, :value => Time.now.strftime('%H:%M'),
+                           :onkeypress => "mask(this, formatar);",  :onblur => "mask(this, formatar)", :required => true %>
+          <span id="startClock" class="add-on btn">
+            <span class="icon-time"></span>
+          </span>
+        </div>
+        <%= f.label 'Fim', :class => 'control-label' %>
+        <div class="input-append controls">
+          <%= f.text_field :finish, :class => 'input-mini clockpicker',
+                           :style => 'text-align: center;', :id => :finish, :value => (Time.now+(4*60*60)).strftime('%H:%M'),
+                           :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar);", :required => true%>
+          <span id="finishClock" class="add-on btn">
+            <span class="icon-time"></span>
+          </span>
+        </div>
+        <%= f.label 'Duração', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :duration, :class => 'input-small', :style => 'text-align: center;', :id => :duration, :disabled => true, :value => '4:00' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= f.submit 'Salvar Histórico', :class => "btn btn-primary" %>
 <% end %>
-
-<%= render 'utils/datepicker' %>
+<%= render 'utils/work' %>

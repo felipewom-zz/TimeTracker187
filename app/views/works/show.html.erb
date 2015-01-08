@@ -1,24 +1,22 @@
 <div class="page-header">
-  <%= link_to works_path, :class => 'btn' do %>
-    <i class="icon-list-alt"></i>
-    Back
-  <% end %>
   <%= link_to edit_work_path(@work), :class => 'btn btn-primary' do %>
     <i class="icon-pencil icon-white"></i>
-    Edit
+    Editar
   <% end %>
-  <h1>Listing works</h1>
 </div>
 
 <dl>
   <dt>Project:</dt>
-  <dd><%= @work.project_id %></dd>
+  <dd><%= @work.project.name %></dd>
 
   <dt>Task:</dt>
-  <dd><%= @work.task_id %></dd>
+  <dd><%= @work.task.title %></dd>
 
   <dt>User:</dt>
-  <dd><%= @work.user_id %></dd>
+  <dd><%= @work.user.to_s %></dd>
+
+  <dt>Data:</dt>
+  <dd><%= @work.historic_date.strftime('%d/%m/%Y') %></dd>
 
   <dt>Start:</dt>
   <dd><%= @work.start %></dd>

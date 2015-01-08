@@ -9,16 +9,15 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>Project</th>
-      <th>Task</th>
-      <th>User</th>
-      <th>Start</th>
-      <th>Finish</th>
-      <th>Duration</th>
-      <th>Additional cost</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
+      <th>Projeto</th>
+      <th>Tarefa</th>
+      <th>Usuário</th>
+      <th>Data</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Duração</th>
+      <th>Custo</th>
+      <th>Desc</th>
       <th></th>
     </tr>
   </thead>
@@ -29,14 +28,17 @@
       <td><%= work.project_id %></td>
       <td><%= work.task_id %></td>
       <td><%= work.user_id %></td>
+      <td><%= work.historic_date.strftime('%d/%m/%Y') %></td>
       <td><%= work.start %></td>
       <td><%= work.finish %></td>
       <td><%= work.duration %></td>
       <td><%= work.additional_cost %></td>
       <td><%= work.description %></td>
-      <td><%= link_to 'Show', work %></td>
-      <td><%= link_to 'Edit', edit_work_path(work) %></td>
-      <td><%= link_to 'Destroy', work, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td>
+          <%= link_to '<i class="icon-eye"></i>'.html_safe, work %>
+          <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_work_path(work) %>
+          <%= link_to '<i class="icon-trash"></i>'.html_safe, work, :confirm => 'Tem certeza?', :method => :delete %>
+      </td>
     </tr>
 <% end %>
   </tbody>

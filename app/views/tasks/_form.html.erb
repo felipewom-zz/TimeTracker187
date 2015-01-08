@@ -1,13 +1,23 @@
-<%= simple_form_for(@task, :defaults => {:input_html => {:class => 'input-xlarge'}}) do |f| %>
-  <%= f.error_notification %>
-
-  <div class='form-inputs'>
-    <%= f.input :title %>
-    <%= f.input :note %>
-    <%= f.input :project_id, :as => :hidden%>
+<%= form_for(@task, :defaults => {:input_html => {:class => 'form-horizontal'}}) do |f| %>
+  <% if @task.errors.any? %>
+    <% @task.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  <% end %>
+  <div class="control-group">
+    <%= f.label 'Título', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title %>
   </div>
-
-  <div class='form-actions'>
-    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= f.label 'Notas', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :note, :rows => 3 %>
   </div>
+    <%= f.label 'Projeto', :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :project_id, Project.all.map {|project| [project.name, project.id]}.sort, :selected => 1  %>
+      <%= link_to '<i class="icon-plus"></i>'.html_safe, new_project_path, :title => 'Novo Projeto', :style => 'position: relative; top: -4px; height: 100%;' %>
+    </div>
+  </div>
+    <%= f.submit 'Salvar', :class => 'btn btn-primary' %>
 <% end %>

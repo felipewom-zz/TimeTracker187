@@ -208,8 +208,9 @@ ActiveRecord::Schema.define(:version => 20150106142939) do
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.integer  "watcher_id"
-    t.datetime "start"
-    t.datetime "finish"
+    t.date "historic_date"
+    t.string "start"
+    t.string "finish"
     t.decimal  "duration",        :precision => 19, :scale => 4
     t.decimal  "additional_cost", :precision => 19, :scale => 4
     t.text     "description"

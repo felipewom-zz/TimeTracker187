@@ -1,0 +1,95 @@
+<script type="text/javascript">
+//    function renderCalendar() {
+//      $('#calendar').fullCalendar({
+//        header: {
+//          left: 'prev,next today',
+//          center: 'title',
+//          right: 'month,agendaWeek,agendaDay'
+//        },
+//        defaultDate: new Date(),
+//        lang: currentLangCode,
+//        buttonIcons: true, // show the prev/next text
+//        weekNumbers: false,
+//        editable: true,
+//        eventLimit: true, // allow "more" link when too many events
+//        events: [
+//          {
+//            title: 'All Day Event',
+//            start: '2015-01-01'
+//          }
+//        ]
+//      });
+//    }
+//    renderCalendar();
+    $(document).ready(function() {
+      var newHistoricUrl = '/works/new';
+      var currentLangCode = 'pt-br';
+      $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        lang: currentLangCode,
+        defaultDate: new Date(),
+        defaultView: 'month',
+        editable: true,
+        dayClick: function(date, jsEvent, view) {
+//          alert('Clicked on: ' + date.format());
+//          alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//          alert('Current view: ' + view.name);
+          // change the day's background color just for fun
+//          $(this).css('background-color', 'grey');
+          var sendDate = date.format().split('-');// comming format => 2014-01-18
+          var formatedDate = sendDate[0]+"/"+sendDate[1]+"/"+sendDate[2]
+          window.location.href = newHistoricUrl+"?date="+ formatedDate;
+        },
+        events: [
+        <% @works.each do |work| %>
+          <% if work == @works.last %>
+          {
+            id: <%= work.id %> ,
+            title: "<%= work.project.name %>",
+            start: "<%= work.historic_date.strftime('%Y/%m/%d') %> <%= work.historic_start %>:00",
+            end:   "<%= work.historic_date.strftime('%Y/%m/%d') %> <%= work.historic_finish %>:00"
+          }
+          <% else %>
+          {
+            id: <%= work.id %> ,
+            title: "<%= work.project.name %>",
+            start: "<%= work.historic_date.strftime('%Y/%m/%d') %> <%= work.historic_start %>:00",
+            end:   "<%= work.historic_date.strftime('%Y/%m/%d') %> <%= work.historic_finish %>:00"
+          },
+          <%end%>
+        <% end %>
+        ],
+        eventClick: function(calEvent, jsEvent, view) {
+//          alert('Event: ' + calEvent.title);
+//          alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+//          alert('View: ' + view.name);
+          // change the border color just for fun
+          $(this).css('border-color', 'red');
+          var editHistoricUrl = 'works/'+ calEvent.id + '/edit';
+          window.location.href = editHistoricUrl;
+        }
+      });
+      $( ".fc-left" ).append( "<button id='addNewHistoricBtn' title='Adicionar nova entrada' class='fc-button fc-state-default fc-corner-left fc-corner-right'><i class='icon-plus'</i></button>" );
+      $( "#addNewHistoricBtn").bind('click', function(event){
+        window.location.href = newHistoricUrl;
+      });
+//      $('td.fc-day').bind('click', function (event) {
+//        var selected_date = $(this).attr('data-date');
+//        var url_to_go = $(location).attr('href') +"?date="+ selected_date;
+//        window.location.href = url_to_go
+//      });
+//      $( "#addNewHistoricBtn").bind('click', function(event){
+//        window.location.href = newHistoricUrl;
+//      });
+    });
+//    $('td.fc-day').bind('click', function (event) {
+//      var selected_date = $(this).attr('data-date');
+//      var url_to_go = $(location).attr('href') +"?date="+ selected_date;
+//      window.location.href = url_to_go
+//    });
+
+</script>

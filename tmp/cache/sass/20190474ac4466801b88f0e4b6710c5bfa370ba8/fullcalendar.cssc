@@ -1,0 +1,2664 @@
+3.2.19 (Media Mark)
+8bc77b52d45c24a61892c2dcb3017cd982a0e026
+o:Sass::Tree::RootNode
+:@template"ÙW/*!
+ * FullCalendar v2.2.5 Stylesheet
+ * Docs & License: http://arshaw.com/fullcalendar/
+ * (c) 2013 Adam Shaw
+ */
+
+
+
+.fc {
+	direction: ltr;
+	text-align: left;
+}
+
+.fc-rtl {
+	text-align: right;
+}
+
+body .fc { /* extra precedence to overcome jqui */
+	font-size: 1em;
+}
+
+
+/* Colors
+--------------------------------------------------------------------------------------------------*/
+
+.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed hr,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-popover {
+	border-color: #ddd;
+}
+
+.fc-unthemed .fc-popover {
+	background-color: #fff;
+}
+
+.fc-unthemed hr,
+.fc-unthemed .fc-popover .fc-header {
+	background: #eee;
+}
+
+.fc-unthemed .fc-popover .fc-header .fc-close {
+	color: #666;
+}
+
+.fc-unthemed .fc-today {
+	background: #fcf8e3;
+}
+
+.fc-highlight { /* when user is selecting cells */
+	background: #bce8f1;
+	opacity: .3;
+	filter: alpha(opacity=30); /* for IE */
+}
+
+.fc-bgevent { /* default look for background events */
+	background: rgb(143, 223, 130);
+	opacity: .3;
+	filter: alpha(opacity=30); /* for IE */
+}
+
+.fc-nonbusiness { /* default look for non-business-hours areas */
+	/* will inherit .fc-bgevent's styles */
+	background: #ccc;
+}
+
+
+/* Icons (inline elements with styled text that mock arrow icons)
+--------------------------------------------------------------------------------------------------*/
+
+.fc-icon {
+	display: inline-block;
+	font-size: 2em;
+	line-height: .5em;
+	height: .5em; /* will make the total height 1em */
+	font-family: "Courier New", Courier, monospace;
+}
+
+.fc-icon-left-single-arrow:after {
+	content: "\02039";
+	font-weight: bold;
+}
+
+.fc-icon-right-single-arrow:after {
+	content: "\0203A";
+	font-weight: bold;
+}
+
+.fc-icon-left-double-arrow:after {
+	content: "\000AB";
+}
+
+.fc-icon-right-double-arrow:after {
+	content: "\000BB";
+}
+
+.fc-icon-x:after {
+	content: "\000D7";
+}
+
+
+/* Buttons (styled <button> tags, normalized to work cross-browser)
+--------------------------------------------------------------------------------------------------*/
+
+.fc button {
+	/* force height to include the border and padding */
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+
+	/* dimensions */
+	margin: 0;
+	height: 2.1em;
+	padding: 0 .6em;
+
+	/* text & cursor */
+	font-size: 1em; /* normalize */
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+/* Firefox has an annoying inner border */
+.fc button::-moz-focus-inner { margin: 0; padding: 0; }
+	
+.fc-state-default { /* non-theme */
+	border: 1px solid;
+}
+
+.fc-state-default.fc-corner-left { /* non-theme */
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+}
+
+.fc-state-default.fc-corner-right { /* non-theme */
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+/* icons in buttons */
+
+.fc button .fc-icon { /* non-theme */
+	position: relative;
+	top: .05em; /* seems to be a good adjustment across browsers */
+	margin: 0 .1em;
+}
+	
+/*
+  button states
+  borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
+*/
+
+.fc-state-default {
+	background-color: #f5f5f5;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+	background-repeat: repeat-x;
+	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	color: #333;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.fc-state-hover,
+.fc-state-down,
+.fc-state-active,
+.fc-state-disabled {
+	color: #333333;
+	background-color: #e6e6e6;
+}
+
+.fc-state-hover {
+	color: #333333;
+	text-decoration: none;
+	background-position: 0 -15px;
+	-webkit-transition: background-position 0.1s linear;
+	   -moz-transition: background-position 0.1s linear;
+	     -o-transition: background-position 0.1s linear;
+	        transition: background-position 0.1s linear;
+}
+
+.fc-state-down,
+.fc-state-active {
+	background-color: #cccccc;
+	background-image: none;
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.fc-state-disabled {
+	cursor: default;
+	background-image: none;
+	opacity: 0.65;
+	filter: alpha(opacity=65);
+	box-shadow: none;
+}
+
+
+/* Buttons Groups
+--------------------------------------------------------------------------------------------------*/
+
+.fc-button-group {
+	display: inline-block;
+}
+
+/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/
+
+.fc .fc-button-group > * { /* extra precedence b/c buttons have margin set to zero */
+	float: left;
+	margin: 0 0 0 -1px;
+}
+
+.fc .fc-button-group > :first-child { /* same */
+	margin-left: 0;
+}
+
+
+/* Popover
+--------------------------------------------------------------------------------------------------*/
+
+.fc-popover {
+	position: absolute;
+	box-shadow: 0 2px 6px rgba(0,0,0,.15);
+}
+
+.fc-popover .fc-header {
+	padding: 2px 4px;
+}
+
+.fc-popover .fc-header .fc-title {
+	margin: 0 2px;
+}
+
+.fc-popover .fc-header .fc-close {
+	cursor: pointer;
+}
+
+.fc-ltr .fc-popover .fc-header .fc-title,
+.fc-rtl .fc-popover .fc-header .fc-close {
+	float: left;
+}
+
+.fc-rtl .fc-popover .fc-header .fc-title,
+.fc-ltr .fc-popover .fc-header .fc-close {
+	float: right;
+}
+
+/* unthemed */
+
+.fc-unthemed .fc-popover {
+	border-width: 1px;
+	border-style: solid;
+}
+
+.fc-unthemed .fc-popover .fc-header .fc-close {
+	font-size: 25px;
+	margin-top: 4px;
+}
+
+/* jqui themed */
+
+.fc-popover > .ui-widget-header + .ui-widget-content {
+	border-top: 0; /* where they meet, let the header have the border */
+}
+
+
+/* Misc Reusable Components
+--------------------------------------------------------------------------------------------------*/
+
+.fc hr {
+	height: 0;
+	margin: 0;
+	padding: 0 0 2px; /* height is unreliable across browsers, so use padding */
+	border-style: solid;
+	border-width: 1px 0;
+}
+
+.fc-clear {
+	clear: both;
+}
+
+.fc-bg,
+.fc-bgevent-skeleton,
+.fc-highlight-skeleton,
+.fc-helper-skeleton {
+	/* these element should always cling to top-left/right corners */
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.fc-bg {
+	bottom: 0; /* strech bg to bottom edge */
+}
+
+.fc-bg table {
+	height: 100%; /* strech bg to bottom edge */
+}
+
+
+/* Tables
+--------------------------------------------------------------------------------------------------*/
+
+.fc table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 1em; /* normalize cross-browser */
+}
+
+.fc th {
+	text-align: center;
+}
+
+.fc th,
+.fc td {
+	border-style: solid;
+	border-width: 1px;
+	padding: 0;
+	vertical-align: top;
+}
+
+.fc td.fc-today {
+	border-style: double; /* overcome neighboring borders */
+}
+
+
+/* Fake Table Rows
+--------------------------------------------------------------------------------------------------*/
+
+.fc .fc-row { /* extra precedence to overcome themes w/ .ui-widget-content forcing a 1px border */
+	/* no visible border by default. but make available if need be (scrollbar width compensation) */
+	border-style: solid;
+	border-width: 0;
+}
+
+.fc-row table {
+	/* don't put left/right border on anything within a fake row.
+	   the outer tbody will worry about this */
+	border-left: 0 hidden transparent;
+	border-right: 0 hidden transparent;
+
+	/* no bottom borders on rows */
+	border-bottom: 0 hidden transparent; 
+}
+
+.fc-row:first-child table {
+	border-top: 0 hidden transparent; /* no top border on first row */
+}
+
+
+/* Day Row (used within the header and the DayGrid)
+--------------------------------------------------------------------------------------------------*/
+
+.fc-row {
+	position: relative;
+}
+
+.fc-row .fc-bg {
+	z-index: 1;
+}
+
+/* highlighting cells & background event skeleton */
+
+.fc-row .fc-bgevent-skeleton,
+.fc-row .fc-highlight-skeleton {
+	bottom: 0; /* stretch skeleton to bottom of row */
+}
+
+.fc-row .fc-bgevent-skeleton table,
+.fc-row .fc-highlight-skeleton table {
+	height: 100%; /* stretch skeleton to bottom of row */
+}
+
+.fc-row .fc-highlight-skeleton td,
+.fc-row .fc-bgevent-skeleton td {
+	border-color: transparent;
+}
+
+.fc-row .fc-bgevent-skeleton {
+	z-index: 2;
+
+}
+
+.fc-row .fc-highlight-skeleton {
+	z-index: 3;
+}
+
+/*
+row content (which contains day/week numbers and events) as well as "helper" (which contains
+temporary rendered events).
+*/
+
+.fc-row .fc-content-skeleton {
+	position: relative;
+	z-index: 4;
+	padding-bottom: 2px; /* matches the space above the events */
+}
+
+.fc-row .fc-helper-skeleton {
+	z-index: 5;
+}
+
+.fc-row .fc-content-skeleton td,
+.fc-row .fc-helper-skeleton td {
+	/* see-through to the background below */
+	background: none; /* in case <td>s are globally styled */
+	border-color: transparent;
+
+	/* don't put a border between events and/or the day number */
+	border-bottom: 0;
+}
+
+.fc-row .fc-content-skeleton tbody td, /* cells with events inside (so NOT the day number cell) */
+.fc-row .fc-helper-skeleton tbody td {
+	/* don't put a border between event cells */
+	border-top: 0;
+}
+
+
+/* Scrolling Container
+--------------------------------------------------------------------------------------------------*/
+
+.fc-scroller { /* this class goes on elements for guaranteed vertical scrollbars */
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.fc-scroller > * { /* we expect an immediate inner element */
+	position: relative; /* re-scope all positions */
+	width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
+	overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
+}
+
+
+/* Global Event Styles
+--------------------------------------------------------------------------------------------------*/
+
+.fc-event {
+	position: relative; /* for resize handle and other inner positioning */
+	display: block; /* make the <a> tag block */
+	font-size: .85em;
+	line-height: 1.3;
+	border-radius: 3px;
+	border: 1px solid #3a87ad; /* default BORDER color */
+	background-color: #3a87ad; /* default BACKGROUND color */
+	font-weight: normal; /* undo jqui's ui-widget-header bold */
+}
+
+/* overpower some of bootstrap's and jqui's styles on <a> tags */
+.fc-event,
+.fc-event:hover,
+.ui-widget .fc-event {
+	color: #fff; /* default TEXT color */
+	text-decoration: none; /* if <a> has an href */
+}
+
+.fc-event[href],
+.fc-event.fc-draggable {
+	cursor: pointer; /* give events with links and draggable events a hand mouse pointer */
+}
+
+.fc-not-allowed, /* causes a "warning" cursor. applied on body */
+.fc-not-allowed .fc-event { /* to override an event's custom cursor */
+	cursor: not-allowed;
+}
+
+
+/* DayGrid events
+----------------------------------------------------------------------------------------------------
+We use the full "fc-day-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+
+.fc-day-grid-event {
+	margin: 1px 2px 0; /* spacing between events and edges */
+	padding: 0 1px;
+}
+
+/* events that are continuing to/from another week. kill rounded corners and butt up against edge */
+
+.fc-ltr .fc-day-grid-event.fc-not-start,
+.fc-rtl .fc-day-grid-event.fc-not-end {
+	margin-left: 0;
+	border-left-width: 0;
+	padding-left: 1px; /* replace the border with padding */
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.fc-ltr .fc-day-grid-event.fc-not-end,
+.fc-rtl .fc-day-grid-event.fc-not-start {
+	margin-right: 0;
+	border-right-width: 0;
+	padding-right: 1px; /* replace the border with padding */
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.fc-day-grid-event > .fc-content { /* force events to be one-line tall */
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.fc-day-grid-event .fc-time {
+	font-weight: bold;
+}
+
+/* resize handle (outside of fc-content, so can go outside of bounds) */
+
+.fc-day-grid-event .fc-resizer {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 7px;
+}
+
+.fc-ltr .fc-day-grid-event .fc-resizer {
+	right: -3px;
+	cursor: e-resize;
+}
+
+.fc-rtl .fc-day-grid-event .fc-resizer {
+	left: -3px;
+	cursor: w-resize;
+}
+
+
+/* Event Limiting
+--------------------------------------------------------------------------------------------------*/
+
+/* "more" link that represents hidden events */
+
+a.fc-more {
+	margin: 1px 3px;
+	font-size: .85em;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+a.fc-more:hover {
+	text-decoration: underline;
+}
+
+.fc-limited { /* rows and cells that are hidden because of a "more" link */
+	display: none;
+}
+
+/* popover that appears when "more" link is clicked */
+
+.fc-day-grid .fc-row {
+	z-index: 1; /* make the "more" popover one higher than this */
+}
+
+.fc-more-popover {
+	z-index: 2;
+	width: 220px;
+}
+
+.fc-more-popover .fc-event-container {
+	padding: 10px;
+}
+
+/* Toolbar
+--------------------------------------------------------------------------------------------------*/
+
+.fc-toolbar {
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.fc-toolbar .fc-left {
+	float: left;
+}
+
+.fc-toolbar .fc-right {
+	float: right;
+}
+
+.fc-toolbar .fc-center {
+	display: inline-block;
+}
+
+/* the things within each left/right/center section */
+.fc .fc-toolbar > * > * { /* extra precedence to override button border margins */
+	float: left;
+	margin-left: .75em;
+}
+
+/* the first thing within each left/center/right section */
+.fc .fc-toolbar > * > :first-child { /* extra precedence to override button border margins */
+	margin-left: 0;
+}
+	
+/* title text */
+
+.fc-toolbar h2 {
+	margin: 0;
+}
+
+/* button layering (for border precedence) */
+
+.fc-toolbar button {
+	position: relative;
+}
+
+.fc-toolbar .fc-state-hover,
+.fc-toolbar .ui-state-hover {
+	z-index: 2;
+}
+	
+.fc-toolbar .fc-state-down {
+	z-index: 3;
+}
+
+.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active {
+	z-index: 4;
+}
+
+.fc-toolbar button:focus {
+	z-index: 5;
+}
+
+
+/* View Structure
+--------------------------------------------------------------------------------------------------*/
+
+/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */
+/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */
+.fc-view-container *,
+.fc-view-container *:before,
+.fc-view-container *:after {
+	-webkit-box-sizing: content-box;
+	   -moz-box-sizing: content-box;
+	        box-sizing: content-box;
+}
+
+.fc-view, /* scope positioning and z-index's for everything within the view */
+.fc-view > table { /* so dragged elements can be above the view's main element */
+	position: relative;
+	z-index: 1;
+}
+
+/* BasicView
+--------------------------------------------------------------------------------------------------*/
+
+/* day row structure */
+
+.fc-basicWeek-view .fc-content-skeleton,
+.fc-basicDay-view .fc-content-skeleton {
+	/* we are sure there are no day numbers in these views, so... */
+	padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
+	padding-bottom: 1em; /* ensure a space at bottom of cell for user selecting/clicking */
+}
+
+.fc-basic-view tbody .fc-row {
+	min-height: 4em; /* ensure that all rows are at least this tall */
+}
+
+/* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */
+
+.fc-row.fc-rigid {
+	overflow: hidden;
+}
+
+.fc-row.fc-rigid .fc-content-skeleton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+/* week and day number styling */
+
+.fc-basic-view .fc-week-number,
+.fc-basic-view .fc-day-number {
+	padding: 0 2px;
+}
+
+.fc-basic-view td.fc-week-number span,
+.fc-basic-view td.fc-day-number {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.fc-basic-view .fc-week-number {
+	text-align: center;
+}
+
+.fc-basic-view .fc-week-number span {
+	/* work around the way we do column resizing and ensure a minimum width */
+	display: inline-block;
+	min-width: 1.25em;
+}
+
+.fc-ltr .fc-basic-view .fc-day-number {
+	text-align: right;
+}
+
+.fc-rtl .fc-basic-view .fc-day-number {
+	text-align: left;
+}
+
+.fc-day-number.fc-other-month {
+	opacity: 0.3;
+	filter: alpha(opacity=30); /* for IE */
+	/* opacity with small font can sometimes look too faded
+	   might want to set the 'color' property instead
+	   making day-numbers bold also fixes the problem */
+}
+
+/* AgendaView all-day area
+--------------------------------------------------------------------------------------------------*/
+
+.fc-agenda-view .fc-day-grid {
+	position: relative;
+	z-index: 2; /* so the "more.." popover will be over the time grid */
+}
+
+.fc-agenda-view .fc-day-grid .fc-row {
+	min-height: 3em; /* all-day section will never get shorter than this */
+}
+
+.fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton {
+	padding-top: 1px; /* add a pixel to make sure there are 2px padding above events */
+	padding-bottom: 1em; /* give space underneath events for clicking/selecting days */
+}
+
+
+/* TimeGrid axis running down the side (for both the all-day area and the slot area)
+--------------------------------------------------------------------------------------------------*/
+
+.fc .fc-axis { /* .fc to overcome default cell styles */
+	vertical-align: middle;
+	padding: 0 4px;
+	white-space: nowrap;
+}
+
+.fc-ltr .fc-axis {
+	text-align: right;
+}
+
+.fc-rtl .fc-axis {
+	text-align: left;
+}
+
+.ui-widget td.fc-axis {
+	font-weight: normal; /* overcome jqui theme making it bold */
+}
+
+
+/* TimeGrid Structure
+--------------------------------------------------------------------------------------------------*/
+
+.fc-time-grid-container, /* so scroll container's z-index is below all-day */
+.fc-time-grid { /* so slats/bg/content/etc positions get scoped within here */
+	position: relative;
+	z-index: 1;
+}
+
+.fc-time-grid {
+	min-height: 100%; /* so if height setting is 'auto', .fc-bg stretches to fill height */
+}
+
+.fc-time-grid table { /* don't put outer borders on slats/bg/content/etc */
+	border: 0 hidden transparent;
+}
+
+.fc-time-grid > .fc-bg {
+	z-index: 1;
+}
+
+.fc-time-grid .fc-slats,
+.fc-time-grid > hr { /* the <hr> AgendaView injects when grid is shorter than scroller */
+	position: relative;
+	z-index: 2;
+}
+
+.fc-time-grid .fc-bgevent-skeleton,
+.fc-time-grid .fc-content-skeleton {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.fc-time-grid .fc-bgevent-skeleton {
+	z-index: 3;
+}
+
+.fc-time-grid .fc-highlight-skeleton {
+	z-index: 4;
+}
+
+.fc-time-grid .fc-content-skeleton {
+	z-index: 5;
+}
+
+.fc-time-grid .fc-helper-skeleton {
+	z-index: 6;
+}
+
+
+/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/
+
+.fc-slats td {
+	height: 1.5em;
+	border-bottom: 0; /* each cell is responsible for its top border */
+}
+
+.fc-slats .fc-minor td {
+	border-top-style: dotted;
+}
+
+.fc-slats .ui-widget-content { /* for jqui theme */
+	background: none; /* see through to fc-bg */
+}
+
+
+/* TimeGrid Highlighting Slots
+--------------------------------------------------------------------------------------------------*/
+
+.fc-time-grid .fc-highlight-container { /* a div within a cell within the fc-highlight-skeleton */
+	position: relative; /* scopes the left/right of the fc-highlight to be in the column */
+}
+
+.fc-time-grid .fc-highlight {
+	position: absolute;
+	left: 0;
+	right: 0;
+	/* top and bottom will be in by JS */
+}
+
+
+/* TimeGrid Event Containment
+--------------------------------------------------------------------------------------------------*/
+
+.fc-time-grid .fc-event-container, /* a div within a cell within the fc-content-skeleton */
+.fc-time-grid .fc-bgevent-container { /* a div within a cell within the fc-bgevent-skeleton */
+	position: relative;
+}
+
+.fc-ltr .fc-time-grid .fc-event-container { /* space on the sides of events for LTR (default) */
+	margin: 0 2.5% 0 2px;
+}
+
+.fc-rtl .fc-time-grid .fc-event-container { /* space on the sides of events for RTL */
+	margin: 0 2px 0 2.5%;
+}
+
+.fc-time-grid .fc-event,
+.fc-time-grid .fc-bgevent {
+	position: absolute;
+	z-index: 1; /* scope inner z-index's */
+}
+
+.fc-time-grid .fc-bgevent {
+	/* background events always span full width */
+	left: 0;
+	right: 0;
+}
+
+
+/* TimeGrid Event Styling
+----------------------------------------------------------------------------------------------------
+We use the full "fc-time-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/
+
+.fc-time-grid-event.fc-not-start { /* events that are continuing from another day */
+	/* replace space made by the top border with padding */
+	border-top-width: 0;
+	padding-top: 1px;
+
+	/* remove top rounded corners */
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.fc-time-grid-event.fc-not-end {
+	/* replace space made by the top border with padding */
+	border-bottom-width: 0;
+	padding-bottom: 1px;
+
+	/* remove bottom rounded corners */
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+.fc-time-grid-event {
+	overflow: hidden; /* don't let the bg flow over rounded corners */
+}
+
+.fc-time-grid-event > .fc-content { /* contains the time and title, but no bg and resizer */
+	position: relative;
+	z-index: 2; /* above the bg */
+}
+
+.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title {
+	padding: 0 1px;
+}
+
+.fc-time-grid-event .fc-time {
+	font-size: .85em;
+	white-space: nowrap;
+}
+
+.fc-time-grid-event .fc-bg {
+	z-index: 1;
+	background: #fff;
+	opacity: .25;
+	filter: alpha(opacity=25); /* for IE */
+}
+
+/* short mode, where time and title are on the same line */
+
+.fc-time-grid-event.fc-short .fc-content {
+	/* don't wrap to second line (now that contents will be inline) */
+	white-space: nowrap;
+}
+
+.fc-time-grid-event.fc-short .fc-time,
+.fc-time-grid-event.fc-short .fc-title {
+	/* put the time and title on the same line */
+	display: inline-block;
+	vertical-align: top;
+}
+
+.fc-time-grid-event.fc-short .fc-time span {
+	display: none; /* don't display the full time text... */
+}
+
+.fc-time-grid-event.fc-short .fc-time:before {
+	content: attr(data-start); /* ...instead, display only the start time */
+}
+
+.fc-time-grid-event.fc-short .fc-time:after {
+	content: "\000A0-\000A0"; /* seperate with a dash, wrapped in nbsp's */
+}
+
+.fc-time-grid-event.fc-short .fc-title {
+	font-size: .85em; /* make the title text the same size as the time */
+	padding: 0; /* undo padding from above */
+}
+
+/* resizer */
+
+.fc-time-grid-event .fc-resizer {
+	position: absolute;
+	z-index: 3; /* above content */
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	overflow: hidden;
+	line-height: 8px;
+	font-size: 11px;
+	font-family: monospace;
+	text-align: center;
+	cursor: s-resize;
+}
+
+.fc-time-grid-event .fc-resizer:after {
+	content: "=";
+}
+:@has_childrenT:@children[∆o:Sass::Tree::CommentNode
+;[ :@value["w/*!
+ * FullCalendar v2.2.5 Stylesheet
+ * Docs & License: http://arshaw.com/fullcalendar/
+ * (c) 2013 Adam Shaw
+ */:@options{ :
+@type:	loud:
+@lineio:Sass::Tree::RuleNode;T:
+@tabsi ;[o:Sass::Tree::PropNode:@prop_syntax:new;i :
+@name["direction;[ ;
+o:Sass::Script::String;
+"ltr;@;:identifier;@;io;;;;i ;["text-align;[ ;
+o;;
+"	left;@;;;@;i:
+@rule[".fc:@parsed_ruleso:"Sass::Selector::CommaSequence:@filename" :@members[o:Sass::Selector::Sequence;[o:#Sass::Selector::SimpleSequence
+;@:@sourceso:Set:
+@hash{ :@subject0;[o:Sass::Selector::Class;@;["fc;i;i;i;@;io;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"
+right;@;;;@;i;[".fc-rtl;o;;" ;[o;;[o;
+;@4;o;; { ;!0;[o;";@4;["fc-rtl;i;i;i;@;io;;T;i ;[o;	
+;[ ;
+[",/* extra precedence to overcome jqui */;@;:normal;io;;;;i ;["font-size;[ ;
+o;;
+"1em;@;;;@;i;["body .fc;o;;" ;[o;;[o;
+;@N;o;; { ;!0;[o:Sass::Selector::Element	;@N;["	body:@namespace0;i;io;
+;@N;o;; { ;!0;[o;";@N;["fc;i;i;i;@;io;	
+;[ ;
+["s/* Colors
+--------------------------------------------------------------------------------------------------*/;@;;#;io;;T;i ;[o;;;;i ;["border-color;[ ;
+o;;
+"	#ddd;@;;;@;i&;["â.fc-unthemed th,
+.fc-unthemed td,
+.fc-unthemed hr,
+.fc-unthemed thead,
+.fc-unthemed tbody,
+.fc-unthemed .fc-row,
+.fc-unthemed .fc-popover;o;;" ;[o;;[o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;$	;@o;["th;%0;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;$	;@o;["td;%0;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;$	;@o;["hr;%0;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;$	;@o;["
+thead;%0;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;$	;@o;["
+tbody;%0;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;";@o;["fc-row;i%;i%o;;["
+o;
+;@o;o;; { ;!0;[o;";@o;["fc-unthemed;i%;i%o;
+;@o;o;; { ;!0;[o;";@o;["fc-popover;i%;i%;i%;@;i%o;;T;i ;[o;;;;i ;["background-color;[ ;
+o;;
+"	#fff;@;;;@;i*;[".fc-unthemed .fc-popover;o;;" ;[o;;[o;
+;@Ì;o;; { ;!0;[o;";@Ì;["fc-unthemed;i);i)o;
+;@Ì;o;; { ;!0;[o;";@Ì;["fc-popover;i);i);i);@;i)o;;T;i ;[o;;;;i ;["background;[ ;
+o;;
+"	#eee;@;;;@;i/;["9.fc-unthemed hr,
+.fc-unthemed .fc-popover .fc-header;o;;" ;[o;;[o;
+;@
+;o;; { ;!0;[o;";@
+;["fc-unthemed;i.;i.o;
+;@
+;o;; { ;!0;[o;$	;@
+;["hr;%0;i.;i.o;;[	"
+o;
+;@
+;o;; { ;!0;[o;";@
+;["fc-unthemed;i.;i.o;
+;@
+;o;; { ;!0;[o;";@
+;["fc-popover;i.;i.o;
+;@
+;o;; { ;!0;[o;";@
+;["fc-header;i.;i.;i.;@;i.o;;T;i ;[o;;;;i ;["
+color;[ ;
+o;;
+"	#666;@;;;@;i3;["2.fc-unthemed .fc-popover .fc-header .fc-close;o;;" ;[o;;[	o;
+;@?;o;; { ;!0;[o;";@?;["fc-unthemed;i2;i2o;
+;@?;o;; { ;!0;[o;";@?;["fc-popover;i2;i2o;
+;@?;o;; { ;!0;[o;";@?;["fc-header;i2;i2o;
+;@?;o;; { ;!0;[o;";@?;["fc-close;i2;i2;i2;@;i2o;;T;i ;[o;;;;i ;["background;[ ;
+o;;
+"#fcf8e3;@;;;@;i7;[".fc-unthemed .fc-today;o;;" ;[o;;[o;
+;@j;o;; { ;!0;[o;";@j;["fc-unthemed;i6;i6o;
+;@j;o;; { ;!0;[o;";@j;["fc-today;i6;i6;i6;@;i6o;;T;i ;[
+o;	
+;[ ;
+["'/* when user is selecting cells */;@;;#;i:o;;;;i ;["background;[ ;
+o;;
+"#bce8f1;@;;;@;i;o;;;;i ;["opacity;[ ;
+o;;
+".3;@;;;@;i<o;;;;i ;["filter;[ ;
+o:Sass::Script::Funcall;"
+alpha:@splat0:
+@args[o:Sass::Script::Operation
+:@operand2o:Sass::Script::Number:@original"30:@denominator_units[ :@numerator_units[ ;
+i#;@;i=:@operand1o;	;
+"opacity;@;;;i=:@operator:single_eq;@;i=;@;i=:@keywords{ ;@;i=o;	
+;[ ;
+["/* for IE */;@;;#;i=;[".fc-highlight;o;;" ;[o;;[o;
+;@§;o;; { ;!0;[o;";@§;["fc-highlight;i:;i:;i:;@;i:o;;T;i ;[
+o;	
+;[ ;
+["-/* default look for background events */;@;;#;i@o;;;;i ;["background;[ ;
+o;&;"rgb;'0;([o;+;,"143;-@ò;.[ ;
+iè;@;iAo;+;,"223;-@ò;.[ ;
+iﬂ;@;iAo;+;,"130;-@ò;.[ ;
+iÇ;@;iA;@;iA;2{ ;@;iAo;;;;i ;["opacity;[ ;
+o;;
+".3;@;;;@;iBo;;;;i ;["filter;[ ;
+o;&;"
+alpha;'0;([o;)
+;*o;+;,"30;-@ò;.[ ;
+i#;@;iC;/o;	;
+"opacity;@;;;iC;0;1;@;iC;@;iC;2{ ;@;iCo;	
+;[ ;
+["/* for IE */;@;;#;iC;[".fc-bgevent;o;;" ;[o;;[o;
+;@·;o;; { ;!0;[o;";@·;["fc-bgevent;i@;i@;i@;@;i@o;;T;i ;[o;	
+;[ ;
+["4/* default look for non-business-hours areas */;@;;#;iFo;	
+;[ ;
+[",/* will inherit .fc-bgevent's styles */;@;;#;iGo;;;;i ;["background;[ ;
+o;;
+"	#ccc;@;;;@;iH;[".fc-nonbusiness;o;;" ;[o;;[o;
+;@ˇ;o;; { ;!0;[o;";@ˇ;["fc-nonbusiness;iF;iF;iF;@;iFo;	
+;[ ;
+["¶/* Icons (inline elements with styled text that mock arrow icons)
+--------------------------------------------------------------------------------------------------*/;@;;#;iLo;;T;i ;[o;;;;i ;["display;[ ;
+o;;
+"inline-block;@;;;@;iPo;;;;i ;["font-size;[ ;
+o;;
+"2em;@;;;@;iQo;;;;i ;["line-height;[ ;
+o;;
+"	.5em;@;;;@;iRo;;;;i ;["height;[ ;
+o;;
+"	.5em;@;;;@;iSo;	
+;[ ;
+[")/* will make the total height 1em */;@;;#;iSo;;;;i ;["font-family;[ ;
+o;;
+"&"Courier New", Courier, monospace;@;;;@;iT;[".fc-icon;o;;" ;[o;;[o;
+;@5;o;; { ;!0;[o;";@5;["fc-icon;iO;iO;iO;@;iOo;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\02039";@;;;@;iXo;;;;i ;["font-weight;[ ;
+o;;
+"	bold;@;;;@;iY;["%.fc-icon-left-single-arrow:after;o;;" ;[o;;[o;
+;@Q;o;; { ;!0;[o;";@Q;["fc-icon-left-single-arrow;iWo:Sass::Selector::Pseudo
+;@Q;["
+after:	@arg0:@syntactic_type:
+class;iW;iW;iW;@;iWo;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\0203A";@;;;@;i]o;;;;i ;["font-weight;[ ;
+o;;
+"	bold;@;;;@;i^;["&.fc-icon-right-single-arrow:after;o;;" ;[o;;[o;
+;@p;o;; { ;!0;[o;";@p;["fc-icon-right-single-arrow;i\o;3
+;@p;["
+after;40;5;6;i\;i\;i\;@;i\o;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\000AB";@;;;@;ib;["%.fc-icon-left-double-arrow:after;o;;" ;[o;;[o;
+;@â;o;; { ;!0;[o;";@â;["fc-icon-left-double-arrow;iao;3
+;@â;["
+after;40;5;6;ia;ia;ia;@;iao;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\000BB";@;;;@;if;["&.fc-icon-right-double-arrow:after;o;;" ;[o;;[o;
+;@¢;o;; { ;!0;[o;";@¢;["fc-icon-right-double-arrow;ieo;3
+;@¢;["
+after;40;5;6;ie;ie;ie;@;ieo;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\000D7";@;;;@;ij;[".fc-icon-x:after;o;;" ;[o;;[o;
+;@ª;o;; { ;!0;[o;";@ª;["fc-icon-x;iio;3
+;@ª;["
+after;40;5;6;ii;ii;ii;@;iio;	
+;[ ;
+["®/* Buttons (styled <button> tags, normalized to work cross-browser)
+--------------------------------------------------------------------------------------------------*/;@;;#;ino;;T;i ;[o;	
+;[ ;
+["9/* force height to include the border and padding */;@;;#;iro;;;;i ;["-moz-box-sizing;[ ;
+o;;
+"border-box;@;;;@;iso;;;;i ;["-webkit-box-sizing;[ ;
+o;;
+"border-box;@;;;@;ito;;;;i ;["box-sizing;[ ;
+o;;
+"border-box;@;;;@;iuo;	
+;[ ;
+["/* dimensions */;@;;#;iwo;;;;i ;["margin;[ ;
+o;;
+"0;@;;;@;ixo;;;;i ;["height;[ ;
+o;;
+"
+2.1em;@;;;@;iyo;;;;i ;["padding;[ ;
+o;;
+"0 .6em;@;;;@;izo;	
+;[ ;
+["/* text & cursor */;@;;#;i|o;;;;i ;["font-size;[ ;
+o;;
+"1em;@;;;@;i}o;	
+;[ ;
+["/* normalize */;@;;#;i}o;;;;i ;["white-space;[ ;
+o;;
+"nowrap;@;;;@;i~o;;;;i ;["cursor;[ ;
+o;;
+"pointer;@;;;@;i;[".fc button;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc;iq;iqo;
+;@;o;; { ;!0;[o;$	;@;["button;%0;iq;iq;iq;@;iqo;	
+;[ ;
+["//* Firefox has an annoying inner border */;@;;#;i}o;;T;i ;[o;;;;i ;["margin;[ ;
+o;;
+"0;@;;;@;i~o;;;;i ;["padding;[ ;
+o;;
+"0;@;;;@;i~;["!.fc button::-moz-focus-inner;o;;" ;[o;;[o;
+;@?;o;; { ;!0;[o;";@?;["fc;i~;i~o;
+;@?;o;; { ;!0;[o;$	;@?;["button;%0;i~o;3
+;@?;["-moz-focus-inner;40;5:element;i~;i~;i~;@;i~o;;T;i ;[o;	
+;[ ;
+["/* non-theme */;@;;#;iÄo;;;;i ;["border;[ ;
+o;;
+"1px solid;@;;;@;iÅ;[".fc-state-default;o;;" ;[o;;[o;
+;@c;o;; { ;!0;[o;";@c;["fc-state-default;iÄ;iÄ;iÄ;@;iÄo;;T;i ;[o;	
+;[ ;
+["/* non-theme */;@;;#;iÑo;;;;i ;["border-top-left-radius;[ ;
+o;;
+"4px;@;;;@;iÖo;;;;i ;["border-bottom-left-radius;[ ;
+o;;
+"4px;@;;;@;iÜ;["%.fc-state-default.fc-corner-left;o;;" ;[o;;[o;
+;@É;o;; { ;!0;[o;";@É;["fc-state-default;iÑo;";@É;["fc-corner-left;iÑ;iÑ;iÑ;@;iÑo;;T;i ;[o;	
+;[ ;
+["/* non-theme */;@;;#;iâo;;;;i ;["border-top-right-radius;[ ;
+o;;
+"4px;@;;;@;iäo;;;;i ;["border-bottom-right-radius;[ ;
+o;;
+"4px;@;;;@;iã;["&.fc-state-default.fc-corner-right;o;;" ;[o;;[o;
+;@¶;o;; { ;!0;[o;";@¶;["fc-state-default;iâo;";@¶;["fc-corner-right;iâ;iâ;iâ;@;iâo;	
+;[ ;
+["/* icons in buttons */;@;;#;iéo;;T;i ;[
+o;	
+;[ ;
+["/* non-theme */;@;;#;iêo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;iëo;;;;i ;["top;[ ;
+o;;
+"
+.05em;@;;;@;iío;	
+;[ ;
+["8/* seems to be a good adjustment across browsers */;@;;#;iío;;;;i ;["margin;[ ;
+o;;
+"0 .1em;@;;;@;iì;[".fc button .fc-icon;o;;" ;[o;;[o;
+;@◊;o;; { ;!0;[o;";@◊;["fc;iê;iêo;
+;@◊;o;; { ;!0;[o;$	;@◊;["button;%0;iê;iêo;
+;@◊;o;; { ;!0;[o;";@◊;["fc-icon;iê;iê;iê;@;iêo;	
+;[ ;
+["c/*
+  button states
+  borrowed from twitter bootstrap (http://twitter.github.com/bootstrap/)
+*/;@;;#;iño;;T;i ;[o;;;;i ;["background-color;[ ;
+o;;
+"#f5f5f5;@;;;@;iúo;;;;i ;["background-image;[ ;
+o;&;"-moz-linear-gradient;'0;([o;	;
+"top;@;;;iùo:Sass::Script::Color	:@attrs{	:rediˇ:
+greeniˇ:	blueiˇ:
+alphai;
+0;@;iùo;8	;9{	;:iÊ;;iÊ;<iÊ;=i;
+0;@;iù;@;iù;2{ ;@;iùo;;;;i ;["background-image;[ ;
+o;&;"-webkit-gradient;'0;([
+o;	;
+"linear;@;;;iûo:Sass::Script::List	:@separator:
+space;
+[o;+;,"0;-@ò;.[ ;
+i ;@;iûo;+;,"0;-@ò;.[ ;
+i ;@;iû;@;iûo;>	;?;@;
+[o;+;,"0;-@ò;.[ ;
+i ;@;iûo;+;,"	100%;-[ ;.["%;
+ii;@;iû;@;iûo;&;"	from;'0;([o;8	;9{	;:iˇ;;iˇ;<iˇ;=i;
+0;@;iû;@;iû;2{ o;&;"to;'0;([o;8	;9{	;:iÊ;;iÊ;<iÊ;=i;
+0;@;iû;@;iû;2{ ;@;iû;2{ ;@;iûo;;;;i ;["background-image;[ ;
+o;&;"-webkit-linear-gradient;'0;([o;	;
+"top;@;;;iüo;8	;9{	;:iˇ;;iˇ;<iˇ;=i;
+0;@;iüo;8	;9{	;:iÊ;;iÊ;<iÊ;=i;
+0;@;iü;@;iü;2{ ;@;iüo;;;;i ;["background-image;[ ;
+o;&;"-o-linear-gradient;'0;([o;	;
+"top;@;;;i†o;8	;9{	;:iˇ;;iˇ;<iˇ;=i;
+0;@;i†o;8	;9{	;:iÊ;;iÊ;<iÊ;=i;
+0;@;i†;@;i†;2{ ;@;i†o;;;;i ;["background-image;[ ;
+o;&;"linear-gradient;'0;([o;>	;?;@;
+[o;	;
+"to;@;;;i°o;	;
+"bottom;@;;;i°;@;i°o;8	;9{	;:iˇ;;iˇ;<iˇ;=i;
+0;@;i°o;8	;9{	;:iÊ;;iÊ;<iÊ;=i;
+0;@;i°;@;i°;2{ ;@;i°o;;;;i ;["background-repeat;[ ;
+o;;
+"repeat-x;@;;;@;i¢o;;;;i ;["border-color;[ ;
+o;;
+"#e6e6e6 #e6e6e6 #bfbfbf;@;;;@;i£o;;;;i ;["border-color;[ ;
+o;>	;?;@;
+[o;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0.1;-@ò;.[ ;
+f0.10000000000000001 ôö;@;i§;@;i§;2{ o;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0.1;-@ò;.[ ;
+f0.10000000000000001 ôö;@;i§;@;i§;2{ o;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"0;-@ò;.[ ;
+i ;@;i§o;+;,"	0.25;-@ò;.[ ;
+f	0.25;@;i§;@;i§;2{ ;@;i§;@;i§o;;;;i ;["
+color;[ ;
+o;;
+"	#333;@;;;@;i•o;;;;i ;["text-shadow;[ ;
+o;>	;?;@;
+[	o;+;,"0;-@ò;.[ ;
+i ;@;i¶o;+;,"1px;-[ ;.["px;
+i;@;i¶o;+;,"1px;-[ ;.["px;
+i;@;i¶o;&;"	rgba;'0;([	o;+;,"255;-@ò;.[ ;
+iˇ;@;i¶o;+;,"255;-@ò;.[ ;
+iˇ;@;i¶o;+;,"255;-@ò;.[ ;
+iˇ;@;i¶o;+;,"	0.75;-@ò;.[ ;
+f	0.75;@;i¶;@;i¶;2{ ;@;i¶;@;i¶o;;;;i ;["box-shadow;[ ;
+o;>	;?:
+comma;
+[o;>	;?;@;
+[
+o;	;
+"
+inset;@;;;ißo;+;,"0;-@ò;.[ ;
+i ;@;ißo;+;,"1px;-[ ;.["px;
+i;@;ißo;+;,"0;-@ò;.[ ;
+i ;@;ißo;&;"	rgba;'0;([	o;+;,"255;-@ò;.[ ;
+iˇ;@;ißo;+;,"255;-@ò;.[ ;
+iˇ;@;ißo;+;,"255;-@ò;.[ ;
+iˇ;@;ißo;+;,"0.2;-@ò;.[ ;
+f0.20000000000000001 ôö;@;iß;@;iß;2{ ;@;ißo;>	;?;@;
+[	o;+;,"0;-@ò;.[ ;
+i ;@;ißo;+;,"1px;-[ ;.["px;
+i;@;ißo;+;,"2px;-[ ;.["px;
+i;@;ißo;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;ißo;+;,"0;-@ò;.[ ;
+i ;@;ißo;+;,"0;-@ò;.[ ;
+i ;@;ißo;+;,"	0.05;-@ò;.[ ;
+f0.050000000000000003 ôö;@;iß;@;iß;2{ ;@;iß;@;iß;@;iß;[".fc-state-default;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-state-default;iõ;iõ;iõ;@;iõo;;T;i ;[o;;;;i ;["
+color;[ ;
+o;;
+"#333333;@;;;@;iÆo;;;;i ;["background-color;[ ;
+o;;
+"#e6e6e6;@;;;@;iØ;["J.fc-state-hover,
+.fc-state-down,
+.fc-state-active,
+.fc-state-disabled;o;;" ;[	o;;[o;
+;@4;o;; { ;!0;[o;";@4;["fc-state-hover;i≠;i≠o;;["
+o;
+;@4;o;; { ;!0;[o;";@4;["fc-state-down;i≠;i≠o;;["
+o;
+;@4;o;; { ;!0;[o;";@4;["fc-state-active;i≠;i≠o;;["
+o;
+;@4;o;; { ;!0;[o;";@4;["fc-state-disabled;i≠;i≠;i≠;@;i≠o;;T;i ;[o;;;;i ;["
+color;[ ;
+o;;
+"#333333;@;;;@;i≥o;;;;i ;["text-decoration;[ ;
+o;;
+"	none;@;;;@;i¥o;;;;i ;["background-position;[ ;
+o;;
+"0 -15px;@;;;@;iµo;;;;i ;["-webkit-transition;[ ;
+o;;
+"$background-position 0.1s linear;@;;;@;i∂o;;;;i ;["-moz-transition;[ ;
+o;;
+"$background-position 0.1s linear;@;;;@;i∑o;;;;i ;["-o-transition;[ ;
+o;;
+"$background-position 0.1s linear;@;;;@;i∏o;;;;i ;["transition;[ ;
+o;;
+"$background-position 0.1s linear;@;;;@;iπ;[".fc-state-hover;o;;" ;[o;;[o;
+;@å;o;; { ;!0;[o;";@å;["fc-state-hover;i≤;i≤;i≤;@;i≤o;;T;i ;[o;;;;i ;["background-color;[ ;
+o;;
+"#cccccc;@;;;@;iæo;;;;i ;["background-image;[ ;
+o;;
+"	none;@;;;@;iøo;;;;i ;["box-shadow;[ ;
+o;>	;?;A;
+[o;>	;?;@;
+[
+o;	;
+"
+inset;@;;;i¿o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"2px;-[ ;.["px;
+i;@;i¿o;+;,"4px;-[ ;.["px;
+i	;@;i¿o;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"	0.15;-@ò;.[ ;
+f0.14999999999999999 33;@;i¿;@;i¿;2{ ;@;i¿o;>	;?;@;
+[	o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"1px;-[ ;.["px;
+i;@;i¿o;+;,"2px;-[ ;.["px;
+i;@;i¿o;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"0;-@ò;.[ ;
+i ;@;i¿o;+;,"	0.05;-@ò;.[ ;
+f0.050000000000000003 ôö;@;i¿;@;i¿;2{ ;@;i¿;@;i¿;@;i¿;["%.fc-state-down,
+.fc-state-active;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-state-down;iΩ;iΩo;;["
+o;
+;@;o;; { ;!0;[o;";@;["fc-state-active;iΩ;iΩ;iΩ;@;iΩo;;T;i ;[
+o;;;;i ;["cursor;[ ;
+o;;
+"default;@;;;@;iƒo;;;;i ;["background-image;[ ;
+o;;
+"	none;@;;;@;i≈o;;;;i ;["opacity;[ ;
+o;;
+"	0.65;@;;;@;i∆o;;;;i ;["filter;[ ;
+o;&;"
+alpha;'0;([o;)
+;*o;+;,"65;-@ò;.[ ;
+iF;@;i«;/o;	;
+"opacity;@;;;i«;0;1;@;i«;@;i«;2{ ;@;i«o;;;;i ;["box-shadow;[ ;
+o;;
+"	none;@;;;@;i»;[".fc-state-disabled;o;;" ;[o;;[o;
+;@0;o;; { ;!0;[o;";@0;["fc-state-disabled;i√;i√;i√;@;i√o;	
+;[ ;
+["{/* Buttons Groups
+--------------------------------------------------------------------------------------------------*/;@;;#;iÃo;;T;i ;[o;;;;i ;["display;[ ;
+o;;
+"inline-block;@;;;@;i–;[".fc-button-group;o;;" ;[o;;[o;
+;@J;o;; { ;!0;[o;";@J;["fc-button-group;iœ;iœ;iœ;@;iœo;	
+;[ ;
+["~/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/;@;;#;i”o;;T;i ;[o;	
+;[ ;
+["?/* extra precedence b/c buttons have margin set to zero */;@;;#;iÿo;;;;i ;["
+float;[ ;
+o;;
+"	left;@;;;@;iŸo;;;;i ;["margin;[ ;
+o;;
+"0 0 0 -1px;@;;;@;i⁄;[".fc .fc-button-group > *;o;;" ;[o;;[	o;
+;@n;o;; { ;!0;[o;";@n;["fc;iÿ;iÿo;
+;@n;o;; { ;!0;[o;";@n;["fc-button-group;iÿ;iÿ">o;
+;@n;o;; { ;!0;[o:Sass::Selector::Universal;@n;%0;iÿ;iÿ;iÿ;@;iÿo;;T;i ;[o;	
+;[ ;
+["/* same */;@;;#;i›o;;;;i ;["margin-left;[ ;
+o;;
+"0;@;;;@;iﬁ;["(.fc .fc-button-group > :first-child;o;;" ;[o;;[	o;
+;@ï;o;; { ;!0;[o;";@ï;["fc;i›;i›o;
+;@ï;o;; { ;!0;[o;";@ï;["fc-button-group;i›;i›">o;
+;@ï;o;; { ;!0;[o;3
+;@ï;["first-child;40;5;6;i›;i›;i›;@;i›o;	
+;[ ;
+["t/* Popover
+--------------------------------------------------------------------------------------------------*/;@;;#;i‚o;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;iÊo;;;;i ;["box-shadow;[ ;
+o;>	;?;@;
+[	o;+;,"0;-@ò;.[ ;
+i ;@;iÁo;+;,"2px;-[ ;.["px;
+i;@;iÁo;+;,"6px;-[ ;.["px;
+i;@;iÁo;&;"	rgba;'0;([	o;+;,"0;-@ò;.[ ;
+i ;@;iÁo;+;,"0;-@ò;.[ ;
+i ;@;iÁo;+;,"0;-@ò;.[ ;
+i ;@;iÁo;+;,"	0.15;-@ò;.[ ;
+f0.14999999999999999 33;@;iÁ;@;iÁ;2{ ;@;iÁ;@;iÁ;[".fc-popover;o;;" ;[o;;[o;
+;@‚;o;; { ;!0;[o;";@‚;["fc-popover;iÂ;iÂ;iÂ;@;iÂo;;T;i ;[o;;;;i ;["padding;[ ;
+o;;
+"2px 4px;@;;;@;iÎ;[".fc-popover .fc-header;o;;" ;[o;;[o;
+;@¯;o;; { ;!0;[o;";@¯;["fc-popover;iÍ;iÍo;
+;@¯;o;; { ;!0;[o;";@¯;["fc-header;iÍ;iÍ;iÍ;@;iÍo;;T;i ;[o;;;;i ;["margin;[ ;
+o;;
+"
+0 2px;@;;;@;iÔ;["%.fc-popover .fc-header .fc-title;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-popover;iÓ;iÓo;
+;@;o;; { ;!0;[o;";@;["fc-header;iÓ;iÓo;
+;@;o;; { ;!0;[o;";@;["fc-title;iÓ;iÓ;iÓ;@;iÓo;;T;i ;[o;;;;i ;["cursor;[ ;
+o;;
+"pointer;@;;;@;iÛ;["%.fc-popover .fc-header .fc-close;o;;" ;[o;;[o;
+;@9;o;; { ;!0;[o;";@9;["fc-popover;iÚ;iÚo;
+;@9;o;; { ;!0;[o;";@9;["fc-header;iÚ;iÚo;
+;@9;o;; { ;!0;[o;";@9;["fc-close;iÚ;iÚ;iÚ;@;iÚo;;T;i ;[o;;;;i ;["
+float;[ ;
+o;;
+"	left;@;;;@;i¯;["W.fc-ltr .fc-popover .fc-header .fc-title,
+.fc-rtl .fc-popover .fc-header .fc-close;o;;" ;[o;;[	o;
+;@];o;; { ;!0;[o;";@];["fc-ltr;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-popover;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-header;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-title;i˜;i˜o;;[
+"
+o;
+;@];o;; { ;!0;[o;";@];["fc-rtl;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-popover;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-header;i˜;i˜o;
+;@];o;; { ;!0;[o;";@];["fc-close;i˜;i˜;i˜;@;i˜o;;T;i ;[o;;;;i ;["
+float;[ ;
+o;;
+"
+right;@;;;@;i˝;["W.fc-rtl .fc-popover .fc-header .fc-title,
+.fc-ltr .fc-popover .fc-header .fc-close;o;;" ;[o;;[	o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-rtl;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-popover;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-header;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-title;i¸;i¸o;;[
+"
+o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-ltr;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-popover;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-header;i¸;i¸o;
+;@ß;o;; { ;!0;[o;";@ß;["fc-close;i¸;i¸;i¸;@;i¸o;	
+;[ ;
+["/* unthemed */;@;;#;i o;;T;i ;[o;;;;i ;["border-width;[ ;
+o;;
+"1px;@;;;@;io;;;;i ;["border-style;[ ;
+o;;
+"
+solid;@;;;@;i;[".fc-unthemed .fc-popover;o;;" ;[o;;[o;
+;@˚;o;; { ;!0;[o;";@˚;["fc-unthemed;i;io;
+;@˚;o;; { ;!0;[o;";@˚;["fc-popover;i;i;i;@;io;;T;i ;[o;;;;i ;["font-size;[ ;
+o;;
+"	25px;@;;;@;io;;;;i ;["margin-top;[ ;
+o;;
+"4px;@;;;@;i	;["2.fc-unthemed .fc-popover .fc-header .fc-close;o;;" ;[o;;[	o;
+;@;o;; { ;!0;[o;";@;["fc-unthemed;i;io;
+;@;o;; { ;!0;[o;";@;["fc-popover;i;io;
+;@;o;; { ;!0;[o;";@;["fc-header;i;io;
+;@;o;; { ;!0;[o;";@;["fc-close;i;i;i;@;io;	
+;[ ;
+["/* jqui themed */;@;;#;io;;T;i ;[o;;;;i ;["border-top;[ ;
+o;;
+"0;@;;;@;io;	
+;[ ;
+[":/* where they meet, let the header have the border */;@;;#;i;["9.fc-popover > .ui-widget-header + .ui-widget-content;o;;" ;[o;;[
+o;
+;@Q;o;; { ;!0;[o;";@Q;["fc-popover;i;i">o;
+;@Q;o;; { ;!0;[o;";@Q;["ui-widget-header;i;i"+o;
+;@Q;o;; { ;!0;[o;";@Q;["ui-widget-content;i;i;i;@;io;	
+;[ ;
+["Ä/* Misc Reusable Components
+--------------------------------------------------------------------------------------------------*/;@;;#;io;;T;i ;[o;;;;i ;["height;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["margin;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["padding;[ ;
+o;;
+"0 0 2px;@;;;@;io;	
+;[ ;
+["?/* height is unreliable across browsers, so use padding */;@;;#;io;;;;i ;["border-style;[ ;
+o;;
+"
+solid;@;;;@;io;;;;i ;["border-width;[ ;
+o;;
+"
+1px 0;@;;;@;i;[".fc hr;o;;" ;[o;;[o;
+;@ó;o;; { ;!0;[o;";@ó;["fc;i;io;
+;@ó;o;; { ;!0;[o;$	;@ó;["hr;%0;i;i;i;@;io;;T;i ;[o;;;;i ;["
+clear;[ ;
+o;;
+"	both;@;;;@;i;[".fc-clear;o;;" ;[o;;[o;
+;@¥;o;; { ;!0;[o;";@¥;["fc-clear;i;i;i;@;io;;T;i ;[
+o;	
+;[ ;
+["F/* these element should always cling to top-left/right corners */;@;;#;i&o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;i'o;;;;i ;["top;[ ;
+o;;
+"0;@;;;@;i(o;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;i)o;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;i*;["N.fc-bg,
+.fc-bgevent-skeleton,
+.fc-highlight-skeleton,
+.fc-helper-skeleton;o;;" ;[	o;;[o;
+;@‡;o;; { ;!0;[o;";@‡;["
+fc-bg;i%;i%o;;["
+o;
+;@‡;o;; { ;!0;[o;";@‡;["fc-bgevent-skeleton;i%;i%o;;["
+o;
+;@‡;o;; { ;!0;[o;";@‡;["fc-highlight-skeleton;i%;i%o;;["
+o;
+;@‡;o;; { ;!0;[o;";@‡;["fc-helper-skeleton;i%;i%;i%;@;i%o;;T;i ;[o;;;;i ;["bottom;[ ;
+o;;
+"0;@;;;@;i.o;	
+;[ ;
+["#/* strech bg to bottom edge */;@;;#;i.;[".fc-bg;o;;" ;[o;;[o;
+;@	;o;; { ;!0;[o;";@	;["
+fc-bg;i-;i-;i-;@;i-o;;T;i ;[o;;;;i ;["height;[ ;
+o;;
+"	100%;@;;;@;i2o;	
+;[ ;
+["#/* strech bg to bottom edge */;@;;#;i2;[".fc-bg table;o;;" ;[o;;[o;
+;@2	;o;; { ;!0;[o;";@2	;["
+fc-bg;i1;i1o;
+;@2	;o;; { ;!0;[o;$	;@2	;["
+table;%0;i1;i1;i1;@;i1o;	
+;[ ;
+["s/* Tables
+--------------------------------------------------------------------------------------------------*/;@;;#;i6o;;T;i ;[o;;;;i ;["
+width;[ ;
+o;;
+"	100%;@;;;@;i:o;;;;i ;["table-layout;[ ;
+o;;
+"
+fixed;@;;;@;i;o;;;;i ;["border-collapse;[ ;
+o;;
+"collapse;@;;;@;i<o;;;;i ;["border-spacing;[ ;
+o;;
+"0;@;;;@;i=o;;;;i ;["font-size;[ ;
+o;;
+"1em;@;;;@;i>o;	
+;[ ;
+[""/* normalize cross-browser */;@;;#;i>;[".fc table;o;;" ;[o;;[o;
+;@o	;o;; { ;!0;[o;";@o	;["fc;i9;i9o;
+;@o	;o;; { ;!0;[o;$	;@o	;["
+table;%0;i9;i9;i9;@;i9o;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"center;@;;;@;iB;[".fc th;o;;" ;[o;;[o;
+;@å	;o;; { ;!0;[o;";@å	;["fc;iA;iAo;
+;@å	;o;; { ;!0;[o;$	;@å	;["th;%0;iA;iA;iA;@;iAo;;T;i ;[	o;;;;i ;["border-style;[ ;
+o;;
+"
+solid;@;;;@;iGo;;;;i ;["border-width;[ ;
+o;;
+"1px;@;;;@;iHo;;;;i ;["padding;[ ;
+o;;
+"0;@;;;@;iIo;;;;i ;["vertical-align;[ ;
+o;;
+"top;@;;;@;iJ;[".fc th,
+.fc td;o;;" ;[o;;[o;
+;@ª	;o;; { ;!0;[o;";@ª	;["fc;iF;iFo;
+;@ª	;o;; { ;!0;[o;$	;@ª	;["th;%0;iF;iFo;;["
+o;
+;@ª	;o;; { ;!0;[o;";@ª	;["fc;iF;iFo;
+;@ª	;o;; { ;!0;[o;$	;@ª	;["td;%0;iF;iF;iF;@;iFo;;T;i ;[o;;;;i ;["border-style;[ ;
+o;;
+"double;@;;;@;iNo;	
+;[ ;
+["'/* overcome neighboring borders */;@;;#;iN;[".fc td.fc-today;o;;" ;[o;;[o;
+;@Ì	;o;; { ;!0;[o;";@Ì	;["fc;iM;iMo;
+;@Ì	;o;; { ;!0;[o;$	;@Ì	;["td;%0;iMo;";@Ì	;["fc-today;iM;iM;iM;@;iMo;	
+;[ ;
+["|/* Fake Table Rows
+--------------------------------------------------------------------------------------------------*/;@;;#;iRo;;T;i ;[	o;	
+;[ ;
+["Y/* extra precedence to overcome themes w/ .ui-widget-content forcing a 1px border */;@;;#;iUo;	
+;[ ;
+["e/* no visible border by default. but make available if need be (scrollbar width compensation) */;@;;#;iVo;;;;i ;["border-style;[ ;
+o;;
+"
+solid;@;;;@;iWo;;;;i ;["border-width;[ ;
+o;;
+"0;@;;;@;iX;[".fc .fc-row;o;;" ;[o;;[o;
+;@
+;o;; { ;!0;[o;";@
+;["fc;iU;iUo;
+;@
+;o;; { ;!0;[o;";@
+;["fc-row;iU;iU;iU;@;iUo;;T;i ;[
+o;	
+;[ ;
+["n/* don't put left/right border on anything within a fake row.
+   the outer tbody will worry about this */;@;;#;i\o;;;;i ;["border-left;[ ;
+o;;
+"0 hidden transparent;@;;;@;i^o;;;;i ;["border-right;[ ;
+o;;
+"0 hidden transparent;@;;;@;i_o;	
+;[ ;
+["$/* no bottom borders on rows */;@;;#;iao;;;;i ;["border-bottom;[ ;
+o;;
+"0 hidden transparent;@;;;@;ib;[".fc-row table;o;;" ;[o;;[o;
+;@P
+;o;; { ;!0;[o;";@P
+;["fc-row;i[;i[o;
+;@P
+;o;; { ;!0;[o;$	;@P
+;["
+table;%0;i[;i[;i[;@;i[o;;T;i ;[o;;;;i ;["border-top;[ ;
+o;;
+"0 hidden transparent;@;;;@;ifo;	
+;[ ;
+["%/* no top border on first row */;@;;#;if;[".fc-row:first-child table;o;;" ;[o;;[o;
+;@q
+;o;; { ;!0;[o;";@q
+;["fc-row;ieo;3
+;@q
+;["first-child;40;5;6;ie;ieo;
+;@q
+;o;; { ;!0;[o;$	;@q
+;["
+table;%0;ie;ie;ie;@;ieo;	
+;[ ;
+["ò/* Day Row (used within the header and the DayGrid)
+--------------------------------------------------------------------------------------------------*/;@;;#;ijo;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;in;[".fc-row;o;;" ;[o;;[o;
+;@ï
+;o;; { ;!0;[o;";@ï
+;["fc-row;im;im;im;@;imo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;ir;[".fc-row .fc-bg;o;;" ;[o;;[o;
+;@´
+;o;; { ;!0;[o;";@´
+;["fc-row;iq;iqo;
+;@´
+;o;; { ;!0;[o;";@´
+;["
+fc-bg;iq;iq;iq;@;iqo;	
+;[ ;
+["9/* highlighting cells & background event skeleton */;@;;#;iuo;;T;i ;[o;;;;i ;["bottom;[ ;
+o;;
+"0;@;;;@;iyo;	
+;[ ;
+[",/* stretch skeleton to bottom of row */;@;;#;iy;["A.fc-row .fc-bgevent-skeleton,
+.fc-row .fc-highlight-skeleton;o;;" ;[o;;[o;
+;@–
+;o;; { ;!0;[o;";@–
+;["fc-row;ix;ixo;
+;@–
+;o;; { ;!0;[o;";@–
+;["fc-bgevent-skeleton;ix;ixo;;["
+o;
+;@–
+;o;; { ;!0;[o;";@–
+;["fc-row;ix;ixo;
+;@–
+;o;; { ;!0;[o;";@–
+;["fc-highlight-skeleton;ix;ix;ix;@;ixo;;T;i ;[o;;;;i ;["height;[ ;
+o;;
+"	100%;@;;;@;i~o;	
+;[ ;
+[",/* stretch skeleton to bottom of row */;@;;#;i~;["M.fc-row .fc-bgevent-skeleton table,
+.fc-row .fc-highlight-skeleton table;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-row;i};i}o;
+;@;o;; { ;!0;[o;";@;["fc-bgevent-skeleton;i};i}o;
+;@;o;; { ;!0;[o;$	;@;["
+table;%0;i};i}o;;[	"
+o;
+;@;o;; { ;!0;[o;";@;["fc-row;i};i}o;
+;@;o;; { ;!0;[o;";@;["fc-highlight-skeleton;i};i}o;
+;@;o;; { ;!0;[o;$	;@;["
+table;%0;i};i};i};@;i}o;;T;i ;[o;;;;i ;["border-color;[ ;
+o;;
+"transparent;@;;;@;iÉ;["G.fc-row .fc-highlight-skeleton td,
+.fc-row .fc-bgevent-skeleton td;o;;" ;[o;;[o;
+;@>;o;; { ;!0;[o;";@>;["fc-row;iÇ;iÇo;
+;@>;o;; { ;!0;[o;";@>;["fc-highlight-skeleton;iÇ;iÇo;
+;@>;o;; { ;!0;[o;$	;@>;["td;%0;iÇ;iÇo;;[	"
+o;
+;@>;o;; { ;!0;[o;";@>;["fc-row;iÇ;iÇo;
+;@>;o;; { ;!0;[o;";@>;["fc-bgevent-skeleton;iÇ;iÇo;
+;@>;o;; { ;!0;[o;$	;@>;["td;%0;iÇ;iÇ;iÇ;@;iÇo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;iá;["!.fc-row .fc-bgevent-skeleton;o;;" ;[o;;[o;
+;@z;o;; { ;!0;[o;";@z;["fc-row;iÜ;iÜo;
+;@z;o;; { ;!0;[o;";@z;["fc-bgevent-skeleton;iÜ;iÜ;iÜ;@;iÜo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"3;@;;;@;iå;["#.fc-row .fc-highlight-skeleton;o;;" ;[o;;[o;
+;@ó;o;; { ;!0;[o;";@ó;["fc-row;iã;ião;
+;@ó;o;; { ;!0;[o;";@ó;["fc-highlight-skeleton;iã;iã;iã;@;ião;	
+;[ ;
+["~/*
+row content (which contains day/week numbers and events) as well as "helper" (which contains
+temporary rendered events).
+*/;@;;#;ièo;;T;i ;[	o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;iïo;;;;i ;["z-index;[ ;
+o;;
+"4;@;;;@;iño;;;;i ;["padding-bottom;[ ;
+o;;
+"2px;@;;;@;ióo;	
+;[ ;
+["-/* matches the space above the events */;@;;#;ió;["!.fc-row .fc-content-skeleton;o;;" ;[o;;[o;
+;@»;o;; { ;!0;[o;";@»;["fc-row;iî;iîo;
+;@»;o;; { ;!0;[o;";@»;["fc-content-skeleton;iî;iî;iî;@;iîo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"5;@;;;@;iõ;[" .fc-row .fc-helper-skeleton;o;;" ;[o;;[o;
+;@Â;o;; { ;!0;[o;";@Â;["fc-row;iö;iöo;
+;@Â;o;; { ;!0;[o;";@Â;["fc-helper-skeleton;iö;iö;iö;@;iöo;;T;i ;[o;	
+;[ ;
+["./* see-through to the background below */;@;;#;i†o;;;;i ;["background;[ ;
+o;;
+"	none;@;;;@;i°o;	
+;[ ;
+[",/* in case <td>s are globally styled */;@;;#;i°o;;;;i ;["border-color;[ ;
+o;;
+"transparent;@;;;@;i¢o;	
+;[ ;
+["B/* don't put a border between events and/or the day number */;@;;#;i§o;;;;i ;["border-bottom;[ ;
+o;;
+"0;@;;;@;i•;["D.fc-row .fc-content-skeleton td,
+.fc-row .fc-helper-skeleton td;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-row;iü;iüo;
+;@;o;; { ;!0;[o;";@;["fc-content-skeleton;iü;iüo;
+;@;o;; { ;!0;[o;$	;@;["td;%0;iü;iüo;;[	"
+o;
+;@;o;; { ;!0;[o;";@;["fc-row;iü;iüo;
+;@;o;; { ;!0;[o;";@;["fc-helper-skeleton;iü;iüo;
+;@;o;; { ;!0;[o;$	;@;["td;%0;iü;iü;iü;@;iüo;;T;i ;[o;	
+;[ ;
+["1/* don't put a border between event cells */;@;;#;i™o;;;;i ;["border-top;[ ;
+o;;
+"0;@;;;@;i´;["Q.fc-row .fc-content-skeleton tbody td, 
+.fc-row .fc-helper-skeleton tbody td;o;;" ;[o;;[	o;
+;@Z;o;; { ;!0;[o;";@Z;["fc-row;i©;i©o;
+;@Z;o;; { ;!0;[o;";@Z;["fc-content-skeleton;i©;i©o;
+;@Z;o;; { ;!0;[o;$	;@Z;["
+tbody;%0;i©;i©o;
+;@Z;o;; { ;!0;[o;$	;@Z;["td;%0;i©;i©o;;[
+"
+o;
+;@Z;o;; { ;!0;[o;";@Z;["fc-row;i©;i©o;
+;@Z;o;; { ;!0;[o;";@Z;["fc-helper-skeleton;i©;i©o;
+;@Z;o;; { ;!0;[o;$	;@Z;["
+tbody;%0;i©;i©o;
+;@Z;o;; { ;!0;[o;$	;@Z;["td;%0;i©;i©;i©;@;i©o;	
+;[ ;
+["{/* Scrolling Container
+--------------------------------------------------------------------------------------------------*/;@;;#;iØo;;T;i ;[o;	
+;[ ;
+["I/* this class goes on elements for guaranteed vertical scrollbars */;@;;#;i≤o;;;;i ;["overflow-y;[ ;
+o;;
+"scroll;@;;;@;i≥o;;;;i ;["overflow-x;[ ;
+o;;
+"hidden;@;;;@;i¥;[".fc-scroller;o;;" ;[o;;[o;
+;@≤;o;; { ;!0;[o;";@≤;["fc-scroller;i≤;i≤;i≤;@;i≤o;;T;i ;[o;	
+;[ ;
+["//* we expect an immediate inner element */;@;;#;i∑o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;i∏o;	
+;[ ;
+["!/* re-scope all positions */;@;;#;i∏o;;;;i ;["
+width;[ ;
+o;;
+"	100%;@;;;@;iπo;	
+;[ ;
+["V/* hack to force re-sizing this inner element when scrollbars appear/disappear */;@;;#;iπo;;;;i ;["overflow;[ ;
+o;;
+"hidden;@;;;@;i∫o;	
+;[ ;
+["S/* don't let negative margins or absolute positioning create further scroll */;@;;#;i∫;[".fc-scroller > *;o;;" ;[o;;[o;
+;@‰;o;; { ;!0;[o;";@‰;["fc-scroller;i∑;i∑">o;
+;@‰;o;; { ;!0;[o;B;@‰;%0;i∑;i∑;i∑;@;i∑o;	
+;[ ;
+["{/* Global Event Styles
+--------------------------------------------------------------------------------------------------*/;@;;#;iæo;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;i¬o;	
+;[ ;
+["8/* for resize handle and other inner positioning */;@;;#;i¬o;;;;i ;["display;[ ;
+o;;
+"
+block;@;;;@;i√o;	
+;[ ;
+["!/* make the <a> tag block */;@;;#;i√o;;;;i ;["font-size;[ ;
+o;;
+"
+.85em;@;;;@;iƒo;;;;i ;["line-height;[ ;
+o;;
+"1.3;@;;;@;i≈o;;;;i ;["border-radius;[ ;
+o;;
+"3px;@;;;@;i∆o;;;;i ;["border;[ ;
+o;;
+"1px solid #3a87ad;@;;;@;i«o;	
+;[ ;
+["/* default BORDER color */;@;;#;i«o;;;;i ;["background-color;[ ;
+o;;
+"#3a87ad;@;;;@;i»o;	
+;[ ;
+["#/* default BACKGROUND color */;@;;#;i»o;;;;i ;["font-weight;[ ;
+o;;
+"normal;@;;;@;i…o;	
+;[ ;
+[",/* undo jqui's ui-widget-header bold */;@;;#;i…;[".fc-event;o;;" ;[o;;[o;
+;@B;o;; { ;!0;[o;";@B;["fc-event;i¡;i¡;i¡;@;i¡o;	
+;[ ;
+["F/* overpower some of bootstrap's and jqui's styles on <a> tags */;@;;#;iÃo;;T;i ;[	o;;;;i ;["
+color;[ ;
+o;;
+"	#fff;@;;;@;i–o;	
+;[ ;
+["/* default TEXT color */;@;;#;i–o;;;;i ;["text-decoration;[ ;
+o;;
+"	none;@;;;@;i—o;	
+;[ ;
+["/* if <a> has an href */;@;;#;i—;["5.fc-event,
+.fc-event:hover,
+.ui-widget .fc-event;o;;" ;[o;;[o;
+;@j;o;; { ;!0;[o;";@j;["fc-event;iœ;iœo;;["
+o;
+;@j;o;; { ;!0;[o;";@j;["fc-event;iœo;3
+;@j;["
+hover;40;5;6;iœ;iœo;;["
+o;
+;@j;o;; { ;!0;[o;";@j;["ui-widget;iœ;iœo;
+;@j;o;; { ;!0;[o;";@j;["fc-event;iœ;iœ;iœ;@;iœo;;T;i ;[o;;;;i ;["cursor;[ ;
+o;;
+"pointer;@;;;@;i÷o;	
+;[ ;
+["K/* give events with links and draggable events a hand mouse pointer */;@;;#;i÷;[",.fc-event[href],
+.fc-event.fc-draggable;o;;" ;[o;;[o;
+;@¢;o;; { ;!0;[o;";@¢;["fc-event;i’o:Sass::Selector::Attribute;@¢;["	href;%0:@flags0;
+0;00;i’;i’o;;["
+o;
+;@¢;o;; { ;!0;[o;";@¢;["fc-event;i’o;";@¢;["fc-draggable;i’;i’;i’;@;i’o;;T;i ;[o;	
+;[ ;
+["//* to override an event's custom cursor */;@;;#;i⁄o;;;;i ;["cursor;[ ;
+o;;
+"not-allowed;@;;;@;i€;["0.fc-not-allowed, 
+.fc-not-allowed .fc-event;o;;" ;[o;;[o;
+;@Ã;o;; { ;!0;[o;";@Ã;["fc-not-allowed;i⁄;i⁄o;;["
+o;
+;@Ã;o;; { ;!0;[o;";@Ã;["fc-not-allowed;i⁄;i⁄o;
+;@Ã;o;; { ;!0;[o;";@Ã;["fc-event;i⁄;i⁄;i⁄;@;i⁄o;	
+;[ ;
+["/* DayGrid events
+----------------------------------------------------------------------------------------------------
+We use the full "fc-day-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/;@;;#;iﬂo;;T;i ;[o;;;;i ;["margin;[ ;
+o;;
+"1px 2px 0;@;;;@;iÊo;	
+;[ ;
+["+/* spacing between events and edges */;@;;#;iÊo;;;;i ;["padding;[ ;
+o;;
+"
+0 1px;@;;;@;iÁ;[".fc-day-grid-event;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-day-grid-event;iÂ;iÂ;iÂ;@;iÂo;	
+;[ ;
+["i/* events that are continuing to/from another week. kill rounded corners and butt up against edge */;@;;#;iÍo;;T;i ;[o;;;;i ;["margin-left;[ ;
+o;;
+"0;@;;;@;iÓo;;;;i ;["border-left-width;[ ;
+o;;
+"0;@;;;@;iÔo;;;;i ;["padding-left;[ ;
+o;;
+"1px;@;;;@;io;	
+;[ ;
+["*/* replace the border with padding */;@;;#;io;;;;i ;["border-top-left-radius;[ ;
+o;;
+"0;@;;;@;iÒo;;;;i ;["border-bottom-left-radius;[ ;
+o;;
+"0;@;;;@;iÚ;["S.fc-ltr .fc-day-grid-event.fc-not-start,
+.fc-rtl .fc-day-grid-event.fc-not-end;o;;" ;[o;;[o;
+;@7;o;; { ;!0;[o;";@7;["fc-ltr;iÌ;iÌo;
+;@7;o;; { ;!0;[o;";@7;["fc-day-grid-event;iÌo;";@7;["fc-not-start;iÌ;iÌo;;["
+o;
+;@7;o;; { ;!0;[o;";@7;["fc-rtl;iÌ;iÌo;
+;@7;o;; { ;!0;[o;";@7;["fc-day-grid-event;iÌo;";@7;["fc-not-end;iÌ;iÌ;iÌ;@;iÌo;;T;i ;[o;;;;i ;["margin-right;[ ;
+o;;
+"0;@;;;@;i˜o;;;;i ;["border-right-width;[ ;
+o;;
+"0;@;;;@;i¯o;;;;i ;["padding-right;[ ;
+o;;
+"1px;@;;;@;i˘o;	
+;[ ;
+["*/* replace the border with padding */;@;;#;i˘o;;;;i ;["border-top-right-radius;[ ;
+o;;
+"0;@;;;@;i˙o;;;;i ;["border-bottom-right-radius;[ ;
+o;;
+"0;@;;;@;i˚;["S.fc-ltr .fc-day-grid-event.fc-not-end,
+.fc-rtl .fc-day-grid-event.fc-not-start;o;;" ;[o;;[o;
+;@á;o;; { ;!0;[o;";@á;["fc-ltr;iˆ;iˆo;
+;@á;o;; { ;!0;[o;";@á;["fc-day-grid-event;iˆo;";@á;["fc-not-end;iˆ;iˆo;;["
+o;
+;@á;o;; { ;!0;[o;";@á;["fc-rtl;iˆ;iˆo;
+;@á;o;; { ;!0;[o;";@á;["fc-day-grid-event;iˆo;";@á;["fc-not-start;iˆ;iˆ;iˆ;@;iˆo;;T;i ;[o;	
+;[ ;
+["+/* force events to be one-line tall */;@;;#;i˛o;;;;i ;["white-space;[ ;
+o;;
+"nowrap;@;;;@;iˇo;;;;i ;["overflow;[ ;
+o;;
+"hidden;@;;;@;i ;["%.fc-day-grid-event > .fc-content;o;;" ;[o;;[o;
+;@≈;o;; { ;!0;[o;";@≈;["fc-day-grid-event;i˛;i˛">o;
+;@≈;o;; { ;!0;[o;";@≈;["fc-content;i˛;i˛;i˛;@;i˛o;;T;i ;[o;;;;i ;["font-weight;[ ;
+o;;
+"	bold;@;;;@;i;[" .fc-day-grid-event .fc-time;o;;" ;[o;;[o;
+;@„;o;; { ;!0;[o;";@„;["fc-day-grid-event;i;io;
+;@„;o;; { ;!0;[o;";@„;["fc-time;i;i;i;@;io;	
+;[ ;
+["M/* resize handle (outside of fc-content, so can go outside of bounds) */;@;;#;io;;T;i ;[	o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;i
+o;;;;i ;["top;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["bottom;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["
+width;[ ;
+o;;
+"7px;@;;;@;i;["#.fc-day-grid-event .fc-resizer;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-day-grid-event;i	;i	o;
+;@;o;; { ;!0;[o;";@;["fc-resizer;i	;i	;i	;@;i	o;;T;i ;[o;;;;i ;["
+right;[ ;
+o;;
+"	-3px;@;;;@;io;;;;i ;["cursor;[ ;
+o;;
+"e-resize;@;;;@;i;["+.fc-ltr .fc-day-grid-event .fc-resizer;o;;" ;[o;;[o;
+;@9;o;; { ;!0;[o;";@9;["fc-ltr;i;io;
+;@9;o;; { ;!0;[o;";@9;["fc-day-grid-event;i;io;
+;@9;o;; { ;!0;[o;";@9;["fc-resizer;i;i;i;@;io;;T;i ;[o;;;;i ;["	left;[ ;
+o;;
+"	-3px;@;;;@;io;;;;i ;["cursor;[ ;
+o;;
+"w-resize;@;;;@;i;["+.fc-rtl .fc-day-grid-event .fc-resizer;o;;" ;[o;;[o;
+;@c;o;; { ;!0;[o;";@c;["fc-rtl;i;io;
+;@c;o;; { ;!0;[o;";@c;["fc-day-grid-event;i;io;
+;@c;o;; { ;!0;[o;";@c;["fc-resizer;i;i;i;@;io;	
+;[ ;
+["{/* Event Limiting
+--------------------------------------------------------------------------------------------------*/;@;;#;io;	
+;[ ;
+["4/* "more" link that represents hidden events */;@;;#;io;;T;i ;[	o;;;;i ;["margin;[ ;
+o;;
+"1px 3px;@;;;@;i!o;;;;i ;["font-size;[ ;
+o;;
+"
+.85em;@;;;@;i"o;;;;i ;["cursor;[ ;
+o;;
+"pointer;@;;;@;i#o;;;;i ;["text-decoration;[ ;
+o;;
+"	none;@;;;@;i$;["a.fc-more;o;;" ;[o;;[o;
+;@°;o;; { ;!0;[o;$	;@°;["a;%0;i o;";@°;["fc-more;i ;i ;i ;@;i o;;T;i ;[o;;;;i ;["text-decoration;[ ;
+o;;
+"underline;@;;;@;i(;["a.fc-more:hover;o;;" ;[o;;[o;
+;@∫;o;; { ;!0;[o;$	;@∫;["a;%0;i'o;";@∫;["fc-more;i'o;3
+;@∫;["
+hover;40;5;6;i';i';i';@;i'o;;T;i ;[o;	
+;[ ;
+["B/* rows and cells that are hidden because of a "more" link */;@;;#;i+o;;;;i ;["display;[ ;
+o;;
+"	none;@;;;@;i,;[".fc-limited;o;;" ;[o;;[o;
+;@⁄;o;; { ;!0;[o;";@⁄;["fc-limited;i+;i+;i+;@;i+o;	
+;[ ;
+[";/* popover that appears when "more" link is clicked */;@;;#;i/o;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;i2o;	
+;[ ;
+["7/* make the "more" popover one higher than this */;@;;#;i2;[".fc-day-grid .fc-row;o;;" ;[o;;[o;
+;@¯;o;; { ;!0;[o;";@¯;["fc-day-grid;i1;i1o;
+;@¯;o;; { ;!0;[o;";@¯;["fc-row;i1;i1;i1;@;i1o;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;i6o;;;;i ;["
+width;[ ;
+o;;
+"
+220px;@;;;@;i7;[".fc-more-popover;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-more-popover;i5;i5;i5;@;i5o;;T;i ;[o;;;;i ;["padding;[ ;
+o;;
+"	10px;@;;;@;i;;[").fc-more-popover .fc-event-container;o;;" ;[o;;[o;
+;@1;o;; { ;!0;[o;";@1;["fc-more-popover;i:;i:o;
+;@1;o;; { ;!0;[o;";@1;["fc-event-container;i:;i:;i:;@;i:o;	
+;[ ;
+["t/* Toolbar
+--------------------------------------------------------------------------------------------------*/;@;;#;i>o;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"center;@;;;@;iBo;;;;i ;["margin-bottom;[ ;
+o;;
+"1em;@;;;@;iC;[".fc-toolbar;o;;" ;[o;;[o;
+;@X;o;; { ;!0;[o;";@X;["fc-toolbar;iA;iA;iA;@;iAo;;T;i ;[o;;;;i ;["
+float;[ ;
+o;;
+"	left;@;;;@;iG;[".fc-toolbar .fc-left;o;;" ;[o;;[o;
+;@n;o;; { ;!0;[o;";@n;["fc-toolbar;iF;iFo;
+;@n;o;; { ;!0;[o;";@n;["fc-left;iF;iF;iF;@;iFo;;T;i ;[o;;;;i ;["
+float;[ ;
+o;;
+"
+right;@;;;@;iK;[".fc-toolbar .fc-right;o;;" ;[o;;[o;
+;@ã;o;; { ;!0;[o;";@ã;["fc-toolbar;iJ;iJo;
+;@ã;o;; { ;!0;[o;";@ã;["fc-right;iJ;iJ;iJ;@;iJo;;T;i ;[o;;;;i ;["display;[ ;
+o;;
+"inline-block;@;;;@;iO;[".fc-toolbar .fc-center;o;;" ;[o;;[o;
+;@®;o;; { ;!0;[o;";@®;["fc-toolbar;iN;iNo;
+;@®;o;; { ;!0;[o;";@®;["fc-center;iN;iN;iN;@;iNo;	
+;[ ;
+[";/* the things within each left/right/center section */;@;;#;iRo;;T;i ;[o;	
+;[ ;
+["=/* extra precedence to override button border margins */;@;;#;iSo;;;;i ;["
+float;[ ;
+o;;
+"	left;@;;;@;iTo;;;;i ;["margin-left;[ ;
+o;;
+"
+.75em;@;;;@;iU;[".fc .fc-toolbar > * > *;o;;" ;[o;;[o;
+;@”;o;; { ;!0;[o;";@”;["fc;iS;iSo;
+;@”;o;; { ;!0;[o;";@”;["fc-toolbar;iS;iS">o;
+;@”;o;; { ;!0;[o;B;@”;%0;iS;iS">o;
+;@”;o;; { ;!0;[o;B;@”;%0;iS;iS;iS;@;iSo;	
+;[ ;
+["@/* the first thing within each left/center/right section */;@;;#;iXo;;T;i ;[o;	
+;[ ;
+["=/* extra precedence to override button border margins */;@;;#;iYo;;;;i ;["margin-left;[ ;
+o;;
+"0;@;;;@;iZ;["'.fc .fc-toolbar > * > :first-child;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc;iY;iYo;
+;@;o;; { ;!0;[o;";@;["fc-toolbar;iY;iY">o;
+;@;o;; { ;!0;[o;B;@;%0;iY;iY">o;
+;@;o;; { ;!0;[o;3
+;@;["first-child;40;5;6;iY;iY;iY;@;iYo;	
+;[ ;
+["/* title text */;@;;#;i]o;;T;i ;[o;;;;i ;["margin;[ ;
+o;;
+"0;@;;;@;i`;[".fc-toolbar h2;o;;" ;[o;;[o;
+;@3;o;; { ;!0;[o;";@3;["fc-toolbar;i_;i_o;
+;@3;o;; { ;!0;[o;$	;@3;["h2;%0;i_;i_;i_;@;i_o;	
+;[ ;
+["2/* button layering (for border precedence) */;@;;#;ico;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;if;[".fc-toolbar button;o;;" ;[o;;[o;
+;@T;o;; { ;!0;[o;";@T;["fc-toolbar;ie;ieo;
+;@T;o;; { ;!0;[o;$	;@T;["button;%0;ie;ie;ie;@;ieo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;ik;["=.fc-toolbar .fc-state-hover,
+.fc-toolbar .ui-state-hover;o;;" ;[o;;[o;
+;@q;o;; { ;!0;[o;";@q;["fc-toolbar;ij;ijo;
+;@q;o;; { ;!0;[o;";@q;["fc-state-hover;ij;ijo;;["
+o;
+;@q;o;; { ;!0;[o;";@q;["fc-toolbar;ij;ijo;
+;@q;o;; { ;!0;[o;";@q;["ui-state-hover;ij;ij;ij;@;ijo;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"3;@;;;@;io;[".fc-toolbar .fc-state-down;o;;" ;[o;;[o;
+;@ü;o;; { ;!0;[o;";@ü;["fc-toolbar;in;ino;
+;@ü;o;; { ;!0;[o;";@ü;["fc-state-down;in;in;in;@;ino;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"4;@;;;@;it;["?.fc-toolbar .fc-state-active,
+.fc-toolbar .ui-state-active;o;;" ;[o;;[o;
+;@º;o;; { ;!0;[o;";@º;["fc-toolbar;is;iso;
+;@º;o;; { ;!0;[o;";@º;["fc-state-active;is;iso;;["
+o;
+;@º;o;; { ;!0;[o;";@º;["fc-toolbar;is;iso;
+;@º;o;; { ;!0;[o;";@º;["ui-state-active;is;is;is;@;iso;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"5;@;;;@;ix;[".fc-toolbar button:focus;o;;" ;[o;;[o;
+;@Í;o;; { ;!0;[o;";@Í;["fc-toolbar;iw;iwo;
+;@Í;o;; { ;!0;[o;$	;@Í;["button;%0;iwo;3
+;@Í;["
+focus;40;5;6;iw;iw;iw;@;iwo;	
+;[ ;
+["{/* View Structure
+--------------------------------------------------------------------------------------------------*/;@;;#;i|o;	
+;[ ;
+["W/* undo twitter bootstrap's box-sizing rules. normalizes positioning techniques */;@;;#;io;	
+;[ ;
+["g/* don't do this for the toolbar because we'll want bootstrap to style those buttons as some pt */;@;;#;iÄo;;T;i ;[o;;;;i ;["-webkit-box-sizing;[ ;
+o;;
+"content-box;@;;;@;iÑo;;;;i ;["-moz-box-sizing;[ ;
+o;;
+"content-box;@;;;@;iÖo;;;;i ;["box-sizing;[ ;
+o;;
+"content-box;@;;;@;iÜ;["R.fc-view-container *,
+.fc-view-container *:before,
+.fc-view-container *:after;o;;" ;[o;;[o;
+;@";o;; { ;!0;[o;";@";["fc-view-container;iÉ;iÉo;
+;@";o;; { ;!0;[o;B;@";%0;iÉ;iÉo;;["
+o;
+;@";o;; { ;!0;[o;";@";["fc-view-container;iÉ;iÉo;
+;@";o;; { ;!0;[o;B;@";%0;iÉo;3
+;@";["before;40;5;6;iÉ;iÉo;;["
+o;
+;@";o;; { ;!0;[o;";@";["fc-view-container;iÉ;iÉo;
+;@";o;; { ;!0;[o;B;@";%0;iÉo;3
+;@";["
+after;40;5;6;iÉ;iÉ;iÉ;@;iÉo;;T;i ;[o;	
+;[ ;
+["C/* so dragged elements can be above the view's main element */;@;;#;iäo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;ião;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;iå;[" .fc-view, 
+.fc-view > table;o;;" ;[o;;[o;
+;@k;o;; { ;!0;[o;";@k;["fc-view;iä;iäo;;[	"
+o;
+;@k;o;; { ;!0;[o;";@k;["fc-view;iä;iä">o;
+;@k;o;; { ;!0;[o;$	;@k;["
+table;%0;iä;iä;iä;@;iäo;	
+;[ ;
+["v/* BasicView
+--------------------------------------------------------------------------------------------------*/;@;;#;ièo;	
+;[ ;
+["/* day row structure */;@;;#;iío;;T;i ;[
+o;	
+;[ ;
+["E/* we are sure there are no day numbers in these views, so... */;@;;#;iño;;;;i ;["padding-top;[ ;
+o;;
+"1px;@;;;@;ióo;	
+;[ ;
+["F/* add a pixel to make sure there are 2px padding above events */;@;;#;ióo;;;;i ;["padding-bottom;[ ;
+o;;
+"1em;@;;;@;iòo;	
+;[ ;
+["G/* ensure a space at bottom of cell for user selecting/clicking */;@;;#;iò;["T.fc-basicWeek-view .fc-content-skeleton,
+.fc-basicDay-view .fc-content-skeleton;o;;" ;[o;;[o;
+;@≠;o;; { ;!0;[o;";@≠;["fc-basicWeek-view;iï;iïo;
+;@≠;o;; { ;!0;[o;";@≠;["fc-content-skeleton;iï;iïo;;["
+o;
+;@≠;o;; { ;!0;[o;";@≠;["fc-basicDay-view;iï;iïo;
+;@≠;o;; { ;!0;[o;";@≠;["fc-content-skeleton;iï;iï;iï;@;iïo;;T;i ;[o;;;;i ;["min-height;[ ;
+o;;
+"4em;@;;;@;iúo;	
+;[ ;
+["6/* ensure that all rows are at least this tall */;@;;#;iú;["!.fc-basic-view tbody .fc-row;o;;" ;[o;;[o;
+;@ﬂ;o;; { ;!0;[o;";@ﬂ;["fc-basic-view;iõ;iõo;
+;@ﬂ;o;; { ;!0;[o;$	;@ﬂ;["
+tbody;%0;iõ;iõo;
+;@ﬂ;o;; { ;!0;[o;";@ﬂ;["fc-row;iõ;iõ;iõ;@;iõo;	
+;[ ;
+["f/* a "rigid" row will take up a constant amount of height because content-skeleton is absolute */;@;;#;iüo;;T;i ;[o;;;;i ;["overflow;[ ;
+o;;
+"hidden;@;;;@;i¢;[".fc-row.fc-rigid;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-row;i°o;";@;["fc-rigid;i°;i°;i°;@;i°o;;T;i ;[	o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;i¶o;;;;i ;["top;[ ;
+o;;
+"0;@;;;@;ißo;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;i®o;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;i©;["*.fc-row.fc-rigid .fc-content-skeleton;o;;" ;[o;;[o;
+;@2;o;; { ;!0;[o;";@2;["fc-row;i•o;";@2;["fc-rigid;i•;i•o;
+;@2;o;; { ;!0;[o;";@2;["fc-content-skeleton;i•;i•;i•;@;i•o;	
+;[ ;
+["&/* week and day number styling */;@;;#;i¨o;;T;i ;[o;;;;i ;["padding;[ ;
+o;;
+"
+0 2px;@;;;@;i∞;["B.fc-basic-view .fc-week-number,
+.fc-basic-view .fc-day-number;o;;" ;[o;;[o;
+;@V;o;; { ;!0;[o;";@V;["fc-basic-view;iØ;iØo;
+;@V;o;; { ;!0;[o;";@V;["fc-week-number;iØ;iØo;;["
+o;
+;@V;o;; { ;!0;[o;";@V;["fc-basic-view;iØ;iØo;
+;@V;o;; { ;!0;[o;";@V;["fc-day-number;iØ;iØ;iØ;@;iØo;;T;i ;[o;;;;i ;["padding-top;[ ;
+o;;
+"2px;@;;;@;iµo;;;;i ;["padding-bottom;[ ;
+o;;
+"2px;@;;;@;i∂;["K.fc-basic-view td.fc-week-number span,
+.fc-basic-view td.fc-day-number;o;;" ;[o;;[o;
+;@ä;o;; { ;!0;[o;";@ä;["fc-basic-view;i¥;i¥o;
+;@ä;o;; { ;!0;[o;$	;@ä;["td;%0;i¥o;";@ä;["fc-week-number;i¥;i¥o;
+;@ä;o;; { ;!0;[o;$	;@ä;["	span;%0;i¥;i¥o;;["
+o;
+;@ä;o;; { ;!0;[o;";@ä;["fc-basic-view;i¥;i¥o;
+;@ä;o;; { ;!0;[o;$	;@ä;["td;%0;i¥o;";@ä;["fc-day-number;i¥;i¥;i¥;@;i¥o;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"center;@;;;@;i∫;["#.fc-basic-view .fc-week-number;o;;" ;[o;;[o;
+;@≈;o;; { ;!0;[o;";@≈;["fc-basic-view;iπ;iπo;
+;@≈;o;; { ;!0;[o;";@≈;["fc-week-number;iπ;iπ;iπ;@;iπo;;T;i ;[o;	
+;[ ;
+["O/* work around the way we do column resizing and ensure a minimum width */;@;;#;iæo;;;;i ;["display;[ ;
+o;;
+"inline-block;@;;;@;iøo;;;;i ;["min-width;[ ;
+o;;
+"1.25em;@;;;@;i¿;["(.fc-basic-view .fc-week-number span;o;;" ;[o;;[o;
+;@Ï;o;; { ;!0;[o;";@Ï;["fc-basic-view;iΩ;iΩo;
+;@Ï;o;; { ;!0;[o;";@Ï;["fc-week-number;iΩ;iΩo;
+;@Ï;o;; { ;!0;[o;$	;@Ï;["	span;%0;iΩ;iΩ;iΩ;@;iΩo;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"
+right;@;;;@;iƒ;["*.fc-ltr .fc-basic-view .fc-day-number;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-ltr;i√;i√o;
+;@;o;; { ;!0;[o;";@;["fc-basic-view;i√;i√o;
+;@;o;; { ;!0;[o;";@;["fc-day-number;i√;i√;i√;@;i√o;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"	left;@;;;@;i»;["*.fc-rtl .fc-basic-view .fc-day-number;o;;" ;[o;;[o;
+;@4;o;; { ;!0;[o;";@4;["fc-rtl;i«;i«o;
+;@4;o;; { ;!0;[o;";@4;["fc-basic-view;i«;i«o;
+;@4;o;; { ;!0;[o;";@4;["fc-day-number;i«;i«;i«;@;i«o;;T;i ;[	o;;;;i ;["opacity;[ ;
+o;;
+"0.3;@;;;@;iÃo;;;;i ;["filter;[ ;
+o;&;"
+alpha;'0;([o;)
+;*o;+;,"30;-@ò;.[ ;
+i#;@;iÕ;/o;	;
+"opacity;@;;;iÕ;0;1;@;iÕ;@;iÕ;2{ ;@;iÕo;	
+;[ ;
+["/* for IE */;@;;#;iÕo;	
+;[ ;
+["û/* opacity with small font can sometimes look too faded
+   might want to set the 'color' property instead
+   making day-numbers bold also fixes the problem */;@;;#;iŒ;["".fc-day-number.fc-other-month;o;;" ;[o;;[o;
+;@n;o;; { ;!0;[o;";@n;["fc-day-number;iÀo;";@n;["fc-other-month;iÀ;iÀ;iÀ;@;iÀo;	
+;[ ;
+["/* AgendaView all-day area
+--------------------------------------------------------------------------------------------------*/;@;;#;i”o;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;i◊o;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;iÿo;	
+;[ ;
+["=/* so the "more.." popover will be over the time grid */;@;;#;iÿ;["!.fc-agenda-view .fc-day-grid;o;;" ;[o;;[o;
+;@ï;o;; { ;!0;[o;";@ï;["fc-agenda-view;i÷;i÷o;
+;@ï;o;; { ;!0;[o;";@ï;["fc-day-grid;i÷;i÷;i÷;@;i÷o;;T;i ;[o;;;;i ;["min-height;[ ;
+o;;
+"3em;@;;;@;i‹o;	
+;[ ;
+[";/* all-day section will never get shorter than this */;@;;#;i‹;[").fc-agenda-view .fc-day-grid .fc-row;o;;" ;[o;;[o;
+;@∂;o;; { ;!0;[o;";@∂;["fc-agenda-view;i€;i€o;
+;@∂;o;; { ;!0;[o;";@∂;["fc-day-grid;i€;i€o;
+;@∂;o;; { ;!0;[o;";@∂;["fc-row;i€;i€;i€;@;i€o;;T;i ;[	o;;;;i ;["padding-top;[ ;
+o;;
+"1px;@;;;@;i‡o;	
+;[ ;
+["F/* add a pixel to make sure there are 2px padding above events */;@;;#;i‡o;;;;i ;["padding-bottom;[ ;
+o;;
+"1em;@;;;@;i·o;	
+;[ ;
+["C/* give space underneath events for clicking/selecting days */;@;;#;i·;[">.fc-agenda-view .fc-day-grid .fc-row .fc-content-skeleton;o;;" ;[o;;[	o;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-agenda-view;iﬂ;iﬂo;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-day-grid;iﬂ;iﬂo;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-row;iﬂ;iﬂo;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-content-skeleton;iﬂ;iﬂ;iﬂ;@;iﬂo;	
+;[ ;
+["π/* TimeGrid axis running down the side (for both the all-day area and the slot area)
+--------------------------------------------------------------------------------------------------*/;@;;#;iÂo;;T;i ;[	o;	
+;[ ;
+["./* .fc to overcome default cell styles */;@;;#;iËo;;;;i ;["vertical-align;[ ;
+o;;
+"middle;@;;;@;iÈo;;;;i ;["padding;[ ;
+o;;
+"
+0 4px;@;;;@;iÍo;;;;i ;["white-space;[ ;
+o;;
+"nowrap;@;;;@;iÎ;[".fc .fc-axis;o;;" ;[o;;[o;
+;@';o;; { ;!0;[o;";@';["fc;iË;iËo;
+;@';o;; { ;!0;[o;";@';["fc-axis;iË;iË;iË;@;iËo;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"
+right;@;;;@;iÔ;[".fc-ltr .fc-axis;o;;" ;[o;;[o;
+;@D;o;; { ;!0;[o;";@D;["fc-ltr;iÓ;iÓo;
+;@D;o;; { ;!0;[o;";@D;["fc-axis;iÓ;iÓ;iÓ;@;iÓo;;T;i ;[o;;;;i ;["text-align;[ ;
+o;;
+"	left;@;;;@;iÛ;[".fc-rtl .fc-axis;o;;" ;[o;;[o;
+;@a;o;; { ;!0;[o;";@a;["fc-rtl;iÚ;iÚo;
+;@a;o;; { ;!0;[o;";@a;["fc-axis;iÚ;iÚ;iÚ;@;iÚo;;T;i ;[o;;;;i ;["font-weight;[ ;
+o;;
+"normal;@;;;@;i˜o;	
+;[ ;
+["-/* overcome jqui theme making it bold */;@;;#;i˜;[".ui-widget td.fc-axis;o;;" ;[o;;[o;
+;@Ç;o;; { ;!0;[o;";@Ç;["ui-widget;iˆ;iˆo;
+;@Ç;o;; { ;!0;[o;$	;@Ç;["td;%0;iˆo;";@Ç;["fc-axis;iˆ;iˆ;iˆ;@;iˆo;	
+;[ ;
+["/* TimeGrid Structure
+--------------------------------------------------------------------------------------------------*/;@;;#;i˚o;;T;i ;[o;	
+;[ ;
+["C/* so slats/bg/content/etc positions get scoped within here */;@;;#;iˇo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;i o;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;i;[",.fc-time-grid-container, 
+.fc-time-grid;o;;" ;[o;;[o;
+;@∞;o;; { ;!0;[o;";@∞;["fc-time-grid-container;iˇ;iˇo;;["
+o;
+;@∞;o;; { ;!0;[o;";@∞;["fc-time-grid;iˇ;iˇ;iˇ;@;iˇo;;T;i ;[o;;;;i ;["min-height;[ ;
+o;;
+"	100%;@;;;@;io;	
+;[ ;
+["J/* so if height setting is 'auto', .fc-bg stretches to fill height */;@;;#;i;[".fc-time-grid;o;;" ;[o;;[o;
+;@‘;o;; { ;!0;[o;";@‘;["fc-time-grid;i;i;i;@;io;;T;i ;[o;	
+;[ ;
+[":/* don't put outer borders on slats/bg/content/etc */;@;;#;io;;;;i ;["border;[ ;
+o;;
+"0 hidden transparent;@;;;@;i	;[".fc-time-grid table;o;;" ;[o;;[o;
+;@Ó;o;; { ;!0;[o;";@Ó;["fc-time-grid;i;io;
+;@Ó;o;; { ;!0;[o;$	;@Ó;["
+table;%0;i;i;i;@;io;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;i;[".fc-time-grid > .fc-bg;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-time-grid;i;i">o;
+;@;o;; { ;!0;[o;";@;["
+fc-bg;i;i;i;@;io;;T;i ;[o;	
+;[ ;
+["I/* the <hr> AgendaView injects when grid is shorter than scroller */;@;;#;io;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;io;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;i;["0.fc-time-grid .fc-slats,
+.fc-time-grid > hr;o;;" ;[o;;[o;
+;@3;o;; { ;!0;[o;";@3;["fc-time-grid;i;io;
+;@3;o;; { ;!0;[o;";@3;["fc-slats;i;io;;[	"
+o;
+;@3;o;; { ;!0;[o;";@3;["fc-time-grid;i;i">o;
+;@3;o;; { ;!0;[o;$	;@3;["hr;%0;i;i;i;@;io;;T;i ;[	o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;io;;;;i ;["top;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;io;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;i;["K.fc-time-grid .fc-bgevent-skeleton,
+.fc-time-grid .fc-content-skeleton;o;;" ;[o;;[o;
+;@t;o;; { ;!0;[o;";@t;["fc-time-grid;i;io;
+;@t;o;; { ;!0;[o;";@t;["fc-bgevent-skeleton;i;io;;["
+o;
+;@t;o;; { ;!0;[o;";@t;["fc-time-grid;i;io;
+;@t;o;; { ;!0;[o;";@t;["fc-content-skeleton;i;i;i;@;io;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"3;@;;;@;i;["'.fc-time-grid .fc-bgevent-skeleton;o;;" ;[o;;[o;
+;@¢;o;; { ;!0;[o;";@¢;["fc-time-grid;i;io;
+;@¢;o;; { ;!0;[o;";@¢;["fc-bgevent-skeleton;i;i;i;@;io;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"4;@;;;@;i#;[").fc-time-grid .fc-highlight-skeleton;o;;" ;[o;;[o;
+;@ø;o;; { ;!0;[o;";@ø;["fc-time-grid;i";i"o;
+;@ø;o;; { ;!0;[o;";@ø;["fc-highlight-skeleton;i";i";i";@;i"o;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"5;@;;;@;i';["'.fc-time-grid .fc-content-skeleton;o;;" ;[o;;[o;
+;@‹;o;; { ;!0;[o;";@‹;["fc-time-grid;i&;i&o;
+;@‹;o;; { ;!0;[o;";@‹;["fc-content-skeleton;i&;i&;i&;@;i&o;;T;i ;[o;;;;i ;["z-index;[ ;
+o;;
+"6;@;;;@;i+;["&.fc-time-grid .fc-helper-skeleton;o;;" ;[o;;[o;
+;@˘;o;; { ;!0;[o;";@˘;["fc-time-grid;i*;i*o;
+;@˘;o;; { ;!0;[o;";@˘;["fc-helper-skeleton;i*;i*;i*;@;i*o;	
+;[ ;
+["î/* TimeGrid Slats (lines that run horizontally)
+--------------------------------------------------------------------------------------------------*/;@;;#;i/o;;T;i ;[o;;;;i ;["height;[ ;
+o;;
+"
+1.5em;@;;;@;i3o;;;;i ;["border-bottom;[ ;
+o;;
+"0;@;;;@;i4o;	
+;[ ;
+["6/* each cell is responsible for its top border */;@;;#;i4;[".fc-slats td;o;;" ;[o;;[o;
+;@$;o;; { ;!0;[o;";@$;["fc-slats;i2;i2o;
+;@$;o;; { ;!0;[o;$	;@$;["td;%0;i2;i2;i2;@;i2o;;T;i ;[o;;;;i ;["border-top-style;[ ;
+o;;
+"dotted;@;;;@;i8;[".fc-slats .fc-minor td;o;;" ;[o;;[o;
+;@A;o;; { ;!0;[o;";@A;["fc-slats;i7;i7o;
+;@A;o;; { ;!0;[o;";@A;["fc-minor;i7;i7o;
+;@A;o;; { ;!0;[o;$	;@A;["td;%0;i7;i7;i7;@;i7o;;T;i ;[o;	
+;[ ;
+["/* for jqui theme */;@;;#;i;o;;;;i ;["background;[ ;
+o;;
+"	none;@;;;@;i<o;	
+;[ ;
+["/* see through to fc-bg */;@;;#;i<;["!.fc-slats .ui-widget-content;o;;" ;[o;;[o;
+;@m;o;; { ;!0;[o;";@m;["fc-slats;i;;i;o;
+;@m;o;; { ;!0;[o;";@m;["ui-widget-content;i;;i;;i;;@;i;o;	
+;[ ;
+["É/* TimeGrid Highlighting Slots
+--------------------------------------------------------------------------------------------------*/;@;;#;i@o;;T;i ;[o;	
+;[ ;
+["?/* a div within a cell within the fc-highlight-skeleton */;@;;#;iCo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;iDo;	
+;[ ;
+["H/* scopes the left/right of the fc-highlight to be in the column */;@;;#;iD;["*.fc-time-grid .fc-highlight-container;o;;" ;[o;;[o;
+;@ñ;o;; { ;!0;[o;";@ñ;["fc-time-grid;iC;iCo;
+;@ñ;o;; { ;!0;[o;";@ñ;["fc-highlight-container;iC;iC;iC;@;iCo;;T;i ;[	o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;iHo;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;iIo;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;iJo;	
+;[ ;
+["*/* top and bottom will be in by JS */;@;;#;iK;[" .fc-time-grid .fc-highlight;o;;" ;[o;;[o;
+;@√;o;; { ;!0;[o;";@√;["fc-time-grid;iG;iGo;
+;@√;o;; { ;!0;[o;";@√;["fc-highlight;iG;iG;iG;@;iGo;	
+;[ ;
+["Ç/* TimeGrid Event Containment
+--------------------------------------------------------------------------------------------------*/;@;;#;iOo;;T;i ;[o;	
+;[ ;
+["=/* a div within a cell within the fc-bgevent-skeleton */;@;;#;iSo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;iT;["L.fc-time-grid .fc-event-container, 
+.fc-time-grid .fc-bgevent-container;o;;" ;[o;;[o;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-time-grid;iS;iSo;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-event-container;iS;iSo;;["
+o;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-time-grid;iS;iSo;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-bgevent-container;iS;iS;iS;@;iSo;;T;i ;[o;	
+;[ ;
+["9/* space on the sides of events for LTR (default) */;@;;#;iWo;;;;i ;["margin;[ ;
+o;;
+"0 2.5% 0 2px;@;;;@;iX;["..fc-ltr .fc-time-grid .fc-event-container;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-ltr;iW;iWo;
+;@;o;; { ;!0;[o;";@;["fc-time-grid;iW;iWo;
+;@;o;; { ;!0;[o;";@;["fc-event-container;iW;iW;iW;@;iWo;;T;i ;[o;	
+;[ ;
+["//* space on the sides of events for RTL */;@;;#;i[o;;;;i ;["margin;[ ;
+o;;
+"0 2px 0 2.5%;@;;;@;i\;["..fc-rtl .fc-time-grid .fc-event-container;o;;" ;[o;;[o;
+;@B;o;; { ;!0;[o;";@B;["fc-rtl;i[;i[o;
+;@B;o;; { ;!0;[o;";@B;["fc-time-grid;i[;i[o;
+;@B;o;; { ;!0;[o;";@B;["fc-event-container;i[;i[;i[;@;i[o;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;iao;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;ibo;	
+;[ ;
+[" /* scope inner z-index's */;@;;#;ib;["7.fc-time-grid .fc-event,
+.fc-time-grid .fc-bgevent;o;;" ;[o;;[o;
+;@p;o;; { ;!0;[o;";@p;["fc-time-grid;i`;i`o;
+;@p;o;; { ;!0;[o;";@p;["fc-event;i`;i`o;;["
+o;
+;@p;o;; { ;!0;[o;";@p;["fc-time-grid;i`;i`o;
+;@p;o;; { ;!0;[o;";@p;["fc-bgevent;i`;i`;i`;@;i`o;;T;i ;[o;	
+;[ ;
+["3/* background events always span full width */;@;;#;ifo;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;igo;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;ih;[".fc-time-grid .fc-bgevent;o;;" ;[o;;[o;
+;@®;o;; { ;!0;[o;";@®;["fc-time-grid;ie;ieo;
+;@®;o;; { ;!0;[o;";@®;["fc-bgevent;ie;ie;ie;@;ieo;	
+;[ ;
+["/* TimeGrid Event Styling
+----------------------------------------------------------------------------------------------------
+We use the full "fc-time-grid-event" class instead of using descendants because the event won't
+be a descendant of the grid when it is being dragged.
+*/;@;;#;ilo;;T;i ;[o;	
+;[ ;
+["6/* events that are continuing from another day */;@;;#;iro;	
+;[ ;
+["</* replace space made by the top border with padding */;@;;#;iso;;;;i ;["border-top-width;[ ;
+o;;
+"0;@;;;@;ito;;;;i ;["padding-top;[ ;
+o;;
+"1px;@;;;@;iuo;	
+;[ ;
+["%/* remove top rounded corners */;@;;#;iwo;;;;i ;["border-top-left-radius;[ ;
+o;;
+"0;@;;;@;ixo;;;;i ;["border-top-right-radius;[ ;
+o;;
+"0;@;;;@;iy;["%.fc-time-grid-event.fc-not-start;o;;" ;[o;;[o;
+;@Á;o;; { ;!0;[o;";@Á;["fc-time-grid-event;iro;";@Á;["fc-not-start;ir;ir;ir;@;iro;;T;i ;[o;	
+;[ ;
+["</* replace space made by the top border with padding */;@;;#;i}o;;;;i ;["border-bottom-width;[ ;
+o;;
+"0;@;;;@;i~o;;;;i ;["padding-bottom;[ ;
+o;;
+"1px;@;;;@;io;	
+;[ ;
+["(/* remove bottom rounded corners */;@;;#;iÅo;;;;i ;["border-bottom-left-radius;[ ;
+o;;
+"0;@;;;@;iÇo;;;;i ;["border-bottom-right-radius;[ ;
+o;;
+"0;@;;;@;iÉ;["#.fc-time-grid-event.fc-not-end;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-time-grid-event;i|o;";@;["fc-not-end;i|;i|;i|;@;i|o;;T;i ;[o;;;;i ;["overflow;[ ;
+o;;
+"hidden;@;;;@;iáo;	
+;[ ;
+["5/* don't let the bg flow over rounded corners */;@;;#;iá;[".fc-time-grid-event;o;;" ;[o;;[o;
+;@7;o;; { ;!0;[o;";@7;["fc-time-grid-event;iÜ;iÜ;iÜ;@;iÜo;;T;i ;[	o;	
+;[ ;
+["=/* contains the time and title, but no bg and resizer */;@;;#;iäo;;;;i ;["position;[ ;
+o;;
+"relative;@;;;@;ião;;;;i ;["z-index;[ ;
+o;;
+"2;@;;;@;iåo;	
+;[ ;
+["/* above the bg */;@;;#;iå;["&.fc-time-grid-event > .fc-content;o;;" ;[o;;[o;
+;@[;o;; { ;!0;[o;";@[;["fc-time-grid-event;iä;iä">o;
+;@[;o;; { ;!0;[o;";@[;["fc-content;iä;iä;iä;@;iäo;;T;i ;[o;;;;i ;["padding;[ ;
+o;;
+"
+0 1px;@;;;@;ië;["@.fc-time-grid-event .fc-time,
+.fc-time-grid-event .fc-title;o;;" ;[o;;[o;
+;@y;o;; { ;!0;[o;";@y;["fc-time-grid-event;iê;iêo;
+;@y;o;; { ;!0;[o;";@y;["fc-time;iê;iêo;;["
+o;
+;@y;o;; { ;!0;[o;";@y;["fc-time-grid-event;iê;iêo;
+;@y;o;; { ;!0;[o;";@y;["fc-title;iê;iê;iê;@;iêo;;T;i ;[o;;;;i ;["font-size;[ ;
+o;;
+"
+.85em;@;;;@;iïo;;;;i ;["white-space;[ ;
+o;;
+"nowrap;@;;;@;iñ;["!.fc-time-grid-event .fc-time;o;;" ;[o;;[o;
+;@≠;o;; { ;!0;[o;";@≠;["fc-time-grid-event;iî;iîo;
+;@≠;o;; { ;!0;[o;";@≠;["fc-time;iî;iî;iî;@;iîo;;T;i ;[
+o;;;;i ;["z-index;[ ;
+o;;
+"1;@;;;@;iöo;;;;i ;["background;[ ;
+o;;
+"	#fff;@;;;@;iõo;;;;i ;["opacity;[ ;
+o;;
+".25;@;;;@;iúo;;;;i ;["filter;[ ;
+o;&;"
+alpha;'0;([o;)
+;*o;+;,"25;-@ò;.[ ;
+i;@;iù;/o;	;
+"opacity;@;;;iù;0;1;@;iù;@;iù;2{ ;@;iùo;	
+;[ ;
+["/* for IE */;@;;#;iù;[".fc-time-grid-event .fc-bg;o;;" ;[o;;[o;
+;@Ë;o;; { ;!0;[o;";@Ë;["fc-time-grid-event;iô;iôo;
+;@Ë;o;; { ;!0;[o;";@Ë;["
+fc-bg;iô;iô;iô;@;iôo;	
+;[ ;
+["@/* short mode, where time and title are on the same line */;@;;#;i†o;;T;i ;[o;	
+;[ ;
+["G/* don't wrap to second line (now that contents will be inline) */;@;;#;i£o;;;;i ;["white-space;[ ;
+o;;
+"nowrap;@;;;@;i§;["-.fc-time-grid-event.fc-short .fc-content;o;;" ;[o;;[o;
+;@;o;; { ;!0;[o;";@;["fc-time-grid-event;i¢o;";@;["fc-short;i¢;i¢o;
+;@;o;; { ;!0;[o;";@;["fc-content;i¢;i¢;i¢;@;i¢o;;T;i ;[o;	
+;[ ;
+["2/* put the time and title on the same line */;@;;#;i©o;;;;i ;["display;[ ;
+o;;
+"inline-block;@;;;@;i™o;;;;i ;["vertical-align;[ ;
+o;;
+"top;@;;;@;i´;["R.fc-time-grid-event.fc-short .fc-time,
+.fc-time-grid-event.fc-short .fc-title;o;;" ;[o;;[o;
+;@7;o;; { ;!0;[o;";@7;["fc-time-grid-event;i®o;";@7;["fc-short;i®;i®o;
+;@7;o;; { ;!0;[o;";@7;["fc-time;i®;i®o;;["
+o;
+;@7;o;; { ;!0;[o;";@7;["fc-time-grid-event;i®o;";@7;["fc-short;i®;i®o;
+;@7;o;; { ;!0;[o;";@7;["fc-title;i®;i®;i®;@;i®o;;T;i ;[o;;;;i ;["display;[ ;
+o;;
+"	none;@;;;@;iØo;	
+;[ ;
+["./* don't display the full time text... */;@;;#;iØ;["/.fc-time-grid-event.fc-short .fc-time span;o;;" ;[o;;[o;
+;@o;o;; { ;!0;[o;";@o;["fc-time-grid-event;iÆo;";@o;["fc-short;iÆ;iÆo;
+;@o;o;; { ;!0;[o;";@o;["fc-time;iÆ;iÆo;
+;@o;o;; { ;!0;[o;$	;@o;["	span;%0;iÆ;iÆ;iÆ;@;iÆo;;T;i ;[o;;;;i ;["content;[ ;
+o;&;"	attr;'0;([o;	;
+"data-start;@;;;i≥;@;i≥;2{ ;@;i≥o;	
+;[ ;
+["2/* ...instead, display only the start time */;@;;#;i≥;["1.fc-time-grid-event.fc-short .fc-time:before;o;;" ;[o;;[o;
+;@û;o;; { ;!0;[o;";@û;["fc-time-grid-event;i≤o;";@û;["fc-short;i≤;i≤o;
+;@û;o;; { ;!0;[o;";@û;["fc-time;i≤o;3
+;@û;["before;40;5;6;i≤;i≤;i≤;@;i≤o;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""\000A0-\000A0";@;;;@;i∑o;	
+;[ ;
+["2/* seperate with a dash, wrapped in nbsp's */;@;;#;i∑;["0.fc-time-grid-event.fc-short .fc-time:after;o;;" ;[o;;[o;
+;@≈;o;; { ;!0;[o;";@≈;["fc-time-grid-event;i∂o;";@≈;["fc-short;i∂;i∂o;
+;@≈;o;; { ;!0;[o;";@≈;["fc-time;i∂o;3
+;@≈;["
+after;40;5;6;i∂;i∂;i∂;@;i∂o;;T;i ;[	o;;;;i ;["font-size;[ ;
+o;;
+"
+.85em;@;;;@;iªo;	
+;[ ;
+["8/* make the title text the same size as the time */;@;;#;iªo;;;;i ;["padding;[ ;
+o;;
+"0;@;;;@;iºo;	
+;[ ;
+[""/* undo padding from above */;@;;#;iº;["+.fc-time-grid-event.fc-short .fc-title;o;;" ;[o;;[o;
+;@ˆ;o;; { ;!0;[o;";@ˆ;["fc-time-grid-event;i∫o;";@ˆ;["fc-short;i∫;i∫o;
+;@ˆ;o;; { ;!0;[o;";@ˆ;["fc-title;i∫;i∫;i∫;@;i∫o;	
+;[ ;
+["/* resizer */;@;;#;iøo;;T;i ;[o;;;;i ;["position;[ ;
+o;;
+"absolute;@;;;@;i¬o;;;;i ;["z-index;[ ;
+o;;
+"3;@;;;@;i√o;	
+;[ ;
+["/* above content */;@;;#;i√o;;;;i ;["	left;[ ;
+o;;
+"0;@;;;@;iƒo;;;;i ;["
+right;[ ;
+o;;
+"0;@;;;@;i≈o;;;;i ;["bottom;[ ;
+o;;
+"0;@;;;@;i∆o;;;;i ;["height;[ ;
+o;;
+"8px;@;;;@;i«o;;;;i ;["overflow;[ ;
+o;;
+"hidden;@;;;@;i»o;;;;i ;["line-height;[ ;
+o;;
+"8px;@;;;@;i…o;;;;i ;["font-size;[ ;
+o;;
+"	11px;@;;;@;i o;;;;i ;["font-family;[ ;
+o;;
+"monospace;@;;;@;iÀo;;;;i ;["text-align;[ ;
+o;;
+"center;@;;;@;iÃo;;;;i ;["cursor;[ ;
+o;;
+"s-resize;@;;;@;iÕ;["$.fc-time-grid-event .fc-resizer;o;;" ;[o;;[o;
+;@`;o;; { ;!0;[o;";@`;["fc-time-grid-event;i¡;i¡o;
+;@`;o;; { ;!0;[o;";@`;["fc-resizer;i¡;i¡;i¡;@;i¡o;;T;i ;[o;;;;i ;["content;[ ;
+o;;
+""=";@;;;@;i—;["*.fc-time-grid-event .fc-resizer:after;o;;" ;[o;;[o;
+;@};o;; { ;!0;[o;";@};["fc-time-grid-event;i–;i–o;
+;@};o;; { ;!0;[o;";@};["fc-resizer;i–o;3
+;@};["
+after;40;5;6;i–;i–;i–;@;i–;@;i

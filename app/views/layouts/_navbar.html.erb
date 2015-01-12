@@ -9,6 +9,7 @@
       <%= link_to title, root_path, :class => "brand" %>
       <div class="nav-collapse">
         <% if user_signed_in? %>
+          <%= render 'layouts/alert' %>
           <ul class="nav pull-right">
             <% if current_user.is? :admin %>
               <% unless navbar_items.nil? %>

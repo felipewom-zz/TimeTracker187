@@ -4,9 +4,9 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, :required => true, :class => 'devise' %>
+    <%= f.input :email, :required => true, :input_html => {:class => 'devise'} %>
   </div>
-  <%= f.submit 'Enviar instruções', :class => 'btn btn-large btn-block btn-default'%>
+  <%= f.submit 'Enviar Instruções', :class => 'btn btn-large btn-block btn-primary'%>
 <% end %>
 
 <%= render "devise/shared/links" %>

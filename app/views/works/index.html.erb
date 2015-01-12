@@ -1,45 +1,10 @@
-<div class="page-header">
-  <%= link_to new_work_path, :class => 'btn btn-primary' do %>
-    <i class="icon-plus icon-white"></i>
-    New Work
-  <% end %>
-  <h1>Listing works</h1>
+<div id="calendar">
 </div>
-
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Projeto</th>
-      <th>Tarefa</th>
-      <th>Usuário</th>
-      <th>Data</th>
-      <th>Início</th>
-      <th>Fim</th>
-      <th>Duração</th>
-      <th>Custo</th>
-      <th>Desc</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-<% @works.each do |work| %>
-    <tr>
-      <td><%= work.project_id %></td>
-      <td><%= work.task_id %></td>
-      <td><%= work.user_id %></td>
-      <td><%= work.historic_date.strftime('%d/%m/%Y') %></td>
-      <td><%= work.start %></td>
-      <td><%= work.finish %></td>
-      <td><%= work.duration %></td>
-      <td><%= work.additional_cost %></td>
-      <td><%= work.description %></td>
-      <td>
-          <%= link_to '<i class="icon-eye"></i>'.html_safe, work %>
-          <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_work_path(work) %>
-          <%= link_to '<i class="icon-trash"></i>'.html_safe, work, :confirm => 'Tem certeza?', :method => :delete %>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<style>
+  #calendar {
+    min-height: 600px;
+    margin: 20px auto;
+    padding: 0;
+  }
+</style>
+<%= render 'utils/work_calendar' %>

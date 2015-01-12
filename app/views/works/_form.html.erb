@@ -1,4 +1,4 @@
-<%= form_for(@work, :defaults => {:input_html => {:class => 'form-horizontal'}}) do |f| %>
+<div class="row-fluid">
   <% if @work.errors.any? %>
     <% @work.errors.full_messages.each do |alert| %>
       <% alert.each do |msg| %>
@@ -9,10 +9,10 @@
       <% end %>
     <% end %>
   <% end %>
-  <div class="row-fluid">
+  <%= form_for(@work, :defaults => {:input_html => {:class => 'form-horizontal'}}) do |f| %>
     <div class="span3">
       <div class="control-group">
-        <%= f.hidden_field :user_id, :as => :hidden, :input_html => {:value => current_user.id} %>
+        <%= f.hidden_field :user_id, :as => :hidden, :value => current_user.id %>
         <%= f.label 'Projeto', :class => 'control-label' %>
         <div class="controls">
           <%= f.select :project_id, Project.all.map { |project| [project.name, project.id] }.sort, :selected => 1 %>
@@ -33,8 +33,8 @@
       <div class="control-group">
         <%= f.label 'Início', :class => 'control-label' %>
         <div class="input-append controls">
-          <%= f.text_field :start, :class => 'input-mini clockpicker start',
-                           :style => 'text-align: center;', :id => :start, :value => Time.now.strftime('%H:%M'),
+          <%= f.text_field :historic_start, :class => 'input-mini clockpicker start',
+                           :style => 'text-align: center;', :id => :historic_start,  :value =>  @historic_start,
                            :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar)", :required => true %>
           <span id="startClock" class="add-on btn">
             <span class="icon-time"></span>
@@ -42,8 +42,8 @@
         </div>
         <%= f.label 'Fim', :class => 'control-label' %>
         <div class="input-append controls">
-          <%= f.text_field :finish, :class => 'input-mini clockpicker',
-                           :style => 'text-align: center;', :id => :finish, :value => (Time.now+(4*60*60)).strftime('%H:%M'),
+          <%= f.text_field :historic_finish, :class => 'input-mini clockpicker',
+                           :style => 'text-align: center;', :id => :historic_finish, :value =>  @historic_finish,
                            :onkeypress => "mask(this, formatar);", :onblur => "mask(this, formatar);", :required => true %>
           <span id="finishClock" class="add-on btn">
             <span class="icon-time"></span>
@@ -51,7 +51,10 @@
         </div>
         <%= f.label 'Duração', :class => 'control-label' %>
         <div class="controls">
-          <%= f.text_field :duration, :class => 'input-small', :style => 'text-align: center;', :id => :duration, :disabled => true, :value => '4:00' %>
+          <%= f.text_field :duration_to_show, :class => 'input-small',
+                           :style => 'text-align: center;', :id => :duration_to_show, :disabled => true, :value => @duration_to_show %>
+          <%= f.hidden_field :historic_duration, :class => 'input-small',
+                             :id => :historic_duration, :value => '14400000' %>
         </div>
         <%= f.label 'Custo Adicional', :class => 'control-label' %>
         <div class="controls">
@@ -59,26 +62,68 @@
         </div>
       </div>
     </div>
-    <div class="span4">
+    <div class="span3">
       <div id="historic" class="controls" style="background-color: #ffffff;width: 220px; border: 2px solid; border-radius: 5px;">
       </div>
-      <%= f.hidden_field :historic_date, :id => :historic_date %>
+      <%= f.hidden_field :historic_date, :id => :historic_date, :value => @historic_date%>
     </div>
-  </div>
-  <br>
-  <%= f.submit 'Salvar Histórico', :class => "btn btn-primary" %>
+    <br>
+    <div class="row-fluid">
+      <%= f.submit 'Salvar Histórico', :class => "btn btn-primary" %>
+    </div>
 <% end %>
-<script type="text/javascript">
-  $('#historic_date').val(new Date());
-  $('#historic').datepicker({
-    format: 'dd/mm/yyyy',
-    language: "pt-BR",
-    setDate: new Date(),
-    autoclose: true,
-    update: new Date()
-  }).on('changeDate', function (ev) {
-    var newDate = new Date(ev.date);
-    $('#historic_date').val(newDate);  //Updates value of of your input
-  });
-</script>
 <%= render 'utils/work' %>
+<% unless @works.nil? %>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Projeto</th>
+      <th>Tarefa</th>
+      <th>Usuário</th>
+      <th>Data</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Duração</th>
+      <th>Custo</th>
+      <th>Desc</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @works.each do |work| %>
+      <tr>
+        <% if work.id == @work.id %>
+          <td>
+            <i style="font-size: 10px;
+                  color: #ffffff;
+                  background-color:rgba(15,131,189,0.5);
+                  -webkit-border-radius: 3px;
+                  -moz-border-radius: 3px;
+                  border-radius: 3px;; ">&nbsp;Editando
+            </i>
+            &nbsp;<%= work.project.name %>
+          </td>
+        <% else %>
+          <td><%= work.project.name %></td>
+        <% end %>
+        <td><%= work.task.title %></td>
+        <td><%= work.user.to_s %></td>
+        <td><%= work.historic_date.strftime('%d/%m/%Y') %></td>
+        <td><%= work.historic_start %></td>
+        <td><%= work.historic_finish %></td>
+        <td>
+          <%=format("%02d:%02d" , (work.historic_duration/1000)/(60*60), ((work.historic_duration/1000)/60)%60) %>
+        </td>
+        <td><%= work.additional_cost %></td>
+        <td><%= work.description %></td>
+        <td>
+          <%= link_to '<i class="icon-eye-open"></i>'.html_safe, work %>
+          <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_work_path(work) %>
+          <%= link_to '<i class="icon-trash"></i>'.html_safe, work, :confirm => 'Tem certeza?', :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+</div>

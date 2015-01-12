@@ -2,27 +2,21 @@
 <html>
 <%= render 'layouts/head' %>
 <body>
-<section>
-  <%= render 'layouts/navbar' %>
-</section>
-  <header>
-    <%= render 'layouts/header' %>
-  </header>
-  <section>
-    <%= render 'layouts/alert' %>
-  </section>
-  <div class="row-fluid">
+<%= render 'layouts/navbar' %>
+<header>
+  <%= render 'layouts/header' %>
+</header>
+<div class="main">
   <% if user_signed_in? %>
-    <div class="span12">
+    <%= yield %>
   <% else %>
-    <div class="row"></div>
-    <div class="span3 offset4" style="padding-top: 4%">
-  <% end %>
-      <div class="hero-unit">
+    <div class="row-fluid" style="height: 99%;">
+      <div class="row"></div>
+      <div class="span3 offset4" style="margin-top: 4%; background-color: #eeeeee; padding: 20px; border-radius: 6px">
         <%= yield %>
       </div>
     </div>
-  </div>
-<%= render 'layouts/footer' %>
+  <% end %>
+</div>
 </body>
 </html>

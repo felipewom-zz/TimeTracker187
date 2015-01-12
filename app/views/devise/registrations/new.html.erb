@@ -6,7 +6,7 @@
   <div class="form-inputs">
         <%= f.text_field :username, :required => true, :placeholder => 'Nome do usuário' , :autofocus => true, :class => 'devise'%>
         <%= f.text_field :first_name, :required => true, :placeholder => 'Nome', :autofocus => true, :class => 'devise' %>
-    <%= f.text_field :last_name, :required => true, :placeholder => 'Sobrenome', :autofocus => true %>
+        <%= f.text_field :last_name, :required => true, :placeholder => 'Sobrenome', :autofocus => true, :class => 'devise' %>
         <%= f.email_field :email, :required => true, :placeholder => 'Email', :autofocus => true, :class => 'devise' %>
         <%= f.text_field :password, :type => :password, :required => true, :placeholder => 'Senha', :class => 'devise' %>
         <%= f.text_field :password_confirmation, :type => :password, :required => true, :placeholder => 'Confirmação de Senha', :class => 'devise' %>

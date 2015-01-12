@@ -19,13 +19,16 @@
   <dd><%= @work.historic_date.strftime('%d/%m/%Y') %></dd>
 
   <dt>Start:</dt>
-  <dd><%= @work.start %></dd>
+  <dd><%= @work.historic_start %></dd>
 
   <dt>Finish:</dt>
-  <dd><%= @work.finish %></dd>
+  <dd><%= @work.historic_finish %></dd>
 
   <dt>Duration:</dt>
-  <dd><%= @work.duration %></dd>
+  <dd>
+    <%= sprintf '%02d', @work.historic_duration/(1000*60*60) %>
+    :
+    <%= sprintf('%02d', (@work.historic_duration/60)%60) %></dd>
 
   <dt>Additional cost:</dt>
   <dd><%= @work.additional_cost %></dd>
@@ -34,3 +37,45 @@
   <dd><%= @work.description %></dd>
 
 </dl>
+<% unless @works.nil? %>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Projeto</th>
+      <th>Tarefa</th>
+      <th>Usuário</th>
+      <th>Data</th>
+      <th>Início</th>
+      <th>Fim</th>
+      <th>Duração</th>
+      <th>Custo</th>
+      <th>Desc</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @works.each do |work| %>
+      <tr>
+        <td><%= work.project.name %></td>
+        <td><%= work.task.title %></td>
+        <td><%= work.user.to_s %></td>
+        <td><%= work.historic_date.strftime('%d/%m/%Y') %></td>
+        <td><%= work.historic_start %></td>
+        <td><%= work.historic_finish %></td>
+        <td>
+          <%= sprintf '%02d', work.historic_duration/(1000*60*60) %>
+          :
+          <%= sprintf('%02d', (work.historic_duration/60)%60) %>
+        </td>
+        <td><%= work.additional_cost %></td>
+        <td><%= work.description %></td>
+        <td>
+          <%= link_to '<i class="icon-eye-open"></i>'.html_safe, work %>
+          <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_work_path(work) %>
+          <%= link_to '<i class="icon-trash"></i>'.html_safe, work, :confirm => 'Tem certeza?', :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

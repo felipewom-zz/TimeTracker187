@@ -1,35 +1,65 @@
 <script type="text/javascript">
+  var datepickerCal = $('#historic').datepicker({
+    language: "pt-BR",
+    startDate: '2013/01/01',
+    update: $('#historic_date').val()
+  }).on('changeDate', function (ev) {
+    var newDate = new Date(ev.date);
+//    newDate.setDate(newDate.getDate());
+    $('#historic_date').val(newDate);  //Updates value of of your input
+  });
+
+  //  Date ajusts
+  $(document).ready(function() {
+    alert($('#historic_date').val());
+    datepickerCal.datepicker('update', new Date($('#historic_date').val())); //Format to receive (Year/month/day)
+  });
+
+  //  Clock ajust
   $('.clockpicker').clockpicker();
   $('#startClock').click(function (e) {
     // Have to stop propagation here
     e.stopPropagation();
-    $('#start').clockpicker('show');
+    $('#historic_start').clockpicker('show');
   });
   $('#finishClock').click(function (e) {
     // Have to stop propagation here
     e.stopPropagation();
-    $('#finish').clockpicker('show');
+    $('#historic_finish').clockpicker('show');
   });
-  $('#start').change(function () {
+  $('#historic_start').change(function () {
     var start = this.value.toString();
-    var end = document.getElementById('finish').value.toString();
-    var duration = calculate(start, end);
-    if (duration < 1) {
-      duration = '00:00';
+    var end = document.getElementById('historic_finish').value.toString();
+    var duration_to_show = calculateToShow(start, end);
+    if (duration_to_show < 1) {
+      duration_to_show = '00:00';
     }
-    document.getElementById('duration').value = duration;
+    document.getElementById('duration_to_show').value = duration_to_show;
+    document.getElementById('historic_duration').value = calculate(start, end);
   });
-  $('#finish').change(function () {
+  $('#historic_finish').change(function () {
     var end = this.value.toString();
-    var start = document.getElementById('start').value.toString();
-    var duration = calculate(start, end);
-    if (duration < 1) {
-      duration = '00:00';
+    var start = document.getElementById('historic_start').value.toString();
+    var duration_to_show = calculateToShow(start, end);
+    if (duration_to_show < 1) {
+      duration_to_show = '00:00';
     }
-    document.getElementById('duration').value = duration;
+    document.getElementById('duration_to_show').value = duration_to_show;
+    document.getElementById('historic_duration').value = calculate(start, end);
   });
 
   function calculate(time_start, time_end) {
+    if (toSeconds(time_end) < toSeconds(time_start)) {
+      alert('Hora final menor que início, hora máx. permitida é 23:59!');
+      return 0;
+    } else {
+      var difference = Math.abs(toSeconds(time_start) - toSeconds(time_end)) * 1000;
+      // compute hours, minutes and seconds
+      return difference;
+    }
+  }
+
+  function calculateToShow(time_start, time_end) {
     if (toSeconds(time_end) < toSeconds(time_start)) {
       alert('Hora final menor que início, hora máx. permitida é 23:59!');
       return 0;

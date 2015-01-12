@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-datepicker
-//= require_tree .
+//= require clockpicker
+//= require moment.min
+//= require fullcalendar
+//= require lang-all
 
 

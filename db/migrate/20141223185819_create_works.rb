@@ -7,10 +7,10 @@ class CreateWorks < ActiveRecord::Migration
       t.integer :ticket_id
       t.integer :watcher_id
       t.date    :historic_date
-      t.string  :start
-      t.string  :finish
-      t.decimal :duration, :precision => 19, :scale => 4
-      t.decimal :additional_cost, :precision => 19, :scale => 4
+      t.string  :historic_start
+      t.string  :historic_finish
+      t.decimal :historic_duration, :precision => 19, :scale => 0
+      t.decimal :additional_cost, :precision => 19, :scale => 0
       t.text :description
 
       t.timestamps

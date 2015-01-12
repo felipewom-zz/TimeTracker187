@@ -1,6 +1,6 @@
 <% flash.each do |name, msg| %>
-  <%= content_tag :div, :class => "alert #{name == :error ? "alert-error" : "alert-success" }" do %>
-    <a class="close" data-dismiss="alert" href="#">×</a>
-    <%= msg %>
-  <% end %>
+    <%= content_tag :div, :style => " width: 72%; margin: 0 auto; padding: 9px 35px 8px 14px;", :class => "nav alert #{name == :error ? "alert-error" : "alert-success" }" do %>
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <%= msg %>
+    <% end %>
 <% end %>

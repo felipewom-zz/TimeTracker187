@@ -4,7 +4,7 @@
              :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
   <%= devise_error_messages! %>
   <div class="row-fluid">
-    <div class="span6">
+    <div class="span4">
         <div class="control-group">
           <%= f.label 'Nome do usuário', :class => 'control-label' %>
           <div class="controls">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="span2">
+      <div class="span4">
         <% if current_user.contact.nil? %>
           <div class="form-actions">
             <%= link_to 'Adicionar Contato', '/contacts/new', :class => 'btn btn-primary' %>
@@ -63,9 +63,7 @@
                 <%= c.label 'Estado', :class => 'control-label' %>
                 <div class="controls">
                   <%= c.text_field :state,:class => 'input-mini state', :required => true, :placeholder => 'UF', :autofocus => true %>
-                </div>
-                <%= c.label 'CEP', :class => 'control-label' %>
-                <div class="controls">
+                  &nbsp;CEP&nbsp;
                   <%= c.text_field :postal_code,:class => 'input-small postal_code', :onkeypress => "formatar('#####-###', this);", :max => 9, :onblur => "formatar('#####-###', this)", :required => true, :placeholder => 'CEP', :autofocus => true %>
                 </div>
                 <%= c.label 'Contato telefônico', :class => 'control-label' %>
@@ -73,7 +71,7 @@
                   <%= c.text_field :cellphone, :required => true, :placeholder => 'Celular (DDD) 99999-9999', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
                   <%= c.text_field :phone_number, :required => true, :placeholder => 'Telefone (DDD) 2222-2222', :onkeypress => 'mask(this, mphone);', :onblur => 'mask(this, mphone);', :autofocus => true %>
                 </div>
-              </div>
+            </div>
             </div>
           <% end %>
           <%= render 'utils/contact' %>

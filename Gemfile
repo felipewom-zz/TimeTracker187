@@ -18,6 +18,7 @@ gem 'maruku', '~> 0.5.9'
 gem 'yard', '~> 0.8.0'
 gem 'syntax', '~> 1.0.0'
 gem 'mail', '~> 2.5.3'
+gem 'fullcalendar-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,7 +28,7 @@ group :assets do
   # Use SCSS for stylesheets
   gem 'bootstrap-sass', '~> 2.2.2.0'
   gem 'bootstrap-generators', '~> 2.2.1'
-  gem 'bootstrap-datepicker-rails', '~> 0.6.35'
+  gem 'bootstrap-datepicker-rails', '~> 1.3.1.1'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
   # gem 'autoprefixer-rails'
